@@ -64,3 +64,46 @@ export const allProjectSlugsQuery = groq`
     "slug": slug.current
   }
 `
+
+// Lab queries
+export const allLabsQuery = groq`
+  *[_type == "lab"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    content,
+    publishedAt,
+    image {
+      asset-> {
+        _id,
+        url
+      }
+    },
+    seoTitle,
+    seoDescription
+  }
+`
+
+export const labQuery = groq`
+  *[_type == "lab" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    content,
+    publishedAt,
+    image {
+      asset-> {
+        _id,
+        url
+      }
+    },
+    seoTitle,
+    seoDescription
+  }
+`
+
+export const allLabSlugsQuery = groq`
+  *[_type == "lab" && defined(slug.current)] {
+    "slug": slug.current
+  }
+`

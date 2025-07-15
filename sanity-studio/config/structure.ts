@@ -1,5 +1,5 @@
 import { StructureBuilder } from 'sanity/desk'
-import { FolderIcon, CogIcon } from '@sanity/icons'
+import { FolderIcon, CogIcon, DocumentIcon } from '@sanity/icons'
 
 // Custom desk structure with enhanced organization
 export const structure = (S: StructureBuilder) =>
@@ -17,6 +17,17 @@ export const structure = (S: StructureBuilder) =>
             .title('Projects')
             .filter('_type == "project"')
             .defaultOrdering([{field: 'projectNumber', direction: 'asc'}])
+        ),
+      
+      // Lab (multi-page)
+      S.listItem()
+        .title('Lab')
+        .icon(DocumentIcon)
+        .child(
+          S.documentTypeList('lab')
+            .title('Lab Posts')
+            .filter('_type == "lab"')
+            .defaultOrdering([{field: 'publishedAt', direction: 'desc'}])
         ),
       
       // Divider

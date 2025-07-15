@@ -33,24 +33,31 @@ export default async function Header({ className = "" }: HeaderProps) {
             <div className="flex flex-row justify-between">
               {/* Services Column */}
               <div className="text-[#E30613] text-left w-full">
-                <div className="font-bold text-xl mb-1">SERVICES</div>
+                <div className="font-bold text-xl">SERVICES</div>
                 {settings?.services?.map((service) => (
-                  <div className="font-bold" key={service}>
+                  <p className="font-bold leading-tight" key={service}>
                     {service}
-                  </div>
+                  </p>
                 ))}
               </div>
               {/* Contact Column */}
               <div className="text-[#E30613] text-left w-full">
-                <div className="font-bold text-xl mb-1">CONTACT</div>
+                <div className="font-bold text-xl">CONTACT</div>
                 {settings?.contactEmail && (
-                  <div className="font-bold">{settings.contactEmail}</div>
+                  <p className="font-bold leading-tight">
+                    <a 
+                      href={`mailto:${settings.contactEmail}`}
+                      className="hover:underline transition-colors"
+                    >
+                      {settings.contactEmail}
+                    </a>
+                  </p>
                 )}
                 {settings?.contactAddress && (
-                  <div className="font-bold">{settings.contactAddress}</div>
+                  <p className="font-bold leading-tight">{settings.contactAddress}</p>
                 )}
                 {settings?.contactLocation && (
-                  <div className="font-bold">{settings.contactLocation}</div>
+                  <p className="font-bold leading-tight">{settings.contactLocation}</p>
                 )}
               </div>
             </div>

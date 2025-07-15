@@ -173,5 +173,38 @@ export interface ProjectQueryResult {
 
 export type AllProjectsQueryResult = ProjectQueryResult[]
 
+// Lab types
+export interface Lab extends SanityDocument {
+  _type: 'lab'
+  title: string
+  slug: {
+    current: string
+  }
+  content: string
+  publishedAt: string
+  image: {
+    asset: SanityImageAsset
+  }
+  seoTitle?: string
+  seoDescription?: string
+}
+
+export interface LabQueryResult {
+  _id: string
+  title: string
+  slug: {
+    current: string
+  }
+  content: string
+  publishedAt: string
+  image: {
+    asset: SanityImageAsset
+  }
+  seoTitle?: string
+  seoDescription?: string
+}
+
+export type AllLabsQueryResult = LabQueryResult[]
+
 // Utility types
 export type SanityImageSource = SanityImageAsset | string
