@@ -3,7 +3,6 @@ import "./globals.css";
 import { settingsQuery } from "@/sanity-studio/queries";
 import { client } from "@/lib/sanity";
 import { getSiteConfig, validateEnv } from "@/lib/env";
-import Header from "@/components/Header";
 
 // Validate environment variables in development
 if (process.env.NODE_ENV === 'development') {
@@ -31,7 +30,6 @@ export default async function RootLayout({
   return (
     <html lang="it">
       <body className="font-arial-narrow">
-        <Header />
         <main>
           {children}
         </main>

@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { getNavigation } from "@/lib/navigation";
 import type { Settings } from "@/sanity-studio/types";
+import Link from "next/link";
 
 interface HeaderProps {
   className?: string;
@@ -14,9 +15,10 @@ export default async function Header({ className = "" }: HeaderProps) {
   return (
     <header className={`w-full fixed top-0 left-0 z-50 ${className}`}>
       <div className="">
-        <div className="w-full flex flex-row px-2 py-4">
+        <div className="w-full flex flex-row px-0 py-2">
           {/* Logo on the left */}
           <div className="w-3/6">
+            <Link href="/">
             <div className="flex-shrink-0 flex items-center justify-center w-16 h-16">
               <Image
                 src="/logo.svg"
@@ -27,6 +29,7 @@ export default async function Header({ className = "" }: HeaderProps) {
                 priority
               />
             </div>
+            </Link>
           </div>
           {/* Spacer */}
           <div className="w-3/6 border-[red]">
@@ -34,8 +37,8 @@ export default async function Header({ className = "" }: HeaderProps) {
               {/* Services Column */}
               <div className="text-[#E30613] text-left w-full">
                 <div className="font-bold text-xl">SERVICES</div>
-                {settings?.services?.map((service) => (
-                  <p className="font-bold leading-tight" key={service}>
+                {settings?.services?.map((service: string) => (
+                  <p className="font-bold leading-tight capitalize" key={service}>
                     {service}
                   </p>
                 ))}

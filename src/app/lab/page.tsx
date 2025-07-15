@@ -1,0 +1,35 @@
+import { getSiteConfig } from "@/lib/env";
+import Blog from "@/components/Blog";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const siteConfig = getSiteConfig();
+  const title = "Blog | " + siteConfig.title;
+  const description = "Read our latest blog posts";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      url: siteConfig.url + '/blog',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+  };
+}
+
+export default function BlogPage() {
+  return (
+      <div className="mx-auto px-4">
+        <div className="h-[82vh]">
+          <Blog />
+        </div>
+      </div>
+  );
+} 

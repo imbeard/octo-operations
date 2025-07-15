@@ -59,15 +59,7 @@ export default defineType({
       type: 'array',
       of: [
         {
-          type: 'string',
-          options: {
-            list: [
-              { title: '360 Concepts & Ideation', value: '360-concepts-ideation' },
-              { title: 'Creative Production', value: 'creative-production' },
-              { title: 'Brand Strategy', value: 'brand-strategy' },
-              { title: 'Octo Initiative', value: 'octo-initiative' }
-            ]
-          }
+          type: 'string'
         }
       ],
       validation: Rule => Rule.required().min(1),
