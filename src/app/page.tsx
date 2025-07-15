@@ -1,4 +1,5 @@
 import { getSiteConfig } from "@/lib/env";
+import { getAllProjects } from "@/lib/projects";
 import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import type { Metadata } from "next";
@@ -27,7 +28,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getAllProjects();
+
   return (
     <>
       <Header />
@@ -44,7 +47,7 @@ export default function Home() {
                 </h1>
               </Link>
               <div className="flex-1 overflow-y-auto">
-                <Projects />
+                <Projects projects={projects} />
               </div>
             </div>
 

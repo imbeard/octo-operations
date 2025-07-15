@@ -2,6 +2,7 @@ import React from 'react'
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { getOptimizedImageUrl, getResponsiveSizes } from '@/lib/sanity'
 import Image from 'next/image'
+import GalleryBlock from './ui/GalleryBlock'
 
 // Define proper TypeScript interfaces for better type safety
 interface SanityImage {
@@ -245,39 +246,12 @@ const SanityContent: React.FC<SanityContentProps> = ({ sections, className = '' 
 
       case 'galleryBlock':
         return (
-          <div key={key} className="my-8">
-            {section.title && (
-              <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-                {section.title}
-              </h3>
-            )}
-            <div className={`grid gap-4 ${
-              section.columns === 1 ? 'grid-cols-1' :
-              section.columns === 2 ? 'grid-cols-1 md:grid-cols-2' :
-              section.columns === 3 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' :
-              'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
-            }`}>
-              {section.images.map((image, imageIndex) => (
-                <figure key={image._key || `gallery-image-${imageIndex}`} className="overflow-hidden rounded-lg">
-                  <div className="relative aspect-square w-full">
-                    <Image
-                      src={getOptimizedImageUrl(image.image, { width: 400, height: 400 })}
-                      alt={image.alt}
-                      fill
-                      className="object-cover"
-                      sizes={getResponsiveSizes(section.columns)}
-                      priority={false}
-                    />
-                  </div>
-                  {image.caption && (
-                    <figcaption className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-                      {image.caption}
-                    </figcaption>
-                  )}
-                </figure>
-              ))}
-            </div>
-          </div>
+          <GalleryBlock
+            key={key}
+            title={section.title}
+            images={section.images}
+            columns={section.columns}
+          />
         )
 
       default:

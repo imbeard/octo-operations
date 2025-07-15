@@ -1,4 +1,5 @@
 import { getSiteConfig } from "@/lib/env";
+import { getAllProjects } from "@/lib/projects";
 import Projects from "@/components/Projects";
 import type { Metadata } from "next";
 
@@ -24,11 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getAllProjects();
+
   return (
       <div className="mx-auto px-4">
         <div className="h-[82vh]">
-          <Projects />
+          <Projects projects={projects} />
         </div>
       </div>
   );

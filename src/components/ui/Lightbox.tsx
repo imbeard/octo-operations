@@ -1,0 +1,136 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
+interface LightboxProps {
+  isOpen: boolean;
+  onClose: () => void;
+  images: Array<{
+    src: string;
+    alt: string;
+    description?: string;
+  }>;
+  initialIndex?: number;
+}
+
+export default function Lightbox({ isOpen, onClose, images, initialIndex = 0 }: LightboxProps) {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+  useEffect(() => {
+    setCurrentIndex(initialIndex);
+  }, [initialIndex]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          onClose();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+          break;
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose, images.length]);
+
+  if (!isOpen) return null;
+
+  const currentImage = images[currentIndex];
+  const prevIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+  const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+
+  return (
+    <div className="fixed top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-50 flex items-center justify-center bg-[lightgray] bg-opacity-95">
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-2 left-3 z-10 text-black font-bold uppercase"
+        aria-label="Close lightbox"
+      >
+        close
+      </button>
+
+      {/* Previous image thumbnail */}
+      {images.length > 1 && (
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+          <div
+            onClick={() => setCurrentIndex(prevIndex)}
+            className="relative w-28 h-48 overflow-hidden transition-all duration-200 cursor-pointer"
+          >
+            <Image
+              src={images[prevIndex].src}
+              alt={images[prevIndex].alt}
+              fill
+              className="object-cover"
+              sizes="96px"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Next image thumbnail */}
+      {images.length > 1 && (
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10">
+          <div
+            onClick={() => setCurrentIndex(nextIndex)}
+            className="relative w-28 h-48 overflow-hidden transition-all duration-200 cursor-pointer"
+          >
+            <Image
+              src={images[nextIndex].src}
+              alt={images[nextIndex].alt}
+              fill
+              className="object-cover"
+              sizes="96px"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Image container */}
+      <div className="relative w-[60vw] h-[80vh] flex flex-col items-center">
+        <div className="relative w-full h-full flex items-center justify-center">
+          <Image
+            src={currentImage.src}
+            alt={currentImage.alt}
+            width={1200}
+            height={800}
+            className="max-w-[40vw] h-[70vh] object-contain"
+            priority
+          />
+        </div>
+        
+        {/* Image counter */}
+        {images.length > 1 && (
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black bg-opacity-50 px-3 py-1 rounded">
+            {currentIndex + 1} / {images.length}
+          </div>
+        )}
+        
+        {/* Image description */}
+        {currentImage.description && (
+          <div className="mt-4 text-white text-center max-w-2xl px-4">
+            <p className="text-sm">{currentImage.description}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+} 
