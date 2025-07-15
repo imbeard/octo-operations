@@ -15,39 +15,39 @@ export default async function Header({ className = "" }: HeaderProps) {
   return (
     <header className={`w-full fixed top-0 left-0 z-50 ${className}`}>
       <div className="">
-        <div className="w-full flex flex-row px-0 py-2">
+        <div className="w-full flex flex-row px-0 py-1.5 sm:py-2">
           {/* Logo on the left */}
-          <div className="w-3/6">
+          <div className="md:w-3/6">
             <Link href="/">
-            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16">
+            <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16">
               <Image
                 src="/logo.svg"
                 alt="OCTO Logo"
                 width={38}
                 height={59}
-                className="w-12 h-16"
+                className="w-10 h-12 sm:w-12 sm:h-16"
                 priority
               />
             </div>
             </Link>
           </div>
           {/* Spacer */}
-          <div className="w-3/6 border-[red]">
+          <div className="w-full md:w-3/6 border-[red]">
             <div className="flex flex-row justify-between">
               {/* Services Column */}
               <div className="text-[#E30613] text-left w-full">
-                <div className="font-bold text-xl">SERVICES</div>
+                <div className="font-bold text-base sm:text-xl">SERVICES</div>
                 {settings?.services?.map((service: string) => (
-                  <p className="font-bold leading-tight capitalize" key={service}>
+                  <p className="font-bold leading-tight capitalize text-xs sm:text-base" key={service}>
                     {service}
                   </p>
                 ))}
               </div>
               {/* Contact Column */}
               <div className="text-[#E30613] text-left w-full">
-                <div className="font-bold text-xl">CONTACT</div>
+                <div className="font-bold text-base sm:text-xl">CONTACT</div>
                 {settings?.contactEmail && (
-                  <p className="font-bold leading-tight">
+                  <p className="font-bold leading-tight text-xs sm:text-base">
                     <a 
                       href={`mailto:${settings.contactEmail}`}
                       className="hover:underline transition-colors"
@@ -57,10 +57,10 @@ export default async function Header({ className = "" }: HeaderProps) {
                   </p>
                 )}
                 {settings?.contactAddress && (
-                  <p className="font-bold leading-tight">{settings.contactAddress}</p>
+                  <p className="font-bold leading-tight text-xs sm:text-base">{settings.contactAddress}</p>
                 )}
                 {settings?.contactLocation && (
-                  <p className="font-bold leading-tight">{settings.contactLocation}</p>
+                  <p className="font-bold leading-tight text-xs sm:text-base">{settings.contactLocation}</p>
                 )}
               </div>
             </div>

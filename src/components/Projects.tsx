@@ -44,10 +44,10 @@ export default function Projects({ projects }: ProjectsProps) {
             project.images && project.images.length > 0 ? (
               <div key={project._id} className="">
                 <div className="flex flex-row justify-between">
-                  <div className="text-lg font-extrabold text-black mb-1 w-full">
+                  <div className="text-sm md:text-lg font-extrabold text-black mb-1 md:w-full">
                     {project.projectNumber}
                   </div>
-                  <div className="text-lg font-extrabold text-black mb-1 w-1/2 ml-5">
+                  <div className="text-sm md:text-lg font-extrabold text-black mb-1 w-max md:w-1/2 ml-5">
                     {project.title}
                   </div>
                 </div>

@@ -62,15 +62,15 @@ export default function Lightbox({ isOpen, onClose, images, initialIndex = 0 }: 
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-2 left-3 z-10 text-black font-bold uppercase"
+        className="absolute top-2 left-3 z-20 text-black font-bold uppercase p-1 py-2"
         aria-label="Close lightbox"
       >
         close
       </button>
 
-      {/* Previous image thumbnail */}
+      {/* Previous image thumbnail - hidden on mobile */}
       {images.length > 1 && (
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
           <div
             onClick={() => setCurrentIndex(prevIndex)}
             className="relative w-28 h-48 overflow-hidden transition-all duration-200 cursor-pointer"
@@ -86,9 +86,9 @@ export default function Lightbox({ isOpen, onClose, images, initialIndex = 0 }: 
         </div>
       )}
 
-      {/* Next image thumbnail */}
+      {/* Next image thumbnail - hidden on mobile */}
       {images.length > 1 && (
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10">
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
           <div
             onClick={() => setCurrentIndex(nextIndex)}
             className="relative w-28 h-48 overflow-hidden transition-all duration-200 cursor-pointer"
@@ -104,15 +104,31 @@ export default function Lightbox({ isOpen, onClose, images, initialIndex = 0 }: 
         </div>
       )}
 
+      {/* Mobile navigation areas */}
+      {images.length > 1 && (
+        <>
+          {/* Left click area for previous */}
+          <div 
+            className="absolute left-0 top-0 w-1/3 h-full z-10 md:hidden"
+            onClick={() => setCurrentIndex(prevIndex)}
+          />
+          {/* Right click area for next */}
+          <div 
+            className="absolute right-0 top-0 w-1/3 h-full z-10 md:hidden"
+            onClick={() => setCurrentIndex(nextIndex)}
+          />
+        </>
+      )}
+
       {/* Image container */}
-      <div className="relative w-[60vw] h-[80vh] flex flex-col items-center">
+      <div className="relative w-[90vw] md:w-[60vw] h-[80vh] flex flex-col items-center">
         <div className="relative w-full h-full flex items-center justify-center">
           <Image
             src={currentImage.src}
             alt={currentImage.alt}
             width={1200}
             height={800}
-            className="max-w-[40vw] h-[70vh] object-contain"
+            className="w-full h-full p-4 md:p-0 md:max-w-[40vw] md:h-[70vh] object-contain"
             priority
           />
         </div>

@@ -22,11 +22,11 @@ export default async function Blog() {
                   className="w-full h-auto object-cover mb-2"
                 />
               )}
-              <p className="text-lg font-bold text-black uppercase leading-tight">{lab.title}</p>
-              <p className="text-lg font-bold text-black uppercase leading-tight">
+              <p className="text-sm md:text-lg font-bold text-black uppercase leading-tight">{lab.title}</p>
+              <p className="text-sm md:text-lg font-bold text-black uppercase leading-tight">
                 {new Date(lab.publishedAt).toLocaleDateString()}
               </p>
-              <p className="text-md font-bold text-black leading-tight">
+              <p className="text-xs md:text-md font-bold text-black leading-tight">
                 {lab.content}
               </p>
             </div>

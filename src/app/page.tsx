@@ -36,30 +36,34 @@ export default async function Home() {
       <Header />
 
       {/* Main content */}
-      <main className="h-screen bg-white pt-[15vh] overflow-hidden">
+      <main className="min-h-screen bg-white mt-[18vh] md:mt-[15vh] md:overflow-hidden">
         <div className="mx-auto px-3 h-full">
-          <div className="flex h-full">
+          <div className="flex h-full flex-col md:flex-row">
             {/* Projects Section - 4/5 width */}
-            <div className="w-3/4 flex flex-col">
-              <Link href="/projects">
-                <h1 className="text-5xl font-bold text-gray-900 mb-4 uppercase">
-                  Projects
-                </h1>
-              </Link>
-              <div className="flex-1 overflow-y-auto">
-                <Projects projects={projects} />
+            <div className="md:w-3/4 flex flex-col">
+              <div className="relative">
+                <Link href="/projects">
+                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 uppercase sticky top-[15vh] md:top-[0vh] z-10">
+                    Projects
+                  </h1>
+                </Link>
+                <div className="flex-1 md:overflow-y-auto py-5">
+                  <Projects projects={projects} />
+                </div>
               </div>
             </div>
 
             {/* Labs Section - 1/5 width */}
-            <div className="w-1/4 flex flex-col">
-              <Link href="/lab">
-                <h1 className="text-5xl font-bold text-gray-900 mb-4 uppercase">
-                  OCTO Lab
-                </h1>
-              </Link>
-              <div className="flex-1 overflow-y-auto">
-                <Blog />
+            <div className="md:w-1/4 flex flex-col">
+              <div className="relative ">
+                <Link href="/lab">
+                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 uppercase sticky top-[15vh] md:top-[0vh] z-10">
+                    OCTO Lab
+                  </h1>
+                </Link>
+                <div className="flex-1 md:overflow-y-auto py-5 ">
+                  <Blog />
+                </div>
               </div>
             </div>
           </div>
