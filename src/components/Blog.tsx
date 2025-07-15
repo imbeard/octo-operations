@@ -26,7 +26,7 @@ export default async function Blog() {
               <p className="text-sm md:text-lg font-bold text-black uppercase leading-tight">
                 {new Date(lab.publishedAt).toLocaleDateString()}
               </p>
-              <p className="text-xs md:text-md font-bold text-black leading-tight">
+              <p className="text-xs md:text-base font-bold text-black leading-tight">
                 {lab.content}
               </p>
             </div>

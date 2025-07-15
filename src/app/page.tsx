@@ -43,11 +43,11 @@ export default async function Home() {
             <div className="md:w-3/4 flex flex-col">
               <div className="relative md:overflow-y-scroll h-full md:h-[85vh]">
                 <Link href="/projects">
-                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 uppercase sticky top-[15vh] md:top-[0vh] z-10">
+                  <h1 className="text-4xl md:text-5xl font-bold text-primary md:text-black mb-4 uppercase sticky top-[15vh] md:top-[0vh] z-10">
                     Projects
                   </h1>
                 </Link>
-                <div className="flex-1 overflow-y-scroll py-5">
+                <div className="flex-1 overflow-y-scroll pb-5">
                   <Projects projects={projects} />
                 </div>
               </div>
@@ -57,11 +57,11 @@ export default async function Home() {
             <div className="md:w-1/4 flex flex-col">
               <div className="relative h-full md:h-[85vh] md:overflow-y-scroll">
                 <Link href="/lab">
-                  <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 uppercase sticky top-[15vh] md:top-[0vh] z-10">
+                  <h1 className="text-4xl md:text-5xl font-bold text-primary md:text-black mb-4 uppercase sticky top-[15vh] md:top-[0vh] z-10">
                     OCTO Lab
                   </h1>
                 </Link>
-                <div className="flex-1 overflow-y-scroll py-5 ">
+                <div className="flex-1 overflow-y-scroll pb-5">
                   <Blog />
                 </div>
               </div>

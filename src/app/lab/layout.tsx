@@ -31,15 +31,15 @@ export default async function ProjectsLayout({
   return (
     <main className="min-h-screen bg-accent relative">
       {/* Fixed Logo */}
-      <div className="fixed top-0 left-0 py-2 w-1/5 z-10">
+      <div className="fixed top-0 left-0 py-2 w-1/5 md:w-1/5 z-10">
         <Link href="/">
-          <div className="flex-shrink-0 flex items-center justify-center w-16 h-16">
+          <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
             <Image
               src="/logo_w.svg"
               alt="OCTO Logo"
               width={38}
               height={59}
-              className="w-12 h-16"
+              className="w-8 h-10 sm:w-10 sm:h-12 md:w-12 md:h-16"
               priority
             />
           </div>
@@ -47,13 +47,13 @@ export default async function ProjectsLayout({
       </div>
 
       {/* Fixed Content */}
-      <div className="fixed top-0 left-1/4 right-1/4 h-full overflow-y-auto px-4 pt-2">
+      <div className="fixed top-0 left-0 md:left-1/4 right-0 md:right-1/4 h-full overflow-y-auto pt-16 md:pt-20">
         {children}
       </div>
 
       {/* Fixed Title */}
-      <div className="fixed top-0 right-0 py-2 w-1/5 z-10">
-        <h1 className="text-6xl text-white font-bold text-right pr-3">OCTO LAB</h1>
+      <div className="fixed top-0 right-4 py-2 min-w-max md:w-1/5 z-10">
+          <h1 className="text-4xl md:text-5xl text-white font-bold text-right leading-tight">OCTO LAB</h1>
       </div>
     </main>
   );
