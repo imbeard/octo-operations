@@ -58,7 +58,7 @@ export default function Lightbox({ isOpen, onClose, images, initialIndex = 0 }: 
   const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
 
   return (
-    <div className="fixed top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-100 flex items-center justify-center bg-[#cdcdcdcc] backdrop-blur-sm shadow-md">
+    <div className="fixed z-100 top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] flex items-center justify-center bg-[#cdcdcdcc] backdrop-blur-sm shadow-md">
       {/* Close button */}
       <button
         onClick={onClose}
@@ -121,14 +121,14 @@ export default function Lightbox({ isOpen, onClose, images, initialIndex = 0 }: 
       )}
 
       {/* Image container */}
-      <div className="relative w-[90vw] md:w-[60vw] h-[80vh] flex flex-col items-center">
+      <div className="relative w-[90vw] md:w-[60vw] h-[70vh] flex flex-col items-center">
         <div className="relative w-full h-full flex items-center justify-center">
           <Image
             src={currentImage.src}
             alt={currentImage.alt}
             width={1200}
             height={800}
-            className="w-full h-full p-4 md:p-0 md:max-w-[40vw] md:h-[70vh] object-contain"
+            className="w-full h-full p-4 md:p-0 md:max-w-[40vw] md:h-[55vh] object-contain"
             priority
           />
         </div>
