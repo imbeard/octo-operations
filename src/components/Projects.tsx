@@ -9,7 +9,7 @@ interface ProjectsProps {
   blur?: boolean;
 }
 
-export default function Projects({ projects, blur = false }: ProjectsProps) {
+export default function Projects({ projects }: ProjectsProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<Array<{
     src: string;
@@ -40,7 +40,7 @@ export default function Projects({ projects, blur = false }: ProjectsProps) {
           </p>
         </div>
       ) : (
-        <div className={`space-y-2 overflow-y-auto flex-1 ${blur ? 'blur-xs' : ''}`}>
+        <div className={`space-y-2 overflow-y-auto flex-1`}>
           {projects.map((project: ProjectQueryResult) =>
             project.images && project.images.length > 0 ? (
               <div key={project._id} className="">
