@@ -22,8 +22,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        'arial-narrow': ['"Arial Narrow"', 'Arial', 'Helvetica', 'sans-serif'],
-        'sans': ['"Arial Narrow"', 'Arial', 'Helvetica', 'sans-serif'],
+        'arial-narrow': ['Arial Narrow', 'Arial', 'Helvetica', 'sans-serif']
       },
       spacing: {
         xs: '0.25rem',

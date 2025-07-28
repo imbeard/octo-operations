@@ -56,10 +56,17 @@
   }
 }
 
+@font-face {
+  font-family: "Arial Narrow";
+  src: url("/font/Arial Narrow Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+  font-family: "Arial Narrow", sans-serif;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
