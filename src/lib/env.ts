@@ -26,7 +26,7 @@ export const env: EnvironmentConfig = {
 export const getSanityConfig = (): SanityConfig => ({
   projectId: env.sanityProjectId,
   dataset: env.sanityDataset,
-  apiVersion: '2024-01-01',
+  apiVersion: '2025-02-19',
   useCdn: env.isProduction,
   requestTimeout: 30000,
 })

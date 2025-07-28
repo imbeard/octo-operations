@@ -3,7 +3,7 @@ export const environment = {
   // Sanity Configuration
   projectId: process.env.SANITY_STUDIO_PROJECT_ID,
   dataset: process.env.SANITY_STUDIO_DATASET,
-  apiVersion: '2024-01-01',
+  apiVersion: '2025-02-19',
   
   // Environment
   isDevelopment: process.env.NODE_ENV === 'development',

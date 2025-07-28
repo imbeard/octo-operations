@@ -5,7 +5,7 @@ import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
 export const config = {
   dataset: process.env.SANITY_STUDIO_DATASET,
   projectId: process.env.SANITY_STUDIO_PROJECT_ID,
-  apiVersion: '2024-01-01',
+  apiVersion: '2025-02-19',
   useCdn: process.env.NODE_ENV === 'production',
   // Add request timeout
   requestTimeout: 30000,
