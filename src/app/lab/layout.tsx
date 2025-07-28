@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { settingsQuery } from "@/sanity-studio/queries";
 import { client } from "@/lib/sanity";
 import { getSiteConfig, validateEnv } from "@/lib/env";
-import Image from "next/image";
-import Link from "next/link";
+import PageLayout from "@/components/PageLayout";
 
 // Validate environment variables in development
 if (process.env.NODE_ENV === "development") {
@@ -23,38 +22,22 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ProjectsLayout({
+export default async function LabLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen bg-accent relative">
-      {/* Fixed Logo */}
-      <div className="fixed top-0 left-0 py-2 w-1/5 md:w-1/5 z-10">
-        <Link href="/">
-          <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16">
-            <Image
-              src="/logo_w.svg"
-              alt="OCTO Logo"
-              width={38}
-              height={59}
-              className="w-8 h-10 sm:w-10 sm:h-12 md:w-12 md:h-16"
-              priority
-            />
-          </div>
-        </Link>
-      </div>
-
-      {/* Fixed Content */}
-      <div className="fixed top-0 left-0 md:left-1/4 right-0 md:right-1/4 h-full overflow-y-auto pt-16 md:pt-20">
-        {children}
-      </div>
-
-      {/* Fixed Title */}
-      <div className="fixed top-0 right-4 py-2 min-w-max md:w-1/5 z-10">
-          <h1 className="text-4xl md:text-5xl text-white font-bold text-right leading-tight">OCTO LAB</h1>
-      </div>
-    </main>
+    <PageLayout
+      title="OCTO LAB"
+      logoSrc="/logo_w.svg"
+      backgroundColor="bg-accent"
+      titleColor="text-white"
+      contentLeftMargin="md:left-1/4"
+      contentRightMargin="md:right-1/4"
+      contentOverflow="overflow-y-auto"
+    >
+      {children}
+    </PageLayout>
   );
 }

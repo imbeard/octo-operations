@@ -32,7 +32,7 @@ export default async function ProjectsPage() {
   const projects = await getAllProjects();
 
   return (
-      <div className="mx-auto px-4">
+      <div className="mx-auto px-3">
         <div className="h-[82vh]">
           <Projects projects={projects} />
         </div>

@@ -63,7 +63,7 @@ export default function Lightbox({
   const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
 
   return (
-    <div className="fixed z-[100] top-[12vh] md:top-0 left-0 w-full h-full grid place-items-center bg-[white]/5 backdrop-blur-xs">
+    <div className="fixed z-[100] top-[15vh] md:top-0 left-0 w-full h-full grid place-items-center bg-[white]/5 backdrop-blur-xs">
       <div className="absolute top-[35%] md:top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-[#cdcdcdcc] backdrop-blur-sm shadow-md w-max mt-[7vh] md:mt-16">
         {/* Close button */}
         <button

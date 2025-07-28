@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function BlogPage() {
   return (
-      <div className="mx-auto px-4">
+      <div className="mx-auto px-3">
         <div className="h-[82vh]">
           <Blog />
         </div>
