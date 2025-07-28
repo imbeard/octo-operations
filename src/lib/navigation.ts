@@ -20,7 +20,10 @@ export async function getNavigation() {
       return navigationCache
     }
 
-    const settings = await client.fetch(settingsQuery)
+    const settings = await client.fetch(settingsQuery, {}, {
+      cache: 'force-cache',
+      next: { tags: ['settings'] }
+    })
     
     // Cache the result
     navigationCache = settings
