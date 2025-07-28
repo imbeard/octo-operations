@@ -6,6 +6,9 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Link from "next/link";
 
+// Enable ISR with revalidation
+export const revalidate = 3600; // Revalidate every hour
+
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
   const title = siteConfig.title;
