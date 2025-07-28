@@ -4,21 +4,21 @@ import type { AllProjectsQueryResult, ProjectQueryResult } from '@/sanity-studio
 
 export async function getAllProjects(): Promise<AllProjectsQueryResult> {
   return await client.fetch(allProjectsQuery, {}, {
-    cache: 'force-cache',
-    next: { tags: ['projects'] }
+    cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
+    next: process.env.NODE_ENV === 'production' ? { tags: ['projects'] } : undefined
   })
 }
 
 export async function getProject(slug: string): Promise<ProjectQueryResult | null> {
   return await client.fetch(projectQuery, { slug }, {
-    cache: 'force-cache',
-    next: { tags: [`project-${slug}`] }
+    cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
+    next: process.env.NODE_ENV === 'production' ? { tags: [`project-${slug}`] } : undefined
   })
 }
 
 export async function getAllProjectSlugs(): Promise<{ slug: string }[]> {
   return await client.fetch(allProjectSlugsQuery, {}, {
-    cache: 'force-cache',
-    next: { tags: ['project-slugs'] }
+    cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
+    next: process.env.NODE_ENV === 'production' ? { tags: ['project-slugs'] } : undefined
   })
 } 

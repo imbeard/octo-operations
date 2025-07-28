@@ -21,8 +21,8 @@ export async function getNavigation() {
     }
 
     const settings = await client.fetch(settingsQuery, {}, {
-      cache: 'force-cache',
-      next: { tags: ['settings'] }
+      cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
+      next: process.env.NODE_ENV === 'production' ? { tags: ['settings'] } : undefined
     })
     
     // Cache the result
