@@ -10,10 +10,9 @@ interface HeaderProps {
 
 export default async function Header({ className = "" }: HeaderProps) {
   const settings: Settings | null = await getNavigation();
-  console.log("Fetched settings:", settings);
 
   return (
-    <header className={`w-full fixed top-0 left-0 z-50 ${className}`}>
+    <header className={`w-full fixed top-0 left-0 border z-50 ${className}`}>
       <div className="">
         <div className="w-full flex flex-row px-0 py-1.5 sm:py-2">
           {/* Logo on the left */}

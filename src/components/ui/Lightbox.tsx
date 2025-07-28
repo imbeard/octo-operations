@@ -58,11 +58,11 @@ export default function Lightbox({ isOpen, onClose, images, initialIndex = 0 }: 
   const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
 
   return (
-    <div className="fixed top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-50 flex items-center justify-center bg-[#cdcdcdcc] backdrop-blur-sm shadow-md">
+    <div className="fixed top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-100 flex items-center justify-center bg-[#cdcdcdcc] backdrop-blur-sm shadow-md">
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-2 left-3 z-20 text-black font-bold uppercase p-1 py-2"
+        className="absolute top-2 left-3 z-100 text-black font-bold uppercase p-1 py-2"
         aria-label="Close lightbox"
       >
         close

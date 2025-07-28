@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
-  const title = "Blog | " + siteConfig.title;
+  const title = "OCTO Lab";
   const description = "Read our latest blog posts";
 
   return {

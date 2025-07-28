@@ -6,9 +6,10 @@ import Lightbox from './ui/Lightbox';
 
 interface ProjectsProps {
   projects: ProjectQueryResult[];
+  blur?: boolean;
 }
 
-export default function Projects({ projects }: ProjectsProps) {
+export default function Projects({ projects, blur = false }: ProjectsProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImages, setLightboxImages] = useState<Array<{
     src: string;
@@ -39,7 +40,7 @@ export default function Projects({ projects }: ProjectsProps) {
           </p>
         </div>
       ) : (
-        <div className="space-y-2 overflow-y-auto flex-1">
+        <div className={`space-y-2 overflow-y-auto flex-1 ${blur ? 'blur-xs' : ''}`}>
           {projects.map((project: ProjectQueryResult) =>
             project.images && project.images.length > 0 ? (
               <div key={project._id} className="">
