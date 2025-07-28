@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 
 // Enable ISR with revalidation
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 1800; // Revalidate every 30 minutes
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
