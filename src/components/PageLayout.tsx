@@ -28,7 +28,7 @@ export default function PageLayout({
       <div className="fixed top-0 left-0 w-1/5 md:w-1/5 z-10">
         <div className="py-1.5 sm:py-2">
           <Link href="/">
-            <div className="flex-shrink-0 flex items-center pl-2 w-14 h-14 sm:w-16 sm:h-16 md:w-16 md:h-16">
+            <div className="flex-shrink-0 flex items-center pl-[3vw] md:pl-2">
               <Image
                 src={logoSrc}
                 alt="OCTO Logo"

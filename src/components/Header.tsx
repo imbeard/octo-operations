@@ -16,9 +16,9 @@ export default async function Header({ className = "" }: HeaderProps) {
       <div className="">
         <div className="w-full flex flex-row px-0 py-1.5 sm:py-2">
           {/* Logo on the left */}
-          <div className="md:w-3/6">
+          <div className="md:w-3/6 w-1/3">
             <Link href="/">
-            <div className="flex-shrink-0 flex items-center pl-2 w-14 h-14 sm:w-16 sm:h-16">
+            <div className="flex-shrink-0 flex items-center pl-[3vw] md:pl-2">
               <Image
                 src="/logo.svg"
                 alt="OCTO Logo"
