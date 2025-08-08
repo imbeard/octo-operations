@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Site Color Theme - Updated to red, white, black */
   --color-primary: #E30613;
-  --color-accent: #E30613;
   --color-white: #ffffff;
   --color-black: #000000;
   
@@ -13,37 +11,14 @@
   
   /* Header height */
   --header-height: 80px;
-  
-  /* Additional semantic colors */
-  --color-primary-light: #ff1a2a;
-  --color-primary-dark: #b30000;
-  --color-accent-light: #ff1a2a;
-  --color-accent-dark: #b30000;
-  --color-accent-75: rgba(227, 6, 19, 0.75);
-  --color-accent-50: rgba(227, 6, 19, 0.5);
-  --color-accent-25: rgba(227, 6, 19, 0.25);
-  --color-white-75: rgba(255, 255, 255, 0.75);
-  --color-white-50: rgba(255, 255, 255, 0.5);
-  --color-white-25: rgba(255, 255, 255, 0.25);
-  --color-gray-light: #f5f5f5;
-  --color-gray: #6b7280;
-  --color-gray-dark: #374151;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--color-primary);
-  --color-accent: var(--color-accent);
   --color-white: var(--color-white);
   --color-black: var(--color-black);
-  --color-primary-light: var(--color-primary-light);
-  --color-primary-dark: var(--color-primary-dark);
-  --color-accent-light: var(--color-accent-light);
-  --color-accent-dark: var(--color-accent-dark);
-  --color-gray-light: var(--color-gray-light);
-  --color-gray: var(--color-gray);
-  --color-gray-dark: var(--color-gray-dark);
   --font-sans: "Arial Narrow", Arial, Helvetica, sans-serif;
   --font-mono: "Arial Narrow", Arial, Helvetica, sans-serif;
   --font-arial-narrow: "Arial Narrow", Arial, Helvetica, sans-serif;
@@ -121,50 +96,22 @@ body::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 
-/* Mobile-specific styles */
+/* Mobile-specific */
 @media (max-width: 768px) {
   body {
     font-size: 16px; /* Prevent zoom on iOS */
   }
   
-  
-  /* Better mobile scrolling */
   html {
     scroll-behavior: smooth;
   }
 }
-
-/* Utility classes for the updated theme */
 .bg-primary {
   background-color: var(--color-primary);
 }
 
 .bg-accent {
   background-color: var(--color-accent);
-}
-
-.bg-accent-75 {
-  background-color: var(--color-accent-75);
-}
-
-.bg-accent-50 {
-  background-color: var(--color-accent-50);
-}
-
-.bg-accent-25 {
-  background-color: var(--color-accent-25);
-}
-
-.bg-white-75 {
-  background-color: var(--color-white-75);
-}
-
-.bg-white-50 {
-  background-color: var(--color-white-50);
-}
-
-.bg-white-25 {
-  background-color: var(--color-white-25);
 }
 
 .text-primary {
@@ -175,30 +122,6 @@ body::-webkit-scrollbar {
   color: var(--color-accent);
 }
 
-.text-accent-75 {
-  color: var(--color-accent-75);
-}
-
-.text-accent-50 {
-  color: var(--color-accent-50);
-}
-
-.text-accent-25 {
-  color: var(--color-accent-25);
-}
-
-.text-white-75 {
-  color: var(--color-white-75);
-}
-
-.text-white-50 {
-  color: var(--color-white-50);
-}
-
-.text-white-25 {
-  color: var(--color-white-25);
-}
-
 .border-primary {
   border-color: var(--color-primary);
 }
@@ -206,31 +129,6 @@ body::-webkit-scrollbar {
 .border-accent {
   border-color: var(--color-accent);
 }
-
-.border-accent-75 {
-  border-color: var(--color-accent-75);
-}
-
-.border-accent-50 {
-  border-color: var(--color-accent-50);
-}
-
-.border-accent-25 {
-  border-color: var(--color-accent-25);
-}
-
-.border-white-75 {
-  border-color: var(--color-white-75);
-}
-
-.border-white-50 {
-  border-color: var(--color-white-50);
-}
-
-.border-white-25 {
-  border-color: var(--color-white-25);
-}
-
 
 
 

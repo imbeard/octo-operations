@@ -12,10 +12,10 @@ export default async function Header({ className = "" }: HeaderProps) {
   const settings: Settings | null = await getNavigation();
 
   return (
-    <header className={`w-full fixed top-0 left-0 z-50 ${className}`}>
+    <header className={`w-full fixed top-0 left-0 ${className}`}>
       <div className="">
         <div className="w-full flex flex-row px-0 py-1.5 sm:py-2">
-          {/* Logo on the left */}
+          {/* Logo */}
           <div className="md:w-3/6 w-1/3">
             <Link href="/">
             <div className="flex-shrink-0 flex items-center pl-[3vw] md:pl-2">
@@ -30,10 +30,9 @@ export default async function Header({ className = "" }: HeaderProps) {
             </div>
             </Link>
           </div>
-          {/* Spacer */}
           <div className="w-full md:w-3/6 border-[red]">
             <div className="flex flex-row justify-between">
-              {/* Services Column */}
+              {/* Services */}
               <div className="text-[#E30613] text-left w-full">
                 <div className="font-bold text-base sm:text-xl">SERVICES</div>
                 {settings?.services?.map((service: string) => (
@@ -42,7 +41,7 @@ export default async function Header({ className = "" }: HeaderProps) {
                   </p>
                 ))}
               </div>
-              {/* Contact Column */}
+              {/* Contacts */}
               <div className="text-[#E30613] text-left w-full">
                 <div className="font-bold text-base sm:text-xl">CONTACT</div>
                 {settings?.contactEmail && (

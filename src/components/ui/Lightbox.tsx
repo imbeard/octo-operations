@@ -12,6 +12,14 @@ interface LightboxProps {
     description?: string;
   }>;
   initialIndex?: number;
+  projectInfo?: {
+    title?: string;
+    subtitle?: string;
+    projectNumber?: string;
+    description?: string;
+    place?: string;
+    tags?: string[];
+  };
 }
 
 export default function Lightbox({
@@ -19,6 +27,7 @@ export default function Lightbox({
   onClose,
   images,
   initialIndex = 0,
+  projectInfo,
 }: LightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
@@ -63,94 +72,162 @@ export default function Lightbox({
   const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
 
   return (
-    <div className="fixed z-[100] top-[15vh] md:top-0 left-0 w-full h-full grid place-items-center bg-[white]/5 backdrop-blur-xs">
-      <div className="absolute top-[35%] md:top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-[#cdcdcdcc] backdrop-blur-sm shadow-md w-max mt-[7vh] md:mt-16">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-2 left-3 z-[200] text-black font-bold uppercase p-1 py-2"
-          aria-label="Close lightbox"
+    <div className="fixed z-50 inset-0 w-full h-full bg-black">
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-2 right-2 md:top-2 md:right-3 z-100 text-white hover:bg-white hover:text-black font-bold uppercase p-2 md:p-1 text-sm md:text-base"
+        aria-label="Close lightbox"
+      >
+        close
+      </button>
+
+      <div className="flex flex-col md:flex-row h-full">
+        {/* Project info */}
+        {projectInfo && (
+          <div className="w-full md:w-2/5 px-2 pt-8 pb-8 md:p-0 flex flex-col justify-between text-white md:m-5 min-h-[30vh] md:min-h-0">
+            <div className="">
+              {projectInfo.projectNumber && (
+                <h1 className="text-2xl md:text-3xl font-semibold text-white/50 md:block hidden">
+                  {projectInfo.projectNumber}
+                </h1>
+              )}
+              {projectInfo.title && (
+                <h2 className="text-3xl md:text-4xl mt-2 md:mt-0 font-bold uppercase">
+                  {projectInfo.title}
+                </h2>
+              )}
+              {projectInfo.subtitle && (
+                <h3 className="text-lg md:text-2xl font-medium mb-1 text-white/70">
+                  {projectInfo.subtitle}
+                </h3>
+              )}
+              {/* Tags */}
+              {projectInfo.tags && projectInfo.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {projectInfo.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="inline-block px-1 py-0.5 text-xs uppercase text-white border border-white/20 "
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {projectInfo.description && (
+                <p className="text-xs md:text-sm max-w-full md:max-w-[375px] text-white/90 mb-3 leading-tight">
+                  {projectInfo.description}
+                </p>
+              )}
+            </div>
+
+            {/* Place positioned at the bottom on desktop */}
+            {projectInfo.place && (
+              <div className="md:mt-auto">
+                <p className="text-xs md:text-sm text-white/70">
+                  {projectInfo.place}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Mobile project number - positioned to align with close button */}
+        {projectInfo && projectInfo.projectNumber && (
+          <div className="absolute top-2 left-2 z-100 md:hidden">
+            <h1 className="text-2xl font-semibold text-white/50">
+              {projectInfo.projectNumber}
+            </h1>
+          </div>
+        )}
+
+        {/* Image gallery */}
+        <div
+          className={`${
+            projectInfo ? "w-full" : "w-full"
+          } relative flex flex-col items-center justify-center min-h-0`}
         >
-          close
-        </button>
-
-        {/* Previous image thumbnail - hidden on mobile */}
-        {images.length > 1 && (
-          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
-            <div
-              onClick={() => setCurrentIndex(prevIndex)}
-              className="relative w-28 h-48 overflow-hidden transition-all duration-200 cursor-pointer"
-            >
-              <Image
-                src={images[prevIndex].src}
-                alt={images[prevIndex].alt}
-                fill
-                className="object-cover"
-                sizes="96px"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Next image thumbnail - hidden on mobile */}
-        {images.length > 1 && (
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
-            <div
-              onClick={() => setCurrentIndex(nextIndex)}
-              className="relative w-28 h-48 overflow-hidden transition-all duration-200 cursor-pointer"
-            >
-              <Image
-                src={images[nextIndex].src}
-                alt={images[nextIndex].alt}
-                fill
-                className="object-cover"
-                sizes="96px"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Mobile navigation areas */}
-        {images.length > 1 && (
-          <>
-            {/* Left click area for previous */}
-            <div
-              className="absolute left-0 top-0 w-1/3 h-full z-10 md:hidden"
-              onClick={() => setCurrentIndex(prevIndex)}
-            />
-            {/* Right click area for next */}
-            <div
-              className="absolute right-0 top-0 w-1/3 h-full z-10 md:hidden"
-              onClick={() => setCurrentIndex(nextIndex)}
-            />
-          </>
-        )}
-
-        {/* Image container */}
-        <div className="relative w-[90vw] md:w-[60vw] h-[70vh] flex flex-col items-center">
-          <div className="relative w-full h-full flex items-center justify-center">
-            <Image
-              src={currentImage.src}
-              alt={currentImage.alt}
-              width={1200}
-              height={800}
-              className="w-full h-full p-4 md:p-0 md:max-w-[40vw] md:h-[55vh] object-contain"
-              priority
-            />
-          </div>
-
-          {/* Image counter */}
+          {/* Prev image */}
           {images.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm bg-black bg-opacity-50 px-3 py-1 rounded">
-              {currentIndex + 1} / {images.length}
+            <div className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
+              <div
+                onClick={() => setCurrentIndex(prevIndex)}
+                className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"
+              >
+                <Image
+                  src={images[prevIndex].src}
+                  alt={images[prevIndex].alt}
+                  fill
+                  className="object-cover"
+                  sizes="96px"
+                />
+              </div>
             </div>
           )}
 
-          {/* Image description */}
-          {currentImage.description && (
-            <div className="mt-4 text-white text-center max-w-2xl px-4">
-              <p className="text-sm">{currentImage.description}</p>
+          {/* Next image */}
+          {images.length > 1 && (
+            <div className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
+              <div
+                onClick={() => setCurrentIndex(nextIndex)}
+                className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"
+              >
+                <Image
+                  src={images[nextIndex].src}
+                  alt={images[nextIndex].alt}
+                  fill
+                  className="object-cover"
+                  sizes="96px"
+                />
+              </div>
             </div>
+          )}
+
+          {/* Image container - positioned between prev and next images */}
+          <div className="relative w-full h-[50vh] md:h-full flex flex-col justify-center items-center">
+            <div
+              className={`relative flex justify-center mx-auto h-full ${
+                images.length > 1
+                  ? "w-[calc(100%-0rem)] md:w-[calc(100%-16rem)]" // 16rem = 2 * (7rem nav image + 1rem positioning)
+                  : "w-full md:w-full"
+              }`}
+            >
+              <div className="relative h-full flex justify-center">
+                <Image
+                  src={currentImage.src}
+                  alt={currentImage.alt}
+                  width={1200}
+                  height={800}
+                  className="w-auto h-auto max-w-full max-h-full object-contain md:w-full md:p-4 "
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Counter */}
+            {images.length > 1 && (
+              <div className="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 text-white text-xs md:text-sm bg-black bg-opacity-50 px-2 md:px-3 py-1 rounded">
+                {currentIndex + 1} / {images.length}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile nav */}
+          {images.length > 1 && (
+            <>
+              {/* Left click */}
+              <div
+                className="absolute left-0 top-0 w-1/3 h-full z-10 md:hidden"
+                onClick={() => setCurrentIndex(prevIndex)}
+              />
+              {/* Right click */}
+              <div
+                className="absolute right-0 top-0 w-1/3 h-full z-10 md:hidden"
+                onClick={() => setCurrentIndex(nextIndex)}
+              />
+            </>
           )}
         </div>
       </div>

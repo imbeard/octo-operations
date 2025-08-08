@@ -17,8 +17,16 @@ export default function Projects({ projects }: ProjectsProps) {
     description?: string;
   }>>([]);
   const [lightboxInitialIndex, setLightboxInitialIndex] = useState(0);
+  const [lightboxProjectInfo, setLightboxProjectInfo] = useState<{
+    title?: string;
+    subtitle?: string;
+    projectNumber?: string;
+    description?: string;
+    place?: string;
+    tags?: string[];
+  } | undefined>(undefined);
 
-  const openLightbox = (projectImages: NonNullable<ProjectQueryResult['images']>, initialIndex: number) => {
+  const openLightbox = (project: ProjectQueryResult, projectImages: NonNullable<ProjectQueryResult['images']>, initialIndex: number) => {
     const images = projectImages.map((img) => ({
       src: img.image.asset.url,
       alt: img.description || 'Project image',
@@ -27,6 +35,14 @@ export default function Projects({ projects }: ProjectsProps) {
     
     setLightboxImages(images);
     setLightboxInitialIndex(initialIndex);
+    setLightboxProjectInfo({
+      title: project.title,
+      subtitle: project.subtitle, // Use the actual subtitle field
+      projectNumber: project.projectNumber, // Pass project number separately
+      description: project.description,
+      place: project.place,
+      tags: project.tags,
+    });
     setLightboxOpen(true);
   };
 
@@ -60,7 +76,7 @@ export default function Projects({ projects }: ProjectsProps) {
                       src={image.image.asset.url}
                       alt={image.description || project.projectNumber}
                       className="w-auto max-h-[150px] object-contain bg-white cursor-pointer hover:opacity-80 transition-opacity"
-                      onClick={() => openLightbox(project.images!, index)}
+                      onClick={() => openLightbox(project, project.images!, index)}
                     />
                   ))}
                 </div>
@@ -75,6 +91,7 @@ export default function Projects({ projects }: ProjectsProps) {
         onClose={() => setLightboxOpen(false)}
         images={lightboxImages}
         initialIndex={lightboxInitialIndex}
+        projectInfo={lightboxProjectInfo}
       />
     </div>
   );

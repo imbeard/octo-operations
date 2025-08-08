@@ -88,10 +88,13 @@ export interface Project extends SanityDocument {
   _type: 'project'
   projectNumber: string
   title: string
+  subtitle?: string
   slug: {
     current: string
   }
   description?: string
+  place?: string
+  tags?: string[]
   images?: ProjectImage[]
   seoTitle?: string
   seoDescription?: string
@@ -162,10 +165,13 @@ export interface ProjectQueryResult {
   _id: string
   projectNumber: string
   title: string
+  subtitle?: string
   slug: {
     current: string
   }
   description?: string
+  place?: string
+  tags?: string[]
   images?: ProjectImage[]
   seoTitle?: string
   seoDescription?: string

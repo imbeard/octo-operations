@@ -20,8 +20,11 @@ export const allProjectsQuery = groq`
     _id,
     projectNumber,
     title,
+    subtitle,
     slug,
     description,
+    place,
+    tags,
     images[] {
       _key,
       image {
@@ -42,8 +45,11 @@ export const projectQuery = groq`
     _id,
     projectNumber,
     title,
+    subtitle,
     slug,
     description,
+    place,
+    tags,
     images[] {
       _key,
       image {

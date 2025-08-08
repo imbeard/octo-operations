@@ -36,6 +36,14 @@ export default defineType({
       fieldset: 'content',
     }),
     defineField({
+      name: 'subtitle',
+      title: 'Project Subtitle',
+      type: 'string',
+      description: 'Optional subtitle for the project',
+      validation: (Rule) => Rule.max(100),
+      fieldset: 'content',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -59,6 +67,30 @@ export default defineType({
       rows: 4,
       description: 'Brief description of the project',
       validation: (Rule) => Rule.max(500),
+      fieldset: 'content',
+    }),
+    defineField({
+      name: 'place',
+      title: 'Project Place',
+      type: 'string',
+      description: 'Location or place where the project was executed',
+      validation: (Rule) => Rule.max(100),
+      fieldset: 'content',
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Project Tags',
+      type: 'array',
+      description: 'Add tags for this project',
+      of: [
+        {
+          type: 'string',
+          validation: (Rule) => Rule.max(20),
+        }
+      ],
+      options: {
+        layout: 'tags',
+      },
       fieldset: 'content',
     }),
     defineField({

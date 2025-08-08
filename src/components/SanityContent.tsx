@@ -4,7 +4,6 @@ import { getOptimizedImageUrl, getResponsiveSizes } from '@/lib/sanity'
 import Image from 'next/image'
 import GalleryBlock from './ui/GalleryBlock'
 
-// Define proper TypeScript interfaces for better type safety
 interface SanityImage {
   _type: 'image'
   _key?: string

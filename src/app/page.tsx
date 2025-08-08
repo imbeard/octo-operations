@@ -38,15 +38,15 @@ export default async function Home() {
     <>
       <Header />
 
-      {/* Main content */}
+      {/* Main */}
       <main className="min-h-screen md:h-screen md:fixed left-0 w-full">
         <div className="mx-auto px-3 h-full">
           <div className="flex h-full flex-col md:flex-row">
-            {/* Projects Section - 4/5 width */}
+            {/* Projects Section */}
             <div className="md:w-3/4 flex flex-col">
               <div className="relative md:overflow-y-scroll h-full">
                 <Link href="/projects">
-                  <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] z-[100] hover:text-primary">
+                  <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary">
                     Projects
                   </h1>
                 </Link>
@@ -56,11 +56,11 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Labs Section - 1/5 width */}
+            {/* Labs Section */}
             <div className="md:w-1/4 flex flex-col">
               <div className="relative h-full md:overflow-y-scroll">
                 <Link href="/lab">
-                  <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] z-[100] hover:text-primary">
+                  <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh]  hover:text-primary">
                     OCTO Lab
                   </h1>
                 </Link>
