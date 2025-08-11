@@ -1,6 +1,7 @@
 import { getSiteConfig } from "@/lib/env";
 import { getAllProjects } from "@/lib/projects";
-import Projects from "@/components/Projects";
+import ProjectsWithLightbox from "@/components/ProjectsWithLightbox";
+import PageLayout from "@/components/PageLayout";
 import type { Metadata } from "next";
 
 // Enable ISR with revalidation
@@ -32,10 +33,16 @@ export default async function ProjectsPage() {
   const projects = await getAllProjects();
 
   return (
-      <div className="mx-auto px-3">
-        <div className="h-[82vh]">
-          <Projects projects={projects} />
-        </div>
-      </div>
+    <PageLayout
+      title="PROJECTS"
+      logoSrc="/logo.svg"
+      backgroundColor="bg-white"
+      titleColor="text-black"
+      contentLeftMargin="md:left-1/6"
+      contentRightMargin="md:right-1/5"
+      contentOverflow="overflow-x-scroll"
+      >
+        <ProjectsWithLightbox initialProjects={projects} />
+    </PageLayout>
   );
 } 

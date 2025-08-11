@@ -1,58 +1,21 @@
 'use client';
 
-import { useState } from 'react';
 import type { ProjectQueryResult } from "@/sanity-studio/types";
-import Lightbox from './ui/Lightbox';
 
 interface ProjectsProps {
   projects: ProjectQueryResult[];
   blur?: boolean;
+  onImageClick?: (project: ProjectQueryResult, projectImages: NonNullable<ProjectQueryResult['images']>, initialIndex: number) => void;
 }
 
-export default function Projects({ projects }: ProjectsProps) {
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxImages, setLightboxImages] = useState<Array<{
-    src: string;
-    alt: string;
-    description?: string;
-  }>>([]);
-  const [lightboxInitialIndex, setLightboxInitialIndex] = useState(0);
-  const [lightboxProjectInfo, setLightboxProjectInfo] = useState<{
-    title?: string;
-    subtitle?: string;
-    projectNumber?: string;
-    description?: string;
-    place?: string;
-    tags?: string[];
-  } | undefined>(undefined);
-
-  const openLightbox = (project: ProjectQueryResult, projectImages: NonNullable<ProjectQueryResult['images']>, initialIndex: number) => {
-    const images = projectImages.map((img) => ({
-      src: img.image.asset.url,
-      alt: img.description || 'Project image',
-      description: img.description,
-    }));
-    
-    setLightboxImages(images);
-    setLightboxInitialIndex(initialIndex);
-    setLightboxProjectInfo({
-      title: project.title,
-      subtitle: project.subtitle, // Use the actual subtitle field
-      projectNumber: project.projectNumber, // Pass project number separately
-      description: project.description,
-      place: project.place,
-      tags: project.tags,
-    });
-    setLightboxOpen(true);
-  };
-
+export default function Projects({ projects, onImageClick }: ProjectsProps) {
   return (
     <div className="w-full flex flex-col">
       {!projects || projects.length === 0 ? (
         <div className="text-gray-600">
           <p>No projects found.</p>
           <p className="mt-2 text-sm">
-            Please add projects in the Sanity Studio.
+            Please add projects
           </p>
         </div>
       ) : (
@@ -76,7 +39,7 @@ export default function Projects({ projects }: ProjectsProps) {
                       src={image.image.asset.url}
                       alt={image.description || project.projectNumber}
                       className="w-auto max-h-[150px] object-contain bg-white cursor-pointer hover:opacity-80 transition-opacity"
-                      onClick={() => openLightbox(project, project.images!, index)}
+                      onClick={() => onImageClick?.(project, project.images!, index)}
                     />
                   ))}
                 </div>
@@ -85,14 +48,6 @@ export default function Projects({ projects }: ProjectsProps) {
           )}
         </div>
       )}
-
-      <Lightbox
-        isOpen={lightboxOpen}
-        onClose={() => setLightboxOpen(false)}
-        images={lightboxImages}
-        initialIndex={lightboxInitialIndex}
-        projectInfo={lightboxProjectInfo}
-      />
     </div>
   );
 }

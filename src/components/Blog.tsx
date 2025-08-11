@@ -12,7 +12,7 @@ export default async function Blog() {
           <p className="mt-2 text-sm">Please add labs in the Sanity Studio.</p>
         </div>
       ) : (
-        <div className="space-y-2 overflow-y-auto flex-1">
+        <div className="space-y-2 overflow-y-auto flex-">
           {labs.map((lab: LabQueryResult) => (
             <div key={lab._id} className="">
               {lab.image && (

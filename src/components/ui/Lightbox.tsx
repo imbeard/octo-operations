@@ -72,11 +72,11 @@ export default function Lightbox({
   const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
 
   return (
-    <div className="fixed z-50 inset-0 w-full h-full bg-black">
+    <div className="fixed z-[999] inset-0 w-full h-full bg-black">
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-2 right-2 md:top-2 md:right-3 z-100 text-white hover:bg-white hover:text-black font-bold uppercase p-2 md:p-1 text-sm md:text-base"
+        className="absolute z-[999] top-2 right-2 md:top-2 md:right-3 text-white hover:bg-white hover:text-black font-bold uppercase p-2 md:p-1 text-sm md:text-base"
         aria-label="Close lightbox"
       >
         close
@@ -92,16 +92,19 @@ export default function Lightbox({
                   {projectInfo.projectNumber}
                 </h1>
               )}
+
               {projectInfo.title && (
                 <h2 className="text-3xl md:text-4xl mt-2 md:mt-0 font-bold uppercase">
                   {projectInfo.title}
                 </h2>
               )}
+
               {projectInfo.subtitle && (
                 <h3 className="text-lg md:text-2xl font-medium mb-1 text-white/70">
                   {projectInfo.subtitle}
                 </h3>
               )}
+
               {/* Tags */}
               {projectInfo.tags && projectInfo.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-3">
@@ -123,7 +126,7 @@ export default function Lightbox({
               )}
             </div>
 
-            {/* Place positioned at the bottom on desktop */}
+            {/* Place desktop */}
             {projectInfo.place && (
               <div className="md:mt-auto">
                 <p className="text-xs md:text-sm text-white/70">
@@ -134,9 +137,9 @@ export default function Lightbox({
           </div>
         )}
 
-        {/* Mobile project number - positioned to align with close button */}
+        {/* Mobile project number */}
         {projectInfo && projectInfo.projectNumber && (
-          <div className="absolute top-2 left-2 z-100 md:hidden">
+          <div className="absolute top-2 left-2 md:hidden">
             <h1 className="text-2xl font-semibold text-white/50">
               {projectInfo.projectNumber}
             </h1>
@@ -151,7 +154,7 @@ export default function Lightbox({
         >
           {/* Prev image */}
           {images.length > 1 && (
-            <div className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
+            <div className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 hidden md:block">
               <div
                 onClick={() => setCurrentIndex(prevIndex)}
                 className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"
@@ -169,7 +172,7 @@ export default function Lightbox({
 
           {/* Next image */}
           {images.length > 1 && (
-            <div className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
+            <div className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 hidden md:block">
               <div
                 onClick={() => setCurrentIndex(nextIndex)}
                 className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"
@@ -185,7 +188,7 @@ export default function Lightbox({
             </div>
           )}
 
-          {/* Image container - positioned between prev and next images */}
+          {/* Main Image container */}
           <div className="relative w-full h-[50vh] md:h-full flex flex-col justify-center items-center">
             <div
               className={`relative flex justify-center mx-auto h-full ${
@@ -206,7 +209,7 @@ export default function Lightbox({
               </div>
             </div>
 
-            {/* Counter */}
+            {/* Image counter */}
             {images.length > 1 && (
               <div className="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 text-white text-xs md:text-sm bg-black bg-opacity-50 px-2 md:px-3 py-1 rounded">
                 {currentIndex + 1} / {images.length}
@@ -219,12 +222,12 @@ export default function Lightbox({
             <>
               {/* Left click */}
               <div
-                className="absolute left-0 top-0 w-1/3 h-full z-10 md:hidden"
+                className="absolute left-0 top-0 w-1/3 h-full md:hidden"
                 onClick={() => setCurrentIndex(prevIndex)}
               />
               {/* Right click */}
               <div
-                className="absolute right-0 top-0 w-1/3 h-full z-10 md:hidden"
+                className="absolute right-0 top-0 w-1/3 h-full md:hidden"
                 onClick={() => setCurrentIndex(nextIndex)}
               />
             </>
