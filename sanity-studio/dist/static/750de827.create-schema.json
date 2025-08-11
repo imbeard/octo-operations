@@ -1,0 +1,1076 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "fieldset": "content"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "URL-friendly version of the title",
+        "name": "slug",
+        "type": "slug",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "subtitle",
+        "type": "string",
+        "fieldset": "content"
+      },
+      {
+        "options": {
+          "layout": "list",
+          "sortable": true
+        },
+        "description": "Add content sections to build your page",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          },
+          {
+            "type": "imageBlock"
+          },
+          {
+            "type": "galleryBlock"
+          }
+        ],
+        "name": "sections",
+        "type": "array",
+        "title": "Page Sections",
+        "fieldset": "content"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Brief description of this page (appears in search results)",
+        "name": "description",
+        "type": "text",
+        "title": "Page Description",
+        "fieldset": "seo"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Custom title for this page (appears in browser tab and search results)",
+        "name": "seoTitle",
+        "type": "string",
+        "title": "Page Title",
+        "fieldset": "seo"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "content",
+        "options": {
+          "collapsible": false
+        }
+      },
+      {
+        "name": "seo",
+        "title": "SEO Settings (Optional)",
+        "description": "Custom settings for search engines. Leave empty to use site defaults.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      }
+    ],
+    "name": "page",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 10
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Project number (e.g., 001, 002, etc.)",
+        "name": "projectNumber",
+        "type": "string",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Project Title",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Optional subtitle for the project",
+        "name": "subtitle",
+        "type": "string",
+        "title": "Project Subtitle",
+        "fieldset": "content"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "URL-friendly version of the title",
+        "name": "slug",
+        "type": "slug",
+        "fieldset": "content"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 500
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Brief description of the project",
+        "name": "description",
+        "type": "text",
+        "title": "Project Description",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Location or place where the project was executed",
+        "name": "place",
+        "type": "string",
+        "title": "Project Place",
+        "fieldset": "content"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "description": "Add tags for this project",
+        "of": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "max",
+                    "constraint": 20
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "type": "string"
+          }
+        ],
+        "name": "tags",
+        "type": "array",
+        "title": "Project Tags",
+        "fieldset": "content"
+      },
+      {
+        "options": {
+          "layout": "grid",
+          "sortable": true
+        },
+        "description": "Add images for this project",
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "image",
+                "type": "image"
+              },
+              {
+                "rows": 2,
+                "description": "Optional description for this image",
+                "name": "description",
+                "type": "text",
+                "title": "Image Description"
+              }
+            ],
+            "type": "object",
+            "name": "projectImage"
+          }
+        ],
+        "name": "images",
+        "type": "array",
+        "title": "Project Images",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Custom title for this project page (appears in browser tab and search results)",
+        "name": "seoTitle",
+        "type": "string",
+        "title": "Page Title",
+        "fieldset": "seo"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Brief description of this project (appears in search results)",
+        "name": "seoDescription",
+        "type": "text",
+        "title": "Page Description",
+        "fieldset": "seo"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "content",
+        "options": {
+          "collapsible": false
+        }
+      },
+      {
+        "name": "seo",
+        "title": "SEO Settings (Optional)",
+        "description": "Custom settings for search engines. Leave empty to use site defaults.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      }
+    ],
+    "name": "project",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Site Title",
+        "fieldset": "general"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Brief description of your site (appears in search results)",
+        "name": "description",
+        "type": "text",
+        "title": "Site Description",
+        "fieldset": "general"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Your website address (e.g., https://octo-operations.com)",
+        "name": "siteUrl",
+        "type": "url",
+        "title": "Website URL",
+        "fieldset": "general"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "services",
+        "type": "array",
+        "fieldset": "services"
+      },
+      {
+        "initialValue": "mail@octo-operations.com",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Contact email address",
+        "name": "contactEmail",
+        "type": "string",
+        "title": "Email",
+        "fieldset": "contact"
+      },
+      {
+        "initialValue": "England Street",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Street address",
+        "name": "contactAddress",
+        "type": "string",
+        "title": "Address",
+        "fieldset": "contact"
+      },
+      {
+        "initialValue": "89123 London (GB)",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "City, postal code and country",
+        "name": "contactLocation",
+        "type": "string",
+        "title": "Location",
+        "fieldset": "contact"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "general",
+        "title": "General Settings",
+        "options": {
+          "collapsible": false
+        }
+      },
+      {
+        "name": "services",
+        "options": {
+          "collapsible": false
+        }
+      },
+      {
+        "name": "contact",
+        "title": "Contact Information",
+        "options": {
+          "collapsible": false
+        }
+      }
+    ],
+    "name": "settings",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Lab Title",
+        "fieldset": "content"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "URL-friendly version of the title",
+        "name": "slug",
+        "type": "slug",
+        "fieldset": "content"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Main image for this lab post",
+        "name": "image",
+        "type": "image",
+        "title": "Lab Image",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "When this lab post was published",
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published Date",
+        "fieldset": "content"
+      },
+      {
+        "rows": 10,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 10
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The main content of the lab post",
+        "name": "content",
+        "type": "text",
+        "title": "Lab Content",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Custom title for this lab page (appears in browser tab and search results)",
+        "name": "seoTitle",
+        "type": "string",
+        "title": "Page Title",
+        "fieldset": "seo"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Brief description of this lab post (appears in search results)",
+        "name": "seoDescription",
+        "type": "text",
+        "title": "Page Description",
+        "fieldset": "seo"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "content",
+        "options": {
+          "collapsible": false
+        }
+      },
+      {
+        "name": "seo",
+        "title": "SEO Settings (Optional)",
+        "description": "Custom settings for search engines. Leave empty to use site defaults.",
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        }
+      }
+    ],
+    "name": "lab",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Alternative text for accessibility",
+        "name": "alt",
+        "type": "string",
+        "title": "Alt Text"
+      },
+      {
+        "rows": 2,
+        "description": "Optional caption for the image",
+        "name": "caption",
+        "type": "text"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Left",
+              "value": "left"
+            },
+            {
+              "title": "Center",
+              "value": "center"
+            },
+            {
+              "title": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        "initialValue": "center",
+        "name": "alignment",
+        "type": "string"
+      }
+    ],
+    "name": "imageBlock",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "description": "Optional title for the gallery",
+        "name": "title",
+        "type": "string",
+        "title": "Gallery Title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "image",
+                "type": "image"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "description": "Alternative text for accessibility",
+                "name": "alt",
+                "type": "string",
+                "title": "Alt Text"
+              },
+              {
+                "rows": 2,
+                "description": "Optional caption for this image",
+                "name": "caption",
+                "type": "text"
+              }
+            ],
+            "type": "object",
+            "name": "galleryImage"
+          }
+        ],
+        "name": "images",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "1 Column",
+              "value": 1
+            },
+            {
+              "title": "2 Columns",
+              "value": 2
+            },
+            {
+              "title": "3 Columns",
+              "value": 3
+            },
+            {
+              "title": "4 Columns",
+              "value": 4
+            }
+          ]
+        },
+        "initialValue": 2,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  1,
+                  2,
+                  3,
+                  4
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 4
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Number of columns in the gallery grid",
+        "name": "columns",
+        "type": "number"
+      }
+    ],
+    "name": "galleryBlock",
+    "type": "object"
+  }
+]
