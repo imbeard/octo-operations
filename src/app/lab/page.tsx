@@ -29,7 +29,6 @@ export default function BlogPage() {
       logoSrc="/logo_w.svg"
       backgroundColor="bg-primary"
       titleColor="text-white"
-      contentOverflow="overflow-y-auto"
     >
       <Blog />
     </PageLayout>

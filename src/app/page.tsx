@@ -1,10 +1,12 @@
 import { getSiteConfig } from "@/lib/env";
 import { getAllProjects } from "@/lib/projects";
+import { getNavigation } from "@/lib/navigation";
 import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Link from "next/link";
+import Popup from "@/components/ui/Popup";
 
 // Enable ISR with revalidation
 export const revalidate = 1800; // Revalidate every 30 minutes
@@ -20,16 +22,17 @@ export async function generateMetadata(): Promise<Metadata> {
       description: "OCTO",
       type: "website",
       url: siteConfig.url,
-    }
+    },
   };
 }
 
 export default async function Home() {
   const projects = await getAllProjects();
+  const settings = await getNavigation();
 
   return (
     <>
-      <Header className="fixed top-0 left-0 z-20" />
+      <Header settings={settings} className="fixed top-0 left-0 z-20"  />
 
       {/* Main */}
       <div className="min-h-screen md:h-screen relative left-0 w-full">
@@ -51,7 +54,7 @@ export default async function Home() {
 
             {/* Labs Section */}
             <div className="md:w-1/4 flex flex-col">
-              <div className="relative h-full md:overflow-y-scroll border">
+              <div className="relative h-full md:overflow-y-scroll">
                 <Link href="/lab">
                   <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30">
                     OCTO Lab
@@ -65,6 +68,8 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      <Popup settings={settings} />
     </>
   );
 }

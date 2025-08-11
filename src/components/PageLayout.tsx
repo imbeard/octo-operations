@@ -7,9 +7,6 @@ interface PageLayoutProps {
   logoSrc: string;
   backgroundColor: string;
   titleColor: string;
-  contentLeftMargin?: string;
-  contentRightMargin?: string;
-  contentOverflow?: string;
 }
 
 export default function PageLayout({
@@ -18,7 +15,6 @@ export default function PageLayout({
   logoSrc,
   backgroundColor,
   titleColor,
-  contentOverflow = "overflow-y-auto",
 }: PageLayoutProps) {
   return (
     <main className={`min-h-screen ${backgroundColor} w-full fixed`}>
@@ -45,7 +41,7 @@ export default function PageLayout({
 
       {/* Content */}
       <div
-        className={`max-w-[1000px] relative mx-auto h-full ${contentOverflow} pt-[8vh] md:pt-[8vh]`}
+        className={`max-w-[1000px] overflow-y-auto relative mx-auto h-full pt-[8vh] md:pt-[8vh]`}
       >
         <div className="px-3">
           <div className="h-[92vh]">{children}</div>

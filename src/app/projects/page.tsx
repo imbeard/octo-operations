@@ -32,9 +32,6 @@ export default async function ProjectsPage() {
       logoSrc="/logo.svg"
       backgroundColor="bg-white"
       titleColor="text-black"
-      contentLeftMargin="md:left-1/6"
-      contentRightMargin="md:right-1/5"
-      contentOverflow="overflow-x-scroll"
       >
         <Projects projects={projects} />
     </PageLayout>

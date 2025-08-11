@@ -1,16 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import { getNavigation } from "@/lib/navigation";
 import type { Settings } from "@/sanity-studio/types";
 import Link from "next/link";
 
 interface HeaderProps {
   className?: string;
+  settings: Settings | null;
 }
 
-export default async function Header({ className = "" }: HeaderProps) {
-  const settings: Settings | null = await getNavigation();
-
+export default function Header({ className = "", settings }: HeaderProps) {
   return (
     <header className={`w-full ${className}`}>
       <div className="">
@@ -30,10 +28,10 @@ export default async function Header({ className = "" }: HeaderProps) {
             </div>
             </Link>
           </div>
-          <div className="w-full md:w-3/6 border-[red]">
+          <div className="w-full md:w-3/6">
             <div className="flex flex-row justify-between">
               {/* Services */}
-              <div className="text-[#E30613] text-left w-full">
+              <div className="text-primary text-left w-full">
                 <div className="font-bold text-base sm:text-xl">SERVICES</div>
                 {settings?.services?.map((service: string) => (
                   <p className="font-bold leading-tight capitalize text-xs sm:text-base" key={service}>
@@ -42,7 +40,7 @@ export default async function Header({ className = "" }: HeaderProps) {
                 ))}
               </div>
               {/* Contacts */}
-              <div className="text-[#E30613] text-left w-full">
+              <div className="text-primary text-left w-full">
                 <div className="font-bold text-base sm:text-xl">CONTACT</div>
                 {settings?.contactEmail && (
                   <p className="font-bold leading-tight text-xs sm:text-base">
