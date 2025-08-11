@@ -76,7 +76,7 @@ function HomeSection({
             {title}
           </h1>
         </Link>
-        <div className="flex-1 md:overflow-y-scroll pb-5 pt-[15vh]">
+        <div className="flex-1 md:overflow-y-scroll pt-[15vh]">
           {children}
         </div>
       </div>
