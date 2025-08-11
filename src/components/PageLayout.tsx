@@ -18,12 +18,10 @@ export default function PageLayout({
   logoSrc,
   backgroundColor,
   titleColor,
-  contentLeftMargin = "md:left-1/4",
-  contentRightMargin = "md:right-1/4",
   contentOverflow = "overflow-y-auto",
 }: PageLayoutProps) {
   return (
-    <main className={`min-h-screen ${backgroundColor} fixed`}>
+    <main className={`min-h-screen ${backgroundColor} w-full fixed`}>
       {/* Fixed Logo */}
       <div className="fixed z-20 md:z-0 top-0 left-0 w-1/5 md:w-1/5">
         <div className="py-1.5 sm:py-2">
@@ -43,7 +41,7 @@ export default function PageLayout({
       </div>
 
       {/* Fixed Title */}
-      <div className="fixed z-20 md:z-0 top-0 right-4 py-2">
+      <div className="fixed top-0 right-4 py-2">
         <h1
           className={`text-4xl md:text-5xl ${titleColor} font-bold text-right leading-tight`}
         >
@@ -51,11 +49,11 @@ export default function PageLayout({
         </h1>
       </div>
 
-      {/* Fixed Content */}
+      {/* Content */}
       <div
-        className={`fixed top-0 left-0 ${contentLeftMargin} right-0 ${contentRightMargin} h-full ${contentOverflow} pt-[8vh] md:pt-[8vh]`}
+        className={`max-w-[1000px] mx-auto h-full ${contentOverflow} pt-[8vh] md:pt-[8vh]`}
       >
-        <div className="mx-auto px-3">
+        <div className="px-3">
           <div className="h-[92vh]">{children}</div>
         </div>
       </div>

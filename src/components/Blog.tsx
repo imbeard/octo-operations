@@ -5,7 +5,7 @@ export default async function Blog() {
   const labs = await getAllLabs();
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="md:max-w-[40vw] mx-auto flex flex-col">
       {!labs || labs.length === 0 ? (
         <div className="text-gray-600">
           <p>No labs found.</p>

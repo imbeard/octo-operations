@@ -9,23 +9,17 @@ export const revalidate = 1800; // Revalidate every 30 minutes
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
-  const title = "Projects";
-  const description = "Explore our projects";
+
 
   return {
-    title,
-    description,
+    title: "Projects",
+    description: "Explore our projects",
     openGraph: {
-      title,
-      description,
+      title: "Projects",
+      description: "Explore our projects",
       type: 'website',
       url: siteConfig.url + '/projects',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-    },
+    }
   };
 }
 
