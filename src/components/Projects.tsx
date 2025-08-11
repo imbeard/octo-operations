@@ -56,7 +56,7 @@ export default function Projects({ projects }: ProjectsProps) {
 
   return (
     <>
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col pb-3">
         <div className={`space-y-2 overflow-y-auto flex-1`}>
           {projects.map((project: ProjectQueryResult) =>
             project.images && project.images.length > 0 ? (

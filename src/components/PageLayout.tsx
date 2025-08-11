@@ -40,11 +40,9 @@ export default function PageLayout({
       </header>
 
       {/* Content */}
-      <div
-        className={`max-w-[1000px] overflow-y-auto relative mx-auto h-full pt-[8vh] md:pt-[8vh]`}
-      >
-        <div className="px-3">
-          <div className="h-[92vh]">{children}</div>
+      <div className="max-w-[1000px] overflow-y-auto relative mx-auto pt-[8vh] md:pt-[8vh]">
+        <div className="h-screen px-3"> 
+          {children}
         </div>
       </div>
     </main>

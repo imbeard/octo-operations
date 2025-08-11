@@ -4,8 +4,8 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 // Sanity client configuration
 export const client = createClient({
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'a2claayl',
-  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.SANITY_STUDIO_DATASET!,
   apiVersion: '2025-02-19',
   useCdn: process.env.NODE_ENV === 'production',
   perspective: 'published',

@@ -5,7 +5,7 @@ export default async function Blog() {
   const labs = await getAllLabs();
 
   return (
-    <div className="md:max-w-[40vw] mx-auto flex flex-col">
+    <div className="md:max-w-[40vw] mx-auto flex flex-col pb-3">
       <div className="space-y-2 overflow-y-auto flex-">
         {labs.map((lab: LabQueryResult) => (
           <div key={lab._id} className="">

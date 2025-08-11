@@ -9,8 +9,8 @@ export const env: EnvironmentConfig = {
   siteDescription: process.env.NEXT_PUBLIC_SITE_DESCRIPTION!,
   
   // Sanity Configuration
-  sanityProjectId: process.env.SANITY_STUDIO_PROJECT_ID || 'a2claayl',
-  sanityDataset: process.env.SANITY_STUDIO_DATASET || 'production',
+  sanityProjectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  sanityDataset: process.env.SANITY_STUDIO_DATASET!,
   sanityApiToken: process.env.SANITY_API_TOKEN,
   
   // Environment flags
@@ -51,8 +51,8 @@ export const validateEnv = () => {
   const missing = required.filter(key => !process.env[key])
   
   if (missing.length > 0) {
-    console.warn(`Missing environment variables: ${missing.join(', ')}`)
+    throw new Error(`Missing required environment variables: ${missing.join(', ')}`)
   }
   
-  return missing.length === 0
+  return true
 } 
