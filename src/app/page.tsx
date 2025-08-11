@@ -15,11 +15,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
 
   return {
-    title: "OCTO",
-    description: "OCTO",
+    title: siteConfig.title || "OCTO",
+    description: siteConfig.description || "OCTO Operations",
     openGraph: {
-      title: "OCTO",
-      description: "OCTO",
+      title: siteConfig.title || "OCTO",
+      description: siteConfig.description || "OCTO Operations",
       type: "website",
       url: siteConfig.url,
     },
@@ -40,7 +40,7 @@ export default async function Home() {
           <div className="flex h-full flex-col md:flex-row">
             {/* Projects Section */}
             <div className="md:w-3/4 flex flex-col">
-              <div className=" md:overflow-y-scroll h-full">
+              <div className="h-full md:overflow-y-scroll">
                 <Link href="/projects">
                   <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30">
                     Projects
@@ -54,7 +54,7 @@ export default async function Home() {
 
             {/* Labs Section */}
             <div className="md:w-1/4 flex flex-col">
-              <div className="relative h-full md:overflow-y-scroll">
+              <div className="h-full md:overflow-y-scroll">
                 <Link href="/lab">
                   <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30">
                     OCTO Lab
@@ -73,3 +73,4 @@ export default async function Home() {
     </>
   );
 }
+

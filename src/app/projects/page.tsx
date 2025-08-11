@@ -10,16 +10,15 @@ export const revalidate = 1800; // Revalidate every 30 minutes
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
 
-
   return {
-    title: "Projects",
-    description: "Explore our projects",
+    title: siteConfig.title + " | Projects",
+    description: siteConfig.description + " | Projects",
     openGraph: {
-      title: "Projects",
-      description: "Explore our projects",
-      type: 'website',
-      url: siteConfig.url + '/projects',
-    }
+      title: siteConfig.title + " | Projects",
+      description: siteConfig.description + " | Projects",
+      type: "website",
+      url: siteConfig.url + "/projects",
+    },
   };
 }
 
@@ -32,8 +31,8 @@ export default async function ProjectsPage() {
       logoSrc="/logo.svg"
       backgroundColor="bg-white"
       titleColor="text-black"
-      >
-        <Projects projects={projects} />
+    >
+      <Projects projects={projects} />
     </PageLayout>
   );
-} 
+}

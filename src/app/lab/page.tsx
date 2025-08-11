@@ -11,10 +11,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 
   return {
-    title: "OCTO Lab",
-    description: "Read our latest blog posts",
+    title: siteConfig.title + " | OCTO LAB",
+    description: siteConfig.description + " | OCTO LAB",
     openGraph: {
-      title: "OCTO Lab",
+      title: siteConfig.title + " | OCTO LAB",
       description: "Read our latest blog posts",
       type: "website",
       url: siteConfig.url + "/blog",
