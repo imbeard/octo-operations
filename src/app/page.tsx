@@ -26,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+
 export default async function Home() {
   const projects = await getAllProjects();
   const settings = await getNavigation();
@@ -39,32 +40,14 @@ export default async function Home() {
         <div className="mx-auto px-3 h-full">
           <div className="flex h-full flex-col md:flex-row">
             {/* Projects Section */}
-            <div className="md:w-3/4 flex flex-col">
-              <div className="h-full md:overflow-y-scroll">
-                <Link href="/projects">
-                  <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30">
-                    Projects
-                  </h1>
-                </Link>
-                <div className="flex-1 md:overflow-y-scroll pb-5 pt-[15vh]">
-                  <Projects projects={projects} />
-                </div>
-              </div>
-            </div>
+            <HomeSection title="Projects" href="/projects" width="md:w-3/4 flex flex-col">
+              <Projects projects={projects} />
+            </HomeSection>
 
             {/* Labs Section */}
-            <div className="md:w-1/4 flex flex-col">
-              <div className="h-full md:overflow-y-scroll">
-                <Link href="/lab">
-                  <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30">
-                    OCTO Lab
-                  </h1>
-                </Link>
-                <div className="flex-1 md:overflow-y-scroll pb-5 pt-[15vh]">
-                  <Blog />
-                </div>
-              </div>
-            </div>
+            <HomeSection title="OCTO Lab" href="/lab" width="md:w-1/4 flex flex-col">
+              <Blog />
+            </HomeSection>
           </div>
         </div>
       </main>
@@ -73,4 +56,32 @@ export default async function Home() {
     </>
   );
 }
+
+function HomeSection({ 
+  title, 
+  href, 
+  children, 
+  width 
+}: { 
+  title: string; 
+  href: string; 
+  children: React.ReactNode; 
+  width: string; 
+}) {
+  return (
+    <div className={width}>
+      <div className="h-full md:overflow-y-scroll">
+        <Link href={href}>
+          <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30">
+            {title}
+          </h1>
+        </Link>
+        <div className="flex-1 md:overflow-y-scroll pb-5 pt-[15vh]">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
