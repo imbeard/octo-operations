@@ -35,7 +35,7 @@ export default async function Home() {
       <Header settings={settings} className="fixed top-0 left-0 z-20"  />
 
       {/* Main */}
-      <div className="min-h-screen md:h-screen relative left-0 w-full">
+      <main className="min-h-screen md:h-screen relative left-0 w-full">
         <div className="mx-auto px-3 h-full">
           <div className="flex h-full flex-col md:flex-row">
             {/* Projects Section */}
@@ -67,7 +67,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
       <Popup settings={settings} />
     </>

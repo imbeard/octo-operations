@@ -5,14 +5,14 @@ import { client } from "@/lib/sanity";
 import { getSiteConfig, validateEnv } from "@/lib/env";
 
 // Validate environment variables in development
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   validateEnv();
 }
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await client.fetch(settingsQuery);
   const siteConfig = getSiteConfig();
-  
+
   return {
     title: settings?.title || siteConfig.title,
     description: settings?.description || siteConfig.description,
@@ -26,11 +26,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="it">
-      <body className="font-arial-narrow">
-        <main>
-          {children}
-        </main>
-      </body>
+      <body className="font-arial-narrow">{children}</body>
     </html>
   );
 }
