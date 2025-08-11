@@ -9,6 +9,12 @@ interface HeaderProps {
 }
 
 export default function Header({ className = "", settings }: HeaderProps) {
+  // Ensure settings data is consistent between server and client
+  const safeServices = settings?.services || [];
+  const safeContactEmail = settings?.contactEmail || "";
+  const safeContactAddress = settings?.contactAddress || "";
+  const safeContactLocation = settings?.contactLocation || "";
+
   return (
     <header className={`w-full ${className}`}>
       <div className="">
@@ -16,16 +22,16 @@ export default function Header({ className = "", settings }: HeaderProps) {
           {/* Logo */}
           <div className="md:w-3/6 w-1/3">
             <Link href="/">
-            <div className="flex-shrink-0 flex items-center pl-2.5">
-              <Image
-                src="/logo.svg"
-                alt="OCTO Logo"
-                width={38}
-                height={59}
-                className="w-7 h-auto md:w-12 md:h-16"
-                priority
-              />
-            </div>
+              <div className="flex-shrink-0 flex items-center pl-2.5">
+                <Image
+                  src="/logo.svg"
+                  alt="OCTO Logo"
+                  width={38}
+                  height={59}
+                  className="w-7 h-auto md:w-12 md:h-16"
+                  priority
+                />
+              </div>
             </Link>
           </div>
           <div className="w-full md:w-3/6">
@@ -33,8 +39,11 @@ export default function Header({ className = "", settings }: HeaderProps) {
               {/* Services */}
               <div className="text-primary text-left w-full">
                 <div className="font-bold text-base sm:text-xl">SERVICES</div>
-                {settings?.services?.map((service: string) => (
-                  <p className="font-bold leading-tight capitalize text-xs sm:text-base" key={service}>
+                {safeServices.map((service: string, index: number) => (
+                  <p
+                    className="font-bold leading-tight capitalize text-xs sm:text-base"
+                    key={index}
+                  >
                     {service}
                   </p>
                 ))}
@@ -42,21 +51,25 @@ export default function Header({ className = "", settings }: HeaderProps) {
               {/* Contacts */}
               <div className="text-primary text-left w-full">
                 <div className="font-bold text-base sm:text-xl">CONTACT</div>
-                {settings?.contactEmail && (
+                {safeContactEmail && (
                   <p className="font-bold leading-tight text-xs sm:text-base">
-                    <a 
-                      href={`mailto:${settings.contactEmail}`}
+                    <a
+                      href={`mailto:${safeContactEmail}`}
                       className="hover:underline transition-colors"
                     >
-                      {settings.contactEmail}
+                      {safeContactEmail}
                     </a>
                   </p>
                 )}
-                {settings?.contactAddress && (
-                  <p className="font-bold leading-tight text-xs sm:text-base">{settings.contactAddress}</p>
+                {safeContactAddress && (
+                  <p className="font-bold leading-tight text-xs sm:text-base">
+                    {safeContactAddress}
+                  </p>
                 )}
-                {settings?.contactLocation && (
-                  <p className="font-bold leading-tight text-xs sm:text-base">{settings.contactLocation}</p>
+                {safeContactLocation && (
+                  <p className="font-bold leading-tight text-xs sm:text-base">
+                    {safeContactLocation}
+                  </p>
                 )}
               </div>
             </div>

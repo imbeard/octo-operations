@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { settingsQuery } from "@/sanity-studio/queries";
 import { client } from "@/lib/sanity";
@@ -27,6 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="it">
       <body className="font-arial-narrow">{children}</body>
+      <Script src="/header-scroll.js" strategy="afterInteractive" />
     </html>
   );
 }

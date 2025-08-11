@@ -76,10 +76,10 @@ export default function Lightbox({
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute z-[999] top-2 right-2 md:top-2 md:right-3 text-white hover:bg-white hover:text-black font-bold uppercase p-2 md:p-1 text-sm md:text-base"
+        className="absolute cursor-pointer z-[999] top-2 right-2 md:top-2 md:right-3 text-white hover:bg-white hover:text-black font-bold uppercase p-2 md:p-1 text-sm md:text-base"
         aria-label="Close lightbox"
       >
-        close
+        close x
       </button>
 
       <div className="flex flex-col md:flex-row h-full">

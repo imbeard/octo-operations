@@ -26,26 +26,32 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-
 export default async function Home() {
   const projects = await getAllProjects();
   const settings = await getNavigation();
 
   return (
     <>
-      <Header settings={settings} className="fixed top-0 left-0 z-20"  />
-
+      <Header settings={settings} className="fixed top-0 left-0 z-20" />
       {/* Main */}
       <main className="min-h-screen md:h-screen relative left-0 w-full">
         <div className="mx-auto px-3 h-full">
           <div className="flex h-full flex-col md:flex-row">
             {/* Projects Section */}
-            <HomeSection title="Projects" href="/projects" width="md:w-3/4 flex flex-col">
+            <HomeSection
+              title="Projects"
+              href="/projects"
+              width="md:w-3/4 flex flex-col"
+            >
               <Projects projects={projects} />
             </HomeSection>
 
             {/* Labs Section */}
-            <HomeSection title="OCTO Lab" href="/lab" width="md:w-1/4 flex flex-col">
+            <HomeSection
+              title="OCTO Lab"
+              href="/lab"
+              width="md:w-1/4 flex flex-col"
+            >
               <Blog />
             </HomeSection>
           </div>
@@ -57,31 +63,29 @@ export default async function Home() {
   );
 }
 
-function HomeSection({ 
-  title, 
-  href, 
-  children, 
-  width 
-}: { 
-  title: string; 
-  href: string; 
-  children: React.ReactNode; 
-  width: string; 
+function HomeSection({
+  title,
+  href,
+  children,
+  width,
+}: {
+  title: string;
+  href: string;
+  children: React.ReactNode;
+  width: string;
 }) {
   return (
     <div className={width}>
       <div className="h-full md:overflow-y-scroll">
         <Link href={href}>
-          <h1 className="text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30">
+          <h1
+            className={`text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30 ${title === "Projects" ? "bigtitle" : ""}`}
+          >
             {title}
           </h1>
         </Link>
-        <div className="flex-1 md:overflow-y-scroll pt-[15vh]">
-          {children}
-        </div>
+        <div className="flex-1 md:overflow-y-scroll pt-[15vh]">{children}</div>
       </div>
     </div>
   );
 }
-
-
