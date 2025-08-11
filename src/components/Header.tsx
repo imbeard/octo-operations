@@ -18,7 +18,7 @@ export default async function Header({ className = "" }: HeaderProps) {
           {/* Logo */}
           <div className="md:w-3/6 w-1/3">
             <Link href="/">
-            <div className="flex-shrink-0 flex items-center pl-2">
+            <div className="flex-shrink-0 flex items-center pl-2.5">
               <Image
                 src="/logo.svg"
                 alt="OCTO Logo"

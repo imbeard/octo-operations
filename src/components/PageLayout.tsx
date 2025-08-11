@@ -22,36 +22,30 @@ export default function PageLayout({
 }: PageLayoutProps) {
   return (
     <main className={`min-h-screen ${backgroundColor} w-full fixed`}>
-      {/* Fixed Logo */}
-      <div className="fixed z-20 md:z-0 top-0 left-0 w-1/5 md:w-1/5">
-        <div className="py-1.5 sm:py-2">
-          <Link href="/">
-            <div className="flex-shrink-0 flex items-center pl-[3vw] md:pl-2">
-              <Image
-                src={logoSrc}
-                alt="OCTO Logo"
-                width={38}
-                height={59}
-                className="w-7 h-auto sm:w-10 sm:h-12 md:w-12 md:h-16"
-                priority
-              />
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      {/* Fixed Title */}
-      <div className="fixed top-0 right-4 py-2">
+      {/* Fixed header */}
+      <header className="absolute z-20 flex flex-row justify-between w-full px-2.5 md:px-2 py-1.5 sm:py-2">
+        <Link href="/">
+          <div className="flex-shrink-0 flex items-center">
+            <Image
+              src={logoSrc}
+              alt="OCTO Logo"
+              width={38}
+              height={59}
+              className="w-7 h-auto sm:w-10 sm:h-12 md:w-12 md:h-16"
+              priority
+            />
+          </div>
+        </Link>
         <h1
           className={`text-4xl md:text-5xl ${titleColor} font-bold text-right leading-tight`}
         >
           {title}
         </h1>
-      </div>
+      </header>
 
       {/* Content */}
       <div
-        className={`max-w-[1000px] mx-auto h-full ${contentOverflow} pt-[8vh] md:pt-[8vh]`}
+        className={`max-w-[1000px] relative mx-auto h-full ${contentOverflow} pt-[8vh] md:pt-[8vh]`}
       >
         <div className="px-3">
           <div className="h-[92vh]">{children}</div>
