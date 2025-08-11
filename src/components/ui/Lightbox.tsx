@@ -154,7 +154,7 @@ export default function Lightbox({
         >
           {/* Prev image */}
           {images.length > 1 && (
-            <div className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 hidden md:block">
+            <div className="absolute z-20 left-2 md:left-4 top-1/2 transform -translate-y-1/2 hidden md:block">
               <div
                 onClick={() => setCurrentIndex(prevIndex)}
                 className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"
@@ -172,7 +172,7 @@ export default function Lightbox({
 
           {/* Next image */}
           {images.length > 1 && (
-            <div className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 hidden md:block">
+            <div className="absolute z-20 right-2 md:right-4 top-1/2 transform -translate-y-1/2 hidden md:block">
               <div
                 onClick={() => setCurrentIndex(nextIndex)}
                 className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"

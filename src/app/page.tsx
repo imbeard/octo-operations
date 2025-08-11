@@ -1,6 +1,6 @@
 import { getSiteConfig } from "@/lib/env";
 import { getAllProjects } from "@/lib/projects";
-import ProjectsWithLightbox from "@/components/ProjectsWithLightbox";
+import Projects from "@/components/Projects";
 import Blog from "@/components/Blog";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
@@ -51,7 +51,7 @@ export default async function Home() {
                   </h1>
                 </Link>
                 <div className="flex-1 md:overflow-y-scroll pb-5 pt-[15vh]">
-                  <ProjectsWithLightbox initialProjects={projects} />
+                  <Projects projects={projects} />
                 </div>
               </div>
             </div>

@@ -25,7 +25,7 @@ export default function PageLayout({
   return (
     <main className={`min-h-screen ${backgroundColor} fixed`}>
       {/* Fixed Logo */}
-      <div className="fixed z-20 top-0 left-0 w-1/5 md:w-1/5">
+      <div className="fixed z-20 md:z-0 top-0 left-0 w-1/5 md:w-1/5">
         <div className="py-1.5 sm:py-2">
           <Link href="/">
             <div className="flex-shrink-0 flex items-center pl-[3vw] md:pl-2">
@@ -43,7 +43,7 @@ export default function PageLayout({
       </div>
 
       {/* Fixed Title */}
-      <div className="fixed z-20 top-0 right-4 py-2">
+      <div className="fixed z-20 md:z-0 top-0 right-4 py-2">
         <h1
           className={`text-4xl md:text-5xl ${titleColor} font-bold text-right leading-tight`}
         >

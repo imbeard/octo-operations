@@ -1,6 +1,6 @@
 import { getSiteConfig } from "@/lib/env";
 import { getAllProjects } from "@/lib/projects";
-import ProjectsWithLightbox from "@/components/ProjectsWithLightbox";
+import Projects from "@/components/Projects";
 import PageLayout from "@/components/PageLayout";
 import type { Metadata } from "next";
 
@@ -42,7 +42,7 @@ export default async function ProjectsPage() {
       contentRightMargin="md:right-1/5"
       contentOverflow="overflow-x-scroll"
       >
-        <ProjectsWithLightbox initialProjects={projects} />
+        <Projects projects={projects} />
     </PageLayout>
   );
 } 
