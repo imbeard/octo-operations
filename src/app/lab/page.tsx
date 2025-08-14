@@ -3,8 +3,9 @@ import Blog from "@/components/Blog";
 import type { Metadata } from "next";
 import PageLayout from "@/components/PageLayout";
 
-// Enable ISR with revalidation
-export const revalidate = 60; // Revalidate every 30 minutes
+// Force dynamic rendering - disable all caching
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
