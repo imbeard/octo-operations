@@ -3,6 +3,12 @@ import { type NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
+    // Validate webhook secret
+    const secret = request.nextUrl.searchParams.get("secret");
+    if (secret !== process.env.SANITY_WEBHOOK_SECRET) {
+      return Response.json({ message: "Invalid secret" }, { status: 401 });
+    }
+
     const body = await request.json();
     const { _type, slug } = body;
 

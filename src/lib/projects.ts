@@ -10,22 +10,36 @@ import type {
 } from "@/sanity-studio/types";
 
 export async function getAllProjects(): Promise<AllProjectsQueryResult> {
-  return await client.fetch(allProjectsQuery, {}, {
-    cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
-    next: process.env.NODE_ENV === 'production' ? { tags: ['projects'] } : undefined
-  })
+  return await client.fetch(
+    allProjectsQuery,
+    {},
+    {
+      cache: "no-store",
+      next: { tags: ["projects"], revalidate: 60 },
+    },
+  );
 }
 
-export async function getProject(slug: string): Promise<ProjectQueryResult | null> {
-  return await client.fetch(projectQuery, { slug }, {
-    cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
-    next: process.env.NODE_ENV === 'production' ? { tags: [`project-${slug}`] } : undefined
-  })
+export async function getProject(
+  slug: string,
+): Promise<ProjectQueryResult | null> {
+  return await client.fetch(
+    projectQuery,
+    { slug },
+    {
+      cache: "no-store",
+      next: { tags: [`project-${slug}`], revalidate: 60 },
+    },
+  );
 }
 
 export async function getAllProjectSlugs(): Promise<{ slug: string }[]> {
-  return await client.fetch(allProjectSlugsQuery, {}, {
-    cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
-    next: process.env.NODE_ENV === 'production' ? { tags: ['project-slugs'] } : undefined
-  })
-} 
+  return await client.fetch(
+    allProjectSlugsQuery,
+    {},
+    {
+      cache: "no-store",
+      next: { tags: ["project-slugs"], revalidate: 60 },
+    },
+  );
+}

@@ -8,33 +8,36 @@ type NavigationSettings = {
   mainNavigation?: NavigationItem[];
   footerNavigation?: NavigationItem[];
 } | null;
-let navigationCache: NavigationSettings = null
-let cacheTimestamp: number = 0
-const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
+let navigationCache: NavigationSettings = null;
+let cacheTimestamp: number = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 export async function getNavigation() {
   try {
     // Check if we have valid cached data
-    const now = Date.now()
-    if (navigationCache && (now - cacheTimestamp) < CACHE_DURATION) {
-      return navigationCache
+    const now = Date.now();
+    if (navigationCache && now - cacheTimestamp < CACHE_DURATION) {
+      return navigationCache;
     }
 
-    const settings = await client.fetch(settingsQuery, {}, {
-      cache: process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
-      next: process.env.NODE_ENV === 'production' ? { tags: ['settings'] } : undefined
-    })
-    
+    const settings = await client.fetch(
+      settingsQuery,
+      {},
+      {
+        cache: "no-store",
+        next: { tags: ["settings"], revalidate: 60 },
+      },
+    );
+
     // Cache the result
-    navigationCache = settings
-    cacheTimestamp = now
-    
+    navigationCache = settings;
+    cacheTimestamp = now;
+
     return settings;
   } catch (error) {
     console.error("Error fetching navigation:", error);
     return null;
   }
-
 }
 
 // Memoized href generation
@@ -111,8 +114,8 @@ export function shouldShowMobileMenu(navigation: NavigationItem[]): boolean {
 
 // Clear cache function for development
 export function clearNavigationCache() {
-  navigationCache = null
-  cacheTimestamp = 0
-  hrefCache.clear()
-  mobileNavCache.clear()
-} 
+  navigationCache = null;
+  cacheTimestamp = 0;
+  hrefCache.clear();
+  mobileNavCache.clear();
+}

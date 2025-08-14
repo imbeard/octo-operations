@@ -12,6 +12,7 @@ export async function getAllLabs(): Promise<AllLabsQueryResult> {
     {},
     {
       cache: "no-store",
+      next: { tags: ["labs"], revalidate: 60 },
     },
   );
 }
@@ -22,6 +23,7 @@ export async function getLab(slug: string): Promise<LabQueryResult | null> {
     { slug },
     {
       cache: "no-store",
+      next: { tags: [`lab-${slug}`], revalidate: 60 },
     },
   );
 }
@@ -32,6 +34,7 @@ export async function getAllLabSlugs(): Promise<{ slug: string }[]> {
     {},
     {
       cache: "no-store",
+      next: { tags: ["lab-slugs"], revalidate: 60 },
     },
   );
 }

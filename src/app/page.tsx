@@ -8,9 +8,8 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import Popup from "@/components/ui/Popup";
 
-// Force dynamic rendering - disable all caching
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// Use ISR with revalidation
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
