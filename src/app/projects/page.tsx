@@ -5,7 +5,7 @@ import PageLayout from "@/components/PageLayout";
 import type { Metadata } from "next";
 
 // Enable ISR with revalidation
-export const revalidate = 1800; // Revalidate every 30 minutes
+export const revalidate = 60; // Revalidate every 30 minutes
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();

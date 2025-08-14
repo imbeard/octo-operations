@@ -4,11 +4,10 @@ import type { Metadata } from "next";
 import PageLayout from "@/components/PageLayout";
 
 // Enable ISR with revalidation
-export const revalidate = 1800; // Revalidate every 30 minutes
+export const revalidate = 60; // Revalidate every 30 minutes
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = getSiteConfig();
-
 
   return {
     title: siteConfig.title + " | OCTO LAB",
@@ -18,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: "Read our latest blog posts",
       type: "website",
       url: siteConfig.url + "/blog",
-    }
+    },
   };
 }
 

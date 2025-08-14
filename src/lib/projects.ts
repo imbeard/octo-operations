@@ -1,6 +1,13 @@
-import { client } from './sanity'
-import { allProjectsQuery, projectQuery, allProjectSlugsQuery } from '@/sanity-studio/queries'
-import type { AllProjectsQueryResult, ProjectQueryResult } from '@/sanity-studio/types'
+import { client } from "./sanity";
+import {
+  allProjectsQuery,
+  projectQuery,
+  allProjectSlugsQuery,
+} from "@/sanity-studio/queries";
+import type {
+  AllProjectsQueryResult,
+  ProjectQueryResult,
+} from "@/sanity-studio/types";
 
 export async function getAllProjects(): Promise<AllProjectsQueryResult> {
   return await client.fetch(allProjectsQuery, {}, {

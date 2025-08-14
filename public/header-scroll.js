@@ -4,6 +4,7 @@
   function initHeaderScroll() {
     const header = document.querySelector("header");
     const title = document.querySelector(".bigtitle");
+    const title2 = document.querySelector(".bigtitle2");
     if (!header) {
       setTimeout(initHeaderScroll, 500);
       return;
@@ -13,9 +14,11 @@
       if (scrollTop > 50) {
         header.classList.add("header-faded");
         title.classList.add("header-faded");
+        title2.classList.add("header-faded");
       } else {
         header.classList.remove("header-faded");
         title.classList.remove("header-faded");
+        title2.classList.remove("header-faded");
       }
     }
 

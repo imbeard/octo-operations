@@ -79,7 +79,7 @@ function HomeSection({
       <div className="h-full md:overflow-y-scroll">
         <Link href={href}>
           <h1
-            className={`text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30 ${title === "Projects" ? "bigtitle" : ""}`}
+            className={`text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30 ${title === "Projects" ? "bigtitle" : ""} ${title === "OCTO Lab" ? "bigtitle2" : ""}`}
           >
             {title}
           </h1>

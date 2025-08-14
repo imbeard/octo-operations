@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/sanity-studio/node_modules
+/sanity-studio
 /.pnp
 .pnp.*
 .yarn/*
