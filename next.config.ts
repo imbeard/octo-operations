@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_SITE_ENV: process.env.NEXT_PUBLIC_SITE_ENV,
   },
-  // Disable caching for immediate updates
+  // Minimal browser caching - allow some caching but revalidate frequently
   async headers() {
     return [
       {
@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "no-cache, no-store, must-revalidate",
+            value: "public, max-age=0, must-revalidate",
           },
         ],
       },
