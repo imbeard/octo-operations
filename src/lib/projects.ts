@@ -10,36 +10,64 @@ import type {
 } from "@/sanity-studio/types";
 
 export async function getAllProjects(): Promise<AllProjectsQueryResult> {
-  return await client.fetch(
-    allProjectsQuery,
-    {},
-    {
-      cache: "no-store",
-      next: { tags: ["projects"], revalidate: 60 },
-    },
-  );
+  try {
+    const result = await client.fetch(
+      allProjectsQuery,
+      {},
+      {
+        next: { tags: ["projects"], revalidate: 60 },
+      },
+    );
+
+    if (!result) {
+      console.warn("Failed to fetch projects, returning empty array");
+      return [];
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return []; // Return empty array as fallback
+  }
 }
 
 export async function getProject(
   slug: string,
 ): Promise<ProjectQueryResult | null> {
-  return await client.fetch(
-    projectQuery,
-    { slug },
-    {
-      cache: "no-store",
-      next: { tags: [`project-${slug}`], revalidate: 60 },
-    },
-  );
+  try {
+    const result = await client.fetch(
+      projectQuery,
+      { slug },
+      {
+        next: { tags: [`project-${slug}`], revalidate: 60 },
+      },
+    );
+
+    return result;
+  } catch (error) {
+    console.error(`Error fetching project ${slug}:`, error);
+    return null;
+  }
 }
 
 export async function getAllProjectSlugs(): Promise<{ slug: string }[]> {
-  return await client.fetch(
-    allProjectSlugsQuery,
-    {},
-    {
-      cache: "no-store",
-      next: { tags: ["project-slugs"], revalidate: 60 },
-    },
-  );
+  try {
+    const result = await client.fetch(
+      allProjectSlugsQuery,
+      {},
+      {
+        next: { tags: ["project-slugs"], revalidate: 60 },
+      },
+    );
+
+    if (!result) {
+      console.warn("Failed to fetch project slugs, returning empty array");
+      return [];
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Error fetching project slugs:", error);
+    return []; // Return empty array as fallback
+  }
 }

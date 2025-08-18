@@ -7,7 +7,7 @@ export const client = createClient({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: process.env.SANITY_STUDIO_DATASET!,
   apiVersion: "2025-02-19",
-  useCdn: process.env.NODE_ENV === 'production',
+  useCdn: process.env.NODE_ENV === "production",
   perspective: "published",
 });
 
@@ -43,20 +43,6 @@ export function getOptimizedImageUrl(
   if (height) url = url.height(height);
 
   return url.url();
-}
-
-// Error handling for Sanity queries
-export async function safeQuery<T>(
-  query: string,
-  params?: Record<string, unknown>,
-): Promise<T | null> {
-  try {
-    const result = await client.fetch<T>(query, params || {});
-    return result;
-  } catch (error) {
-    console.error("Sanity query error:", error);
-    return null;
-  }
 }
 
 // Type-safe image component props

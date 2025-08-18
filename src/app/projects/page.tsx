@@ -23,16 +23,34 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProjectsPage() {
-  const projects = await getAllProjects();
+  try {
+    const projects = await getAllProjects();
 
-  return (
-    <PageLayout
-      title="PROJECTS"
-      logoSrc="/logo.svg"
-      backgroundColor="bg-white"
-      titleColor="text-black"
-    >
-      <Projects projects={projects} />
-    </PageLayout>
-  );
+    return (
+      <PageLayout
+        title="PROJECTS"
+        logoSrc="/logo.svg"
+        backgroundColor="bg-white"
+        titleColor="text-black"
+      >
+        <Projects projects={projects} />
+      </PageLayout>
+    );
+  } catch (error) {
+    console.error("Error in ProjectsPage:", error);
+
+    // Return fallback UI during build failures
+    return (
+      <PageLayout
+        title="PROJECTS"
+        logoSrc="/logo.svg"
+        backgroundColor="bg-white"
+        titleColor="text-black"
+      >
+        <div className="flex items-center justify-center h-64">
+          <p className="text-gray-600">Projects will be available shortly.</p>
+        </div>
+      </PageLayout>
+    );
+  }
 }

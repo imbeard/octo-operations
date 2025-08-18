@@ -24,7 +24,6 @@ export async function getNavigation() {
       settingsQuery,
       {},
       {
-        cache: "no-store",
         next: { tags: ["settings"], revalidate: 60 },
       },
     );
