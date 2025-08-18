@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import MobileCarousel from "./MobileCarousel";
 
 interface LightboxProps {
   isOpen: boolean;
@@ -30,10 +31,69 @@ export default function Lightbox({
   projectInfo,
 }: LightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCurrentIndex(initialIndex);
   }, [initialIndex]);
+
+  // Detect if we're on mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 && "ontouchstart" in window);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Preload adjacent images for smoother transitions
+  useEffect(() => {
+    if (!isOpen || images.length <= 1) return;
+
+    const preloadImage = (src: string) => {
+      const img = new window.Image();
+      img.src = src;
+    };
+
+    const prevIdx = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+    const nextIdx = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+
+    // Preload previous and next images
+    preloadImage(images[prevIdx].src);
+    preloadImage(images[nextIdx].src);
+  }, [currentIndex, images, isOpen]);
+
+  const goToPrevious = () => {
+    if (images.length <= 1) return;
+
+    const newIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+    setCurrentIndex(newIndex);
+
+    // Add haptic feedback if available
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+  };
+
+  const goToNext = () => {
+    if (images.length <= 1) return;
+
+    const newIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+    setCurrentIndex(newIndex);
+
+    // Add haptic feedback if available
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+  };
+
+  const handleSlideChange = (index: number) => {
+    setCurrentIndex(index);
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,11 +105,11 @@ export default function Lightbox({
           break;
         case "ArrowLeft":
           e.preventDefault();
-          setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+          goToPrevious();
           break;
         case "ArrowRight":
           e.preventDefault();
-          setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+          goToNext();
           break;
       }
     };
@@ -68,8 +128,8 @@ export default function Lightbox({
   if (!isOpen) return null;
 
   const currentImage = images[currentIndex];
-  const prevIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
-  const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+  const prevIdx = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+  const nextIdx = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
 
   return (
     <div className="fixed z-[999] inset-0 w-full h-full bg-black">
@@ -156,12 +216,12 @@ export default function Lightbox({
           {images.length > 1 && (
             <div className="absolute z-20 left-2 md:left-4 top-1/2 transform -translate-y-1/2 hidden md:block">
               <div
-                onClick={() => setCurrentIndex(prevIndex)}
+                onClick={goToPrevious}
                 className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"
               >
                 <Image
-                  src={images[prevIndex].src}
-                  alt={images[prevIndex].alt}
+                  src={images[prevIdx].src}
+                  alt={images[prevIdx].alt}
                   fill
                   className="object-cover"
                   sizes="96px"
@@ -174,12 +234,12 @@ export default function Lightbox({
           {images.length > 1 && (
             <div className="absolute z-20 right-2 md:right-4 top-1/2 transform -translate-y-1/2 hidden md:block">
               <div
-                onClick={() => setCurrentIndex(nextIndex)}
+                onClick={goToNext}
                 className="relative w-20 md:w-28 h-32 md:h-48 overflow-hidden transition-all duration-200 cursor-pointer"
               >
                 <Image
-                  src={images[nextIndex].src}
-                  alt={images[nextIndex].alt}
+                  src={images[nextIdx].src}
+                  alt={images[nextIdx].alt}
                   fill
                   className="object-cover"
                   sizes="96px"
@@ -189,25 +249,46 @@ export default function Lightbox({
           )}
 
           {/* Main Image container */}
-          <div className="relative w-full h-[50vh] md:h-full flex flex-col justify-center items-center">
-            <div
-              className={`relative flex justify-center mx-auto h-full ${
-                images.length > 1
-                  ? "w-[calc(100%-0rem)] md:w-[calc(100%-16rem)]" // 16rem = 2 * (7rem nav image + 1rem positioning)
-                  : "w-full md:w-full"
-              }`}
-            >
-              <div className="relative h-full flex justify-center">
-                <Image
-                  src={currentImage.src}
-                  alt={currentImage.alt}
-                  width={1200}
-                  height={800}
-                  className="w-auto h-auto max-w-full max-h-full object-contain md:w-full md:p-4 "
-                  priority
+          <div
+            className="relative w-full h-[50vh] md:h-full flex flex-col justify-center items-center overflow-hidden"
+            ref={containerRef}
+            style={{
+              touchAction: isMobile ? "none" : "auto",
+            }}
+          >
+            {isMobile ? (
+              /* Mobile: Embla Carousel */
+              <div
+                className={`h-full ${
+                  images.length > 1 ? "w-[calc(100%-0rem)]" : "w-full"
+                }`}
+              >
+                <MobileCarousel
+                  images={images}
+                  initialIndex={currentIndex}
+                  onSlideChangeAction={handleSlideChange}
                 />
               </div>
-            </div>
+            ) : (
+              /* Desktop: Single image with instant switching */
+              <div
+                className={`relative flex justify-center mx-auto h-full ${
+                  images.length > 1 ? "w-[calc(100%-16rem)]" : "w-full"
+                }`}
+              >
+                <div className="relative h-full flex justify-center w-full">
+                  <Image
+                    src={currentImage.src}
+                    alt={currentImage.alt}
+                    width={1200}
+                    height={800}
+                    className="w-auto h-auto max-w-full max-h-full object-contain md:p-4 select-none"
+                    priority
+                    draggable={false}
+                  />
+                </div>
+              </div>
+            )}
 
             {/* Image counter */}
             {images.length > 1 && (
@@ -216,22 +297,6 @@ export default function Lightbox({
               </div>
             )}
           </div>
-
-          {/* Mobile nav */}
-          {images.length > 1 && (
-            <>
-              {/* Left click */}
-              <div
-                className="absolute left-0 top-0 w-1/3 h-full md:hidden"
-                onClick={() => setCurrentIndex(prevIndex)}
-              />
-              {/* Right click */}
-              <div
-                className="absolute right-0 top-0 w-1/3 h-full md:hidden"
-                onClick={() => setCurrentIndex(nextIndex)}
-              />
-            </>
-          )}
         </div>
       </div>
     </div>

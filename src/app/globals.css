@@ -1,79 +1,79 @@
 @import "tailwindcss";
 
 :root {
-    --color-primary: #e30613;
-    --color-white: #ffffff;
-    --color-black: #000000;
+  --color-primary: #e30613;
+  --color-white: #ffffff;
+  --color-black: #000000;
 
-    /* Background and foreground colors */
-    --background: var(--color-white);
-    --foreground: var(--color-black);
+  /* Background and foreground colors */
+  --background: var(--color-white);
+  --foreground: var(--color-black);
 
-    /* Header height */
-    --header-height: 80px;
+  /* Header height */
+  --header-height: 80px;
 }
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-primary: var(--color-primary);
-    --color-white: var(--color-white);
-    --color-black: var(--color-black);
-    --font-sans: "Arial Narrow", Arial, Helvetica, sans-serif;
-    --font-mono: "Arial Narrow", Arial, Helvetica, sans-serif;
-    --font-arial-narrow: "Arial Narrow", Arial, Helvetica, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --color-white: var(--color-white);
+  --color-black: var(--color-black);
+  --font-sans: "Arial Narrow", Arial, Helvetica, sans-serif;
+  --font-mono: "Arial Narrow", Arial, Helvetica, sans-serif;
+  --font-arial-narrow: "Arial Narrow", Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --background: var(--color-white);
-        --foreground: var(--color-white);
-    }
+  :root {
+    --background: var(--color-white);
+    --foreground: var(--color-white);
+  }
 }
 
 @font-face {
-    font-family: "Arial Narrow";
-    src: url("/font/Arial Narrow Bold.woff2") format("woff2");
-    font-weight: 700;
-    font-style: normal;
+  font-family: "Arial Narrow";
+  src: url("/font/Arial Narrow Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: "Arial Narrow", sans-serif;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Arial Narrow", sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Hide scrollbars */
 html {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
 html::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+  display: none; /* Safari and Chrome */
 }
 
 body {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
 body::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+  display: none; /* Safari and Chrome */
 }
 
 /* Hide scrollbars on all elements */
 * {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
 *::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+  display: none; /* Safari and Chrome */
 }
 
 /* Specific classes that commonly have scrollbars */
@@ -83,8 +83,8 @@ body::-webkit-scrollbar {
 .overflow-y-scroll,
 .overflow-x-scroll,
 .overflow-scroll {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
 .overflow-y-auto::-webkit-scrollbar,
@@ -93,41 +93,41 @@ body::-webkit-scrollbar {
 .overflow-y-scroll::-webkit-scrollbar,
 .overflow-x-scroll::-webkit-scrollbar,
 .overflow-scroll::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+  display: none; /* Safari and Chrome */
 }
 
 /* Mobile-specific */
 @media (max-width: 768px) {
-    body {
-        font-size: 16px; /* Prevent zoom on iOS */
-    }
+  body {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
 
-    html {
-        scroll-behavior: smooth;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 .bg-primary {
-    background-color: var(--color-primary);
+  background-color: var(--color-primary);
 }
 
 .bg-accent {
-    background-color: var(--color-accent);
+  background-color: var(--color-accent);
 }
 
 .text-primary {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .text-accent {
-    color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .border-primary {
-    border-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .border-accent {
-    border-color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 h1,
@@ -136,23 +136,55 @@ h3,
 h4,
 h5,
 h6 {
-    @apply tracking-tight;
+  @apply tracking-tight;
 }
 
 /* Header transitions */
 header {
-    transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .header-faded {
-    opacity: 0.5;
-    pointer-events: none;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* Styles for when the popup is open */
 body.popup-open header,
 body.popup-open .md\:w-3\/4 h1 {
-    opacity: 0.5;
-    pointer-events: none;
-    transition: opacity 0.3s ease-in-out;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Simple Embla styles for mobile lightbox */
+.embla {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.embla__container {
+  display: flex;
+  height: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  will-change: transform;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-property: transform;
+  transition-duration: 0.5s;
+}
+
+.embla__slide {
+  flex: 0 0 80%;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
