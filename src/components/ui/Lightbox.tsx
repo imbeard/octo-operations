@@ -277,14 +277,14 @@ export default function Lightbox({
                 }`}
               >
                 <div className="relative h-full flex justify-center w-full">
-                  <Image
+                  <img
                     src={currentImage.src}
                     alt={currentImage.alt}
                     width={1200}
                     height={800}
-                    className="w-auto h-auto max-w-full max-h-full object-contain md:p-4 select-none"
-                    priority
+                    loading="lazy"
                     draggable={false}
+                    className="w-auto h-auto max-w-full max-h-full object-contain md:p-4 select-none"
                   />
                 </div>
               </div>
