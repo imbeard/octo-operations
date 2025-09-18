@@ -53,20 +53,16 @@ export default function Popup({ settings }: PopupProps) {
         >
           X
         </button>
-        <div className="flex flex-col gap-4 justify-between h-full min-w-[70vw] md:min-w-[25vw] p-2 text-white">
+        <div className="flex flex-col gap-4 justify-between h-full max-w-[80vw] lg:max-w-[40vw] min-w-[40vw] md:min-w-[25vw] p-2 text-white">
           <div>
-            <h1 className="text-xl font-bold uppercase mb-1">Services</h1>
-            {settings?.services?.map((service: string) => (
-              <p
-                className="font-bold leading-tight capitalize text-sm sm:text-lg"
-                key={service}
-              >
-                {service}
-              </p>
-            ))}
+            <h1 className="text-xl font-bold uppercase mb-1">About</h1>
+
+            <p className="font-bold leading-tight capitalize text-sm sm:text-lg">
+              {settings.abouttext}
+            </p>
           </div>
 
-          <div>
+          {/*<div>
             <h1 className="text-xl font-bold uppercase mb-1">Contact</h1>
             {settings?.contactEmail && (
               <p className="font-bold leading-tight text-sm sm:text-lg">
@@ -88,7 +84,7 @@ export default function Popup({ settings }: PopupProps) {
                 {settings.contactLocation}
               </p>
             )}
-          </div>
+          </div>*/}
         </div>
       </div>
     </div>

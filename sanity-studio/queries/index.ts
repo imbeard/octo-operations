@@ -1,4 +1,4 @@
-import { groq } from 'next-sanity'
+import { groq } from "next-sanity";
 
 // Settings query (singleton - primary query)
 export const settingsQuery = groq`
@@ -10,9 +10,10 @@ export const settingsQuery = groq`
     services,
     contactEmail,
     contactAddress,
-    contactLocation
+    contactLocation,
+    abouttext
   }
-`
+`;
 
 // Project queries
 export const allProjectsQuery = groq`
@@ -38,7 +39,7 @@ export const allProjectsQuery = groq`
     seoTitle,
     seoDescription
   }
-`
+`;
 
 export const projectQuery = groq`
   *[_type == "project" && slug.current == $slug][0] {
@@ -63,13 +64,13 @@ export const projectQuery = groq`
     seoTitle,
     seoDescription
   }
-`
+`;
 
 export const allProjectSlugsQuery = groq`
   *[_type == "project" && defined(slug.current)] {
     "slug": slug.current
   }
-`
+`;
 
 // Lab queries
 export const allLabsQuery = groq`
@@ -88,7 +89,7 @@ export const allLabsQuery = groq`
     seoTitle,
     seoDescription
   }
-`
+`;
 
 export const labQuery = groq`
   *[_type == "lab" && slug.current == $slug][0] {
@@ -106,10 +107,10 @@ export const labQuery = groq`
     seoTitle,
     seoDescription
   }
-`
+`;
 
 export const allLabSlugsQuery = groq`
   *[_type == "lab" && defined(slug.current)] {
     "slug": slug.current
   }
-`
+`;
