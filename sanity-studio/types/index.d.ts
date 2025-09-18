@@ -2,215 +2,216 @@
 
 // Base Sanity types
 export interface SanityDocument {
-  _id: string
-  _type: string
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
+  _id: string;
+  _type: string;
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
 }
 
 // Image asset type
 export interface SanityImageAsset {
-  _id: string
-  _type: 'sanity.imageAsset'
-  url: string
+  _id: string;
+  _type: "sanity.imageAsset";
+  url: string;
   metadata: {
     dimensions: {
-      width: number
-      height: number
-    }
+      width: number;
+      height: number;
+    };
     palette: {
       dominant: {
-        background: string
-        foreground: string
-      }
-    }
-  }
+        background: string;
+        foreground: string;
+      };
+    };
+  };
 }
 
 // Block types
 export interface SectionBlock {
-  _type: 'sectionBlock'
-  _key: string
-  title?: string
-  subtitle?: string
-  description?: string
-  image?: SanityImageAsset
-  imageAlt?: string
-  imageDescription?: string
+  _type: "sectionBlock";
+  _key: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  image?: SanityImageAsset;
+  imageAlt?: string;
+  imageDescription?: string;
 }
 
 export interface TwoImageBlock {
-  _type: 'twoImageBlock'
-  _key: string
-  image1?: SanityImageAsset
-  caption1?: string
-  alt1?: string
-  image2?: SanityImageAsset
-  caption2?: string
-  alt2?: string
+  _type: "twoImageBlock";
+  _key: string;
+  image1?: SanityImageAsset;
+  caption1?: string;
+  alt1?: string;
+  image2?: SanityImageAsset;
+  caption2?: string;
+  alt2?: string;
 }
 
 // Union type for all block types
-export type ContentBlock = SectionBlock | TwoImageBlock
+export type ContentBlock = SectionBlock | TwoImageBlock;
 
 // Page types
 export interface Page extends SanityDocument {
-  _type: 'page'
-  title: string
+  _type: "page";
+  title: string;
   slug: {
-    current: string
-  }
-  subtitle: string
-  description?: string
-  seoTitle?: string
-  heroImage?: SanityImageAsset
-  sections?: ContentBlock[]
+    current: string;
+  };
+  subtitle: string;
+  description?: string;
+  seoTitle?: string;
+  heroImage?: SanityImageAsset;
+  sections?: ContentBlock[];
 }
 
 // Settings types
 export interface Settings extends SanityDocument {
-  _type: 'settings'
+  _type: "settings";
   // General Settings
-  title?: string
-  description?: string
-  siteUrl?: string
+  title?: string;
+  description?: string;
+  siteUrl?: string;
   // Services
-  services?: string[]
+  services?: string[];
   // Contact Information
-  contactEmail?: string
-  contactAddress?: string
-  contactLocation?: string
+  contactEmail?: string;
+  contactAddress?: string;
+  contactLocation?: string;
+  abouttext?: string;
 }
 
 // Project types
 export interface Project extends SanityDocument {
-  _type: 'project'
-  projectNumber: string
-  title: string
-  subtitle?: string
+  _type: "project";
+  projectNumber: string;
+  title: string;
+  subtitle?: string;
   slug: {
-    current: string
-  }
-  description?: string
-  place?: string
-  tags?: string[]
-  images?: ProjectImage[]
-  seoTitle?: string
-  seoDescription?: string
+    current: string;
+  };
+  description?: string;
+  place?: string;
+  tags?: string[];
+  images?: ProjectImage[];
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export interface ProjectImage {
-  _key: string
+  _key: string;
   image: {
-    asset: SanityImageAsset
-  }
-  description?: string
+    asset: SanityImageAsset;
+  };
+  description?: string;
 }
 
 // Navigation types
 export interface NavigationItem {
-  label: string
-  multiple?: boolean
-  link?: NavigationLink
-  children?: NavigationItem[]
+  label: string;
+  multiple?: boolean;
+  link?: NavigationLink;
+  children?: NavigationItem[];
 }
 
 export interface NavigationLink {
-  type: 'internal' | 'internalPath' | 'external'
+  type: "internal" | "internalPath" | "external";
   internalLink?: {
     slug: {
-      current: string
-    }
-  }
-  internalPath?: string
-  externalUrl?: string
-  openInNewTab?: boolean
+      current: string;
+    };
+  };
+  internalPath?: string;
+  externalUrl?: string;
+  openInNewTab?: boolean;
 }
 
 // Query result types
 export interface HomePageQueryResult {
-  _id: string
-  title: string
-  seoTitle?: string
-  description?: string
-  sections?: ContentBlock[]
+  _id: string;
+  title: string;
+  seoTitle?: string;
+  description?: string;
+  sections?: ContentBlock[];
 }
 
 export interface PageQueryResult {
-  _id: string
-  title: string
-  subtitle: string
-  description?: string
-  seoTitle?: string
-  heroImage?: SanityImageAsset
-  sections?: ContentBlock[]
+  _id: string;
+  title: string;
+  subtitle: string;
+  description?: string;
+  seoTitle?: string;
+  heroImage?: SanityImageAsset;
+  sections?: ContentBlock[];
 }
 
 export interface SettingsQueryResult {
-  _id: string
+  _id: string;
   // General Settings
-  title?: string
-  description?: string
-  siteUrl?: string
+  title?: string;
+  description?: string;
+  siteUrl?: string;
   // Services
-  services?: string[]
+  services?: string[];
   // Contact Information
-  contactEmail?: string
-  contactAddress?: string
-  contactLocation?: string
+  contactEmail?: string;
+  contactAddress?: string;
+  contactLocation?: string;
 }
 
 export interface ProjectQueryResult {
-  _id: string
-  projectNumber: string
-  title: string
-  subtitle?: string
+  _id: string;
+  projectNumber: string;
+  title: string;
+  subtitle?: string;
   slug: {
-    current: string
-  }
-  description?: string
-  place?: string
-  tags?: string[]
-  images?: ProjectImage[]
-  seoTitle?: string
-  seoDescription?: string
+    current: string;
+  };
+  description?: string;
+  place?: string;
+  tags?: string[];
+  images?: ProjectImage[];
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
-export type AllProjectsQueryResult = ProjectQueryResult[]
+export type AllProjectsQueryResult = ProjectQueryResult[];
 
 // Lab types
 export interface Lab extends SanityDocument {
-  _type: 'lab'
-  title: string
+  _type: "lab";
+  title: string;
   slug: {
-    current: string
-  }
-  content: string
-  publishedAt: string
+    current: string;
+  };
+  content: string;
+  publishedAt: string;
   image: {
-    asset: SanityImageAsset
-  }
-  seoTitle?: string
-  seoDescription?: string
+    asset: SanityImageAsset;
+  };
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 export interface LabQueryResult {
-  _id: string
-  title: string
+  _id: string;
+  title: string;
   slug: {
-    current: string
-  }
-  content: string
-  publishedAt: string
+    current: string;
+  };
+  content: string;
+  publishedAt: string;
   image: {
-    asset: SanityImageAsset
-  }
-  seoTitle?: string
-  seoDescription?: string
+    asset: SanityImageAsset;
+  };
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
-export type AllLabsQueryResult = LabQueryResult[]
+export type AllLabsQueryResult = LabQueryResult[];
 
 // Utility types
-export type SanityImageSource = SanityImageAsset | string
+export type SanityImageSource = SanityImageAsset | string;

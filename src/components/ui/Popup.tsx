@@ -58,7 +58,7 @@ export default function Popup({ settings }: PopupProps) {
             <h1 className="text-xl font-bold uppercase mb-1">About</h1>
 
             <p className="font-bold leading-tight capitalize text-sm sm:text-lg">
-              {settings.abouttext}
+              {settings?.abouttext}
             </p>
           </div>
 
