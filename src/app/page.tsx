@@ -6,7 +6,7 @@ import Blog from "@/components/Blog";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Link from "next/link";
-import Popup from "@/components/ui/Popup";
+import BusinessCard from "@/components/ui/BusinessCard";
 
 // Use ISR with revalidation
 export const revalidate = 60;
@@ -34,7 +34,7 @@ export default async function Home() {
     <>
       <Header settings={settings} className="fixed top-0 left-0 z-20" />
       {/* Main */}
-      <main className="min-h-screen md:h-screen relative left-0 w-full">
+      <main className="min-h-screen bg-black text-white md:h-screen relative left-0 w-full">
         <div className="mx-auto px-3 h-full">
           <div className="flex h-full flex-col md:flex-row">
             {/* Projects Section */}
@@ -50,7 +50,7 @@ export default async function Home() {
             <HomeSection
               title="OCTO Lab"
               href="/lab"
-              width="md:w-1/4 flex flex-col"
+              width="md:w-1/4 flex flex-col bg-primary text-white"
             >
               <Blog />
             </HomeSection>
@@ -58,7 +58,7 @@ export default async function Home() {
         </div>
       </main>
 
-      <Popup settings={settings} />
+      <BusinessCard settings={settings} />
     </>
   );
 }
@@ -79,12 +79,12 @@ function HomeSection({
       <div className="h-full md:overflow-y-scroll">
         <Link href={href}>
           <h1
-            className={`text-4xl w-fit md:text-5xl font-bold text-black mb-4 uppercase sticky top-[15vh] hover:text-primary z-30 ${title === "Projects" ? "bigtitle" : ""} ${title === "OCTO Lab" ? "bigtitle2" : ""}`}
+            className={`text-4xl w-fit md:text-6xl font-bold text-white mb-4 uppercase sticky top-[1vh] hover:text-primary z-30 ${title === "Projects" ? "bigtitle" : ""} ${title === "OCTO Lab" ? "bigtitle2" : ""}`}
           >
             {title}
           </h1>
         </Link>
-        <div className="flex-1 md:overflow-y-scroll pt-[15vh]">{children}</div>
+        <div className="flex-1 md:overflow-y-scroll pt-[10vh]">{children}</div>
       </div>
     </div>
   );

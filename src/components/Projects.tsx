@@ -33,7 +33,7 @@ export default function Projects({ projects }: ProjectsProps) {
   const handleImageClick = (
     project: ProjectQueryResult,
     projectImages: NonNullable<ProjectQueryResult["images"]>,
-    initialIndex: number
+    initialIndex: number,
   ) => {
     const images = projectImages.map((img) => ({
       src: img.image.asset.url,
@@ -62,29 +62,28 @@ export default function Projects({ projects }: ProjectsProps) {
             project.images && project.images.length > 0 ? (
               <div key={project._id} className="">
                 <div className="flex flex-row justify-between">
-                  <div className="text-sm md:text-lg font-extrabold text-black mb-1 md:w-full">
-                    {project.projectNumber}
-                  </div>
-                  <div className="text-sm md:text-lg font-extrabold text-black mb-1 w-max md:w-1/2 ml-5">
+                  <div className="text-xl md:text-3xl font-extrabold uppercase text-white mb-1 w-max md:w-1/2">
                     {project.title}
                   </div>
                 </div>
 
                 <div className="flex flex-row gap-1 overflow-x-scroll">
-                  {project.images.map((image, index) => (
+                  {project.images.length > 0 && (
                     <img
-                      key={index}
-                      src={image.image.asset.url}
-                      alt={image.description || project.projectNumber}
+                      key={project.images[0].image.asset.url}
+                      src={project.images[0].image.asset.url}
+                      alt={
+                        project.images[0].description || project.projectNumber
+                      }
                       className="w-auto max-h-[150px] object-contain bg-white cursor-pointer hover:opacity-80 transition-opacity"
                       onClick={() =>
-                        handleImageClick(project, project.images!, index)
+                        handleImageClick(project, project.images!, 0)
                       }
                     />
-                  ))}
+                  )}
                 </div>
               </div>
-            ) : null
+            ) : null,
           )}
         </div>
       </div>

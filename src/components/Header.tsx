@@ -34,7 +34,7 @@ export default function Header({ className = "", settings }: HeaderProps) {
               </div>
             </Link>
           </div>
-          <div className="w-full md:w-3/6">
+          <div className="w-full md:w-3/6 hidden">
             <div className="flex flex-row justify-between">
               {/* Services */}
               <div className="text-primary text-left w-full">
@@ -49,7 +49,7 @@ export default function Header({ className = "", settings }: HeaderProps) {
                 ))}
               </div>
               {/* Contacts */}
-              <div className="text-primary text-left w-full">
+              <div className="bg-primary text-primary text-left w-full hidden">
                 <div className="font-bold text-base sm:text-xl">CONTACT</div>
                 {safeContactEmail && (
                   <p className="font-bold leading-tight text-xs sm:text-base">

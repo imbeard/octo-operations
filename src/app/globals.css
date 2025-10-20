@@ -38,6 +38,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("/font/RobotoMono-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: bold;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -187,4 +199,15 @@ body.popup-open .md\:w-3\/4 h1 {
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+.bigtitle2 {
+  text-align: right;
+  margin-left: 0.5rem;
+  &:hover {
+    color: black;
+  }
+}
+.bigtitle {
+  margin-left: 50px;
 }

@@ -33,7 +33,7 @@ export default function PageLayout({
           </div>
         </Link>
         <h1
-          className={`text-4xl md:text-5xl ${titleColor} font-bold text-right leading-tight`}
+          className={`text-4xl md:text-6xl ${titleColor} font-bold text-right leading-tight`}
         >
           {title}
         </h1>
@@ -41,9 +41,7 @@ export default function PageLayout({
 
       {/* Content */}
       <div className="max-w-[1000px] overflow-y-auto relative mx-auto pt-[8vh] md:pt-[8vh]">
-        <div className="h-[92dvh] px-3"> 
-          {children}
-        </div>
+        <div className="h-[92dvh] px-3">{children}</div>
       </div>
     </main>
   );
