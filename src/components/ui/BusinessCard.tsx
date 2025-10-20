@@ -137,7 +137,7 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
       }`}
       aria-modal="true"
       role="dialog"
-      onClick={(e) => {
+      onClick={() => {
         // Click on backdrop when card is up should close it
         if (hasFallen && centerCardUp) {
           handleCenterCardClick();
