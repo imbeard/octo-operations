@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import type { Settings } from "@/sanity-studio/types";
 
 interface BusinessCardProps {
@@ -12,19 +12,35 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
   const [centerFallen, setCenterFallen] = useState(false);
   const [hasDroppedIn, setHasDroppedIn] = useState(false);
   const [centerCardUp, setCenterCardUp] = useState(false);
+  const hasShownRef = useRef(false);
 
   // Number of cards to display (excluding the center card)
   const cardCount = 23; // 23 scattered cards + 1 center card = 24 total
 
   useEffect(() => {
-    if (sessionStorage.getItem("cardsShown") !== "true") {
+    // Check if animation has been shown during this navigation session
+    const hasSeenAnimation = sessionStorage.getItem("cardsShown") === "true";
+
+    if (!hasSeenAnimation && !hasShownRef.current) {
+      // First load - play full animation
+      hasShownRef.current = true;
       setIsOpen(true);
       // Trigger drop-in animation
       setTimeout(() => setHasDroppedIn(true), 100);
       // Scattered cards fall after 3.5 seconds
       setTimeout(() => setScatteredFallen(true), 3500);
       // Center card falls 3 seconds after scattered cards (at 6.5 seconds total)
-      setTimeout(() => setCenterFallen(true), 7500);
+      setTimeout(() => {
+        setCenterFallen(true);
+        // Mark animation as shown in sessionStorage
+        sessionStorage.setItem("cardsShown", "true");
+      }, 7500);
+    } else if (hasSeenAnimation) {
+      // Returning from navigation - skip animation, show only bottom card
+      setIsOpen(true);
+      setScatteredFallen(true);
+      setCenterFallen(true);
+      setHasDroppedIn(true);
     }
   }, []);
 
