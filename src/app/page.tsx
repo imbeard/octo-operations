@@ -40,7 +40,7 @@ export default async function Home() {
             {/* Projects Section */}
             <HomeSection
               title="Projects"
-              href="/projects"
+              href="/"
               width="md:w-3/4 flex flex-col"
             >
               <Projects projects={projects} />
@@ -79,7 +79,7 @@ function HomeSection({
       <div className="h-full md:overflow-y-scroll">
         <Link href={href}>
           <h1
-            className={`text-4xl w-fit md:text-6xl font-bold text-white mb-4 uppercase sticky top-[1vh] hover:text-primary z-30 ${title === "Projects" ? "bigtitle" : ""} ${title === "OCTO Lab" ? "bigtitle2" : ""}`}
+            className={`text-4xl w-fit md:text-5xl font-bold text-white mb-4 uppercase sticky top-[2vh] hover:text-primary z-30 ${title === "Projects" ? "bigtitle" : ""} ${title === "OCTO Lab" ? "bigtitle2" : ""}`}
           >
             {title}
           </h1>

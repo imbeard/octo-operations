@@ -16,13 +16,13 @@ export default async function Blog() {
                 className="w-full h-auto object-cover mb-2"
               />
             )}
-            <p className="text-sm md:text-lg font-bold  uppercase leading-tight">
+            <p className="text-sm md:text-md font-bold  uppercase leading-tight">
               {lab.title}
             </p>
-            <p className="text-sm md:text-lg font-bold  uppercase leading-tight">
+            <p className="text-sm md:text-md font-bold  uppercase leading-tight">
               {new Date(lab.publishedAt).toLocaleDateString()}
             </p>
-            <p className="text-xs md:text-base font-bold leading-tight">
+            <p className="text-xs md:text-md font-bold leading-tight">
               {lab.content}
             </p>
           </div>

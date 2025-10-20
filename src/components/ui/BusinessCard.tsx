@@ -8,7 +8,8 @@ interface BusinessCardProps {
 
 export default function BusinessCard({ settings }: BusinessCardProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasFallen, setHasFallen] = useState(false);
+  const [scatteredFallen, setScatteredFallen] = useState(false);
+  const [centerFallen, setCenterFallen] = useState(false);
   const [hasDroppedIn, setHasDroppedIn] = useState(false);
   const [centerCardUp, setCenterCardUp] = useState(false);
 
@@ -20,13 +21,15 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
       setIsOpen(true);
       // Trigger drop-in animation
       setTimeout(() => setHasDroppedIn(true), 100);
-      // Trigger fall-down animation after 3 seconds
-      setTimeout(() => setHasFallen(true), 3500);
+      // Scattered cards fall after 3.5 seconds
+      setTimeout(() => setScatteredFallen(true), 3500);
+      // Center card falls 3 seconds after scattered cards (at 6.5 seconds total)
+      setTimeout(() => setCenterFallen(true), 7500);
     }
   }, []);
 
   useEffect(() => {
-    if (isOpen && !hasFallen) {
+    if (isOpen && !centerFallen) {
       document.body.classList.add("cards-open");
     } else {
       document.body.classList.remove("cards-open");
@@ -34,10 +37,10 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
     return () => {
       document.body.classList.remove("cards-open");
     };
-  }, [isOpen, hasFallen]);
+  }, [isOpen, centerFallen]);
 
   const handleCenterCardClick = () => {
-    if (hasFallen) {
+    if (centerFallen) {
       // Toggle center card up/down
       setCenterCardUp(!centerCardUp);
     }
@@ -55,12 +58,12 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
     const y = ((seed * 13) % 60) - 30; // Y position between -30% and 30%
 
     return {
-      transform: hasFallen
+      transform: scatteredFallen
         ? `translate(0, 100vh) rotate(${angle}deg)` // Fall off screen
         : hasDroppedIn
           ? `translate(${x}vw, ${y}vh) rotate(${angle}deg)`
           : `translate(${x}vw, -100vh) rotate(${angle}deg)`,
-      transition: hasFallen
+      transition: scatteredFallen
         ? `transform 0.8s cubic-bezier(0.6, 0.04, 0.98, 0.34) ${index * 0.05}s`
         : hasDroppedIn
           ? `transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s`
@@ -72,14 +75,14 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
   // Style for the center card (always straight, no rotation)
   const getCenterCardStyle = () => {
     return {
-      transform: hasFallen
+      transform: centerFallen
         ? centerCardUp
           ? `translate(-50%, -50%) rotate(0deg)` // Centered when up
-          : `translate(-50%, calc(50vh - 80px)) rotate(0deg)` // Only heading visible at bottom
+          : `translate(-50%, calc(50vh - 83px)) rotate(0deg)` // Only heading visible at bottom
         : hasDroppedIn
           ? `translate(-50%, -50%) rotate(0deg)` // Centered when scattered
           : `translate(-50%, -150vh) rotate(0deg)`, // Start from top
-      transition: hasFallen
+      transition: centerFallen
         ? `transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)` // Smooth toggle when fallen
         : hasDroppedIn
           ? `transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${cardCount * 0.1}s` // Drop in last
@@ -94,7 +97,7 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
   const CardContent = () => (
     <div className="relative w-full h-full p-2 bg-primary text-white flex flex-col justify-between ">
       <div>
-        <img src="/logoext.svg" className="w-full" />
+        <img src="/logoext.svg" className="w-[80%] mx-auto mb-2" />
         <div className="space-y-1 text-sm roboto">
           <p>
             Octo Operations is a creative production agency. An operational
@@ -129,9 +132,9 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center ${
-        !hasFallen
+        !centerFallen
           ? "bg-black/30 backdrop-blur-sm"
-          : hasFallen && !centerCardUp
+          : centerFallen && !centerCardUp
             ? "pointer-events-none"
             : "bg-black/30 backdrop-blur-sm"
       }`}
@@ -139,7 +142,7 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
       role="dialog"
       onClick={() => {
         // Click on backdrop when card is up should close it
-        if (hasFallen && centerCardUp) {
+        if (centerFallen && centerCardUp) {
           handleCenterCardClick();
         }
       }}
@@ -158,10 +161,10 @@ export default function BusinessCard({ settings }: BusinessCardProps) {
 
         {/* Center card - always straight, clickable */}
         <div
-          className={`absolute w-[85vw] max-w-[500px] aspect-[1.586/1] shadow-2xl ${hasFallen ? "cursor-pointer pointer-events-auto" : ""}`}
+          className={`absolute w-[85vw] max-w-[500px] aspect-[1.586/1] shadow-2xl ${centerFallen ? "cursor-pointer pointer-events-auto" : ""}`}
           style={getCenterCardStyle()}
           onClick={(e) => {
-            if (hasFallen) {
+            if (centerFallen) {
               e.stopPropagation();
               handleCenterCardClick();
             }

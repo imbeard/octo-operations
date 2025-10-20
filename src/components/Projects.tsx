@@ -62,7 +62,7 @@ export default function Projects({ projects }: ProjectsProps) {
             project.images && project.images.length > 0 ? (
               <div key={project._id} className="">
                 <div className="flex flex-row justify-between">
-                  <div className="text-xl md:text-3xl font-extrabold uppercase text-white mb-1 w-max md:w-1/2">
+                  <div className="text-xl md:text-2xl font-extrabold uppercase text-white mb-1 w-max md:w-1/2">
                     {project.title}
                   </div>
                 </div>
@@ -75,7 +75,7 @@ export default function Projects({ projects }: ProjectsProps) {
                       alt={
                         project.images[0].description || project.projectNumber
                       }
-                      className="w-auto max-h-[150px] object-contain bg-white cursor-pointer hover:opacity-80 transition-opacity"
+                      className="w-auto max-h-[250px] object-contain bg-white cursor-pointer hover:opacity-80 transition-opacity"
                       onClick={() =>
                         handleImageClick(project, project.images!, 0)
                       }
