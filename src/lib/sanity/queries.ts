@@ -73,6 +73,33 @@ export const allProjectSlugsQuery = groq`
   }
 `;
 
+
+export interface Project {
+	_type: 'project';
+	_createdAt: string;
+	title?: string;
+	slug: Slug;
+	mainImage?: ImageAsset;
+	body: PortableTextBlock[];
+	numberOfCharacters?: number;
+  	estimatedWordCount?: number;
+  	estimatedReadingTime?: number;
+}
+
+export  const previousProjectQuery = groq`
+  *[_type == "project" && projectNumber > $projectNumber] | order(projectNumber asc)[0]{
+    title,
+    slug
+  }
+`;
+
+export  const nextProjectQuery = groq`
+  *[_type == "project" && projectNumber < $projectNumber] | order(projectNumber desc)[0]{
+    title,
+    slug
+  }
+`;
+
 // Lab queries
 export const allLabsQuery = groq`
   *[_type == "lab"] | order(publishedAt desc) {
@@ -115,3 +142,44 @@ export const allLabSlugsQuery = groq`
     "slug": slug.current
   }
 `;
+
+
+export interface Lab {
+	_type: 'lab';
+	_publishedAt: string;
+	title?: string;
+	slug: Slug;
+	mainImage?: ImageAsset;
+	body: PortableTextBlock[];
+	numberOfCharacters?: number;
+  	estimatedWordCount?: number;
+  	estimatedReadingTime?: number;
+}
+
+export  const previousLabQuery = groq`
+  *[_type == "lab" && publishedAt > $publishedAt] | order(publishedAt asc)[0]{
+    title,
+    slug
+  }
+`;
+
+export  const nextLabQuery = groq`
+  *[_type == "lab" && publishedAt < $publishedAt] | order(publishedAt desc)[0]{
+    title,
+    slug
+  }
+`;
+
+export interface AdjacentPost {
+  title: string;
+  slug: {
+    current: string;
+  };
+}
+export interface General {
+	description?: string;
+	contactEmail?: string;
+	contactAddress?: string;
+	New_Article?: string;
+}
+

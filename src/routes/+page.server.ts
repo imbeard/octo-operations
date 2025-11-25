@@ -1,4 +1,4 @@
-import { projectsQuery, optionsQuery } from '$lib/sanity/queries';
+import { allProjectsQuery, settingsQuery } from '$lib/sanity/queries';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (event) => {
@@ -7,7 +7,7 @@ export const load: PageServerLoad = async (event) => {
 	// corresponding `+page.svelte` file, but you can return the data in any
 	// format you like.
 	return {
-		projects: await loadQuery(projectsQuery),
-		options: await loadQuery(optionsQuery)
+		projects: await loadQuery(allProjectsQuery),
+		options: await loadQuery(settingsQuery)
 	};
 };
