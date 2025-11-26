@@ -162,14 +162,11 @@ export const allLabSlugsQuery = groq`
 
 export interface Lab {
 	_type: 'lab';
-	_publishedAt: string;
+	publishedAt: string;
 	title?: string;
 	slug: Slug;
-	mainImage?: ImageAsset;
-	body: PortableTextBlock[];
-	numberOfCharacters?: number;
-  	estimatedWordCount?: number;
-  	estimatedReadingTime?: number;
+	image?: ImageAsset;
+	content: string;
 }
 
 export  const previousLabQuery = groq`

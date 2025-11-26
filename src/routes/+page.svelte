@@ -18,8 +18,8 @@
 	<meta name="description" content="" />
 </svelte:head>
 
-<section class="projects-container max-h-[60vh] overflow-y-scroll max-w-6/12  ">
-	<div class="project-list grid grid-cols-2 md:grid-cols-3 gap-3 ">
+<section class="items-container max-h-[60vh] overflow-y-scroll max-w-6/12  ">
+	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3 ">
 		{#if projects.length}
 		{#each projects as project,index}
 			<a href=/project/{project.slug.current} class="text-white">

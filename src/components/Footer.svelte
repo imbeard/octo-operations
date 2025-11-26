@@ -55,17 +55,22 @@
         </nav>
 
         {#if projectInfo}
-            <div class="footer-project-meta text-base w-10/12">
-                <h1>{projectInfo.title}</h1>
+            <div class="footer-project-meta text-base w-10/12 grid grid-cols-3 gap-4">
+                <div class="info flex flex-col">
+                    <h1>{projectInfo.title}</h1>
 
-                {#if projectInfo.place}
-                    <span>{projectInfo.place}</span>
-                {/if}
+                    {#if projectInfo.place}
+                        <span>{projectInfo.place}</span>
+                    {/if}
+                </div> 
 
                 {#if projectInfo.tags?.length}
+                    <div class="tags grid grid-rows-2 grid-flow-col  gap-x-2 col-span-2">
                     {#each projectInfo.tags as tag, i}
-                        <span class="tag">{tag}</span>{i < projectInfo.tags.length - 1 ? ', ' : ''}
+                        <span class="tag">{tag}</span>
                     {/each}
+
+                    </div>
                 {/if}
             </div>
         {/if}
