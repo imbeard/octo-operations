@@ -1,7 +1,10 @@
 <script>
     import { page } from '$app/stores';
 
-    const { settings } = $props();   
+    const { settings } = $props();
+
+    let projectInfo = $derived($page.data.projectInfo);
+
     let isModalOpen = $state(false);
 
     function openModal() {
@@ -39,8 +42,8 @@
         </div>
     {/if}
 <footer class="footer">
-    <div class="p-5   {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red-500'}">
-        <nav class="flex flex-wrap items-center justify-between">
+    <div class="p-5  {$page.url.pathname.startsWith('/project/') ? 'flex flex-wrap justify-between' : ''} {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red-500'}">
+        <nav class="flex flex-wrap items-center justify-between ">
             {#if isSingleProject}
                 <!-- Show only back link when on project page -->
                 <a href="/" class="nav-link">BACK</a>
@@ -50,6 +53,22 @@
                 <button class="cursor-pointer" onclick={openModal}>CONTACTS</button>
             {/if}    
         </nav>
+
+        {#if projectInfo}
+            <div class="footer-project-meta text-base w-10/12">
+                <h1>{projectInfo.title}</h1>
+
+                {#if projectInfo.place}
+                    <span>{projectInfo.place}</span>
+                {/if}
+
+                {#if projectInfo.tags?.length}
+                    {#each projectInfo.tags as tag, i}
+                        <span class="tag">{tag}</span>{i < projectInfo.tags.length - 1 ? ', ' : ''}
+                    {/each}
+                {/if}
+            </div>
+        {/if}
     </div>
 
 

@@ -8,34 +8,27 @@
 	let open = $state(false);
 
 	onMount(() => {
-		/*if ('startViewTransition' in document) {
-			setTimeout(() => {
-				document.startViewTransition(() => {
-					
-				});
-			}, 1000);
-		} else {
-			
-		}*/
+		const interval = setInterval(() => {
+            now = new Date();
+        }, 1000);
+
+        
+        return () => clearInterval(interval);
 	});
 
-    // Current date
-    const now = new Date();
-
-    // Format date as DD/MM/YYYY
-    const date = now.toLocaleDateString('en-GB'); // e.g., "26/11/2025"
-
-    // Format time in Paris
-    const parisTime = now.toLocaleTimeString('en-GB', {
+    let now = $state(new Date());
+    
+    let date = $derived(now.toLocaleDateString('en-GB'));
+    
+    let parisTime = $derived(now.toLocaleTimeString('en-GB', {
         timeZone: 'Europe/Paris',
         hour12: false
-    });
-
-    // Format time in London
-    const londonTime = now.toLocaleTimeString('en-GB', {
+    }));
+    
+    let londonTime = $derived(now.toLocaleTimeString('en-GB', {
         timeZone: 'Europe/London',
         hour12: false
-    });
+    }));
 
     let isSinglePage = $derived(
         $page.url.pathname.startsWith('/project/') || 

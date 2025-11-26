@@ -21,7 +21,14 @@ export const load: PageServerLoad = async (event) => {
 		return { status: 404 };
 	}
 
-	const projectNumber = initial.data.projectNumber;
+	const project = initial.data;
+	const projectNumber = project.projectNumber;
+
+	const projectInfo = {
+        place: project.place ?? null,
+        tags: project.tags ?? [],
+        title: project.title ?? null
+    };
 
 	const [previousPost, nextPost] = await Promise.all([
 		client.fetch<AdjacentPost | null>(previousProjectQuery, { projectNumber }),
@@ -30,15 +37,13 @@ export const load: PageServerLoad = async (event) => {
 
 	const general = await loadQuery<General>(settingsQuery);
 
-	// We pass the data in a format that is easy for `useQuery` to consume in the
-	// corresponding `+page.svelte` file, but you can return the data in any
-	// format you like.
 	return {
 		query,
 		params,
 		options: { initial },
 		previousPost,
 		nextPost,
-		general
+		general,
+		projectInfo
 	};
 };

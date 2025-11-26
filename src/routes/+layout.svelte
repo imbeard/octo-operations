@@ -29,6 +29,6 @@
 		<slot />
 	</main>	
 	
-	<Footer settings={data.settings} />
+	<Footer settings={data.settings} projectInfo={data.projectInfo}  />
 	
 </div>

@@ -14,15 +14,14 @@
 
 	let { data }: { data: ExtendedPageData } = $props();
 
-	// Create reactive query that updates when params change
+	
 	const q = $derived(useQuery(data.query, data.params, data.options));
 
-	// Extract reactive values from the query store
 	const post = $derived($q?.data as Project | null);
 	const loading = $derived($q?.loading as boolean);
 	const error = $derived($q?.error);
 
-	// Extract other data properties directly from data
+
 	const previousPost = $derived(data.previousPost);
 	const nextPost = $derived(data.nextPost);
 	const general = $derived(data.general);
@@ -32,8 +31,8 @@
 	{#if post}
 		<title>{post.title}</title>
 		<meta name="description" content={`${post.title}`} />
-		{#if post.mainImage}
-			<meta property="og:image" content={urlFor(post.mainImage).width(1200).height(630).url()} />
+		{#if post.images?.[0]}
+			<meta property="og:image" content={urlFor(post.images?.[0].image.asset.url).width(1200).height(630).url()} />
 		{/if}
 	{/if}
 </svelte:head>
@@ -43,35 +42,27 @@
 		<p>Loading...</p>
 	</div>
 {:else if post}
-	<article class="post mt-15">
-		<div class="main-image relative">
-			<div class="info-container bg-white  absolute top-1/2 -translate-y-1/2 w-full">
-				<div class="px-4 2xl:container 2xl:mx-auto gap-4 flex flex-col md:flex-row md:justify-between md:items-center">
-					<h1 class="text-xl">{post.title}</h1>
-					
-
+	<article class="single-project ">
+		<div class="outer-images-container">
+			{#if post?.images && post.images.length > 0}
+				<div class="images-container mx-auto max-h-[60vh] max-w-6/12 overflow-x-auto overflow-y-hidden whitespace-nowrap">
+					{#each post.images as image}
+						<div class="image-wrapper image-wrapper inline-block max-h-full">
+							<img 
+								src={image.image.asset.url} 
+								alt={image.description || post.title || 'Project image'}
+								class="project-image project-image max-h-[60vh] h-full w-auto inline-block"
+							/>
+							
+						</div>
+					{/each}
 				</div>
-			</div>
-
-		
-			{#if post.mainImage}
-				<img
-					class="post__cover w-full object-cover aspect-4/3"
-					src={urlFor(post.mainImage).url()}
-					alt={`Cover image for ${post.title}`}
-				/>
 			{:else}
-				<div class="post__cover--none"></div>
+				<p>No images available for this project.</p>
 			{/if}
-		</div>
-		<div class="post__container px-4 2xl:container 2xl:mx-auto">
 			
-			{#if post.body}
-				<div class="post__content prose mx-auto mt-8">
-					<PortableText onMissingComponent={false} value={post.body} />
-				</div>
-			{/if}
 		</div>
+		
 	</article>
 
 	<nav class="post__nav absolute w-full text-white px-5 flex flex-col md:flex-row md:justify-between md:items-center pointer-events-none"  aria-label="Navigate between blog posts">
@@ -85,7 +76,7 @@
 		{/if}
 
 		{#if nextPost}
-			<a href="/project/{nextPost.slug.current}" class="pointer-events-auto">
+			<a href="/project/{nextPost.slug.current}" class="pointer-events-auto ml-auto">
 				next project
 			</a>
 		{/if}
@@ -96,7 +87,7 @@
 	</div>
 {:else}
 	<div class="not-found">
-		<p>No post found.</p>
+		<p>No propject found.</p>
 	</div>
 {/if}
 

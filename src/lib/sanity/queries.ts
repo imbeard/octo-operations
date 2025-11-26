@@ -101,14 +101,15 @@ export interface ProjectImage {
 	description?: string;
 }
 
-export  const previousProjectQuery = groq`
+export const nextProjectQuery = groq`
   *[_type == "project" && projectNumber > $projectNumber] | order(projectNumber asc)[0]{
     title,
     slug
   }
 `;
 
-export  const nextProjectQuery = groq`
+
+export const previousProjectQuery = groq`
   *[_type == "project" && projectNumber < $projectNumber] | order(projectNumber desc)[0]{
     title,
     slug
@@ -195,6 +196,5 @@ export interface General {
 	description?: string;
 	contactEmail?: string;
 	contactAddress?: string;
-	New_Article?: string;
 }
 

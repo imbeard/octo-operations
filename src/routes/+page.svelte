@@ -23,7 +23,7 @@
 		{#if projects.length}
 		{#each projects as project,index}
 			<a href=/project/{project.slug.current} class="text-white">
-				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border-1">
+				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border">
 					{#if project.images?.[0]}
 						<img 
 							src={project.images[0].image.asset.url} 
