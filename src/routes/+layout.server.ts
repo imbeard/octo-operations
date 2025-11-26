@@ -1,10 +1,15 @@
 import type { LayoutServerLoad } from './$types';
+import { client } from '$lib/sanity/client';
+import { settingsQuery } from '$lib/sanity/queries';
 
-export const load: LayoutServerLoad = (event) => {
-	// The `event.locals.preview` value received here is set by the helper function
-	// in `hooks.server.ts`. It indicates whether the app is in preview mode or not.
-	const { preview } = event.locals;
-	// As `event.locals` is only available on the server, we can expose the value
-	// to the client by returning it here.
-	return { preview };
+export const load: LayoutServerLoad = async (event) => {  // <-- async here
+    const { preview } = event.locals;
+
+    // Now you can use await
+    const settings = await client.fetch(settingsQuery);
+
+    return {
+        preview,
+        settings: settings || {}
+    };
 };

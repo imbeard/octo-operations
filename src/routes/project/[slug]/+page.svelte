@@ -18,7 +18,7 @@
 	const q = $derived(useQuery(data.query, data.params, data.options));
 
 	// Extract reactive values from the query store
-	const post = $derived($q?.data as Post | null);
+	const post = $derived($q?.data as Project | null);
 	const loading = $derived($q?.loading as boolean);
 	const error = $derived($q?.error);
 
@@ -31,7 +31,7 @@
 <svelte:head>
 	{#if post}
 		<title>{post.title}</title>
-		<meta name="description" content={`Read ${post.title} on our blog`} />
+		<meta name="description" content={`${post.title}`} />
 		{#if post.mainImage}
 			<meta property="og:image" content={urlFor(post.mainImage).width(1200).height(630).url()} />
 		{/if}
@@ -74,21 +74,19 @@
 		</div>
 	</article>
 
-	<nav class="post__nav my-15 px-4 2xl:container 2xl:mx-auto gap-4 flex flex-col md:flex-row md:justify-between md:items-center "  aria-label="Navigate between blog posts">
+	<nav class="post__nav absolute w-full text-white px-5 flex flex-col md:flex-row md:justify-between md:items-center pointer-events-none"  aria-label="Navigate between blog posts">
 		{#if previousPost}
 			<a
 				href="/project/{previousPost.slug.current}"
-				class="flex flex-col  md:w-1/2 text-orange hover:text-black"
+				class="pointer-events-auto"
 			>
-				<span class="text-md">{general?.data?.Prev_Article || 'Previous Article'}</span>
-				<span class="text-xs">{previousPost.title}</span>
+				previous project
 			</a>
 		{/if}
 
 		{#if nextPost}
-			<a href="/project/{nextPost.slug.current}" class="flex flex-col ml-auto text-right  md:w-1/2 text-orange hover:text-black">
-				<span class="text-md">{general?.data?.Next_Article || 'Next Article'}</span>
-				<span class="text-xs">{nextPost.title}</span>
+			<a href="/project/{nextPost.slug.current}" class="pointer-events-auto">
+				next project
 			</a>
 		{/if}
 	</nav>

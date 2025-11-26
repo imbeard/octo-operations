@@ -77,13 +77,28 @@ export const allProjectSlugsQuery = groq`
 export interface Project {
 	_type: 'project';
 	_createdAt: string;
+	_id: string;
+	projectNumber: string;
 	title?: string;
+	subtitle?: string;
 	slug: Slug;
-	mainImage?: ImageAsset;
-	body: PortableTextBlock[];
-	numberOfCharacters?: number;
-  	estimatedWordCount?: number;
-  	estimatedReadingTime?: number;
+	description?: string;
+	place?: string;
+	tags?: string[];
+	images?: ProjectImage[];
+	seoTitle?: string;
+	seoDescription?: string;
+}
+
+export interface ProjectImage {
+	_key: string;
+	image: {
+		asset: {
+			_id: string;
+			url: string;
+		}
+	};
+	description?: string;
 }
 
 export  const previousProjectQuery = groq`
