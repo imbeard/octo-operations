@@ -32,7 +32,7 @@ Access Sanity Studio at `http://localhost:3333` when running `npm run studio`.
 
 ## 📋 TODO
 
-- [ ] Blog single page?
+- [X] Blog single page?
 - [ ] SEO Check on original domain
 - [ ] Favicon, OpenGraph
 
