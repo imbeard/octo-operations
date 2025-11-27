@@ -40,7 +40,7 @@
 <header
 	class="header"
 >
-	<div class="p-5 flex flex-wrap items-center justify-between  {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red-500'}">
+	<div class="p-5 flex flex-wrap items-center justify-between  {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
         <a
                 id="logo"
                 class="{$page.url.pathname.startsWith('/blog') ? 'blog-logo' : ''}"

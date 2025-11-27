@@ -22,7 +22,7 @@
 {#if isModalOpen}
         <div class="fixed inset-0 bg-black/50 flex justify-center items-center">
             <div class="bg-white p-2  w-96 relative">
-                <div class="modal-header bg-red-500 flex p-1">
+                <div class="modal-header bg-red flex p-1">
                     <button 
                     class="ml-auto bg-white text-sm w-3 h-3 cursor-pointer flex items-center justify-center"
                     onclick={closeModal}
@@ -42,7 +42,7 @@
         </div>
     {/if}
 <footer class="footer">
-    <div class="p-5  {$page.url.pathname.startsWith('/project/') ? 'flex flex-wrap justify-between' : ''} {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red-500'}">
+    <div class="p-5  {$page.url.pathname.startsWith('/project/') ? 'flex flex-wrap justify-between' : ''} {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
         <nav class="flex flex-wrap items-center justify-between ">
             {#if isSingleProject}
                 <!-- Show only back link when on project page -->

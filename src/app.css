@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-red: #E30613;
+}
+
 .bebas-neue-regular {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
