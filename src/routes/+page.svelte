@@ -18,12 +18,12 @@
 	<meta name="description" content="" />
 </svelte:head>
 
-<section class="items-container max-h-[60vh] overflow-y-scroll max-w-6/12  ">
+<section class="items-container max-h-[60vh] data-simplebar overflow-y-scroll max-w-11/12 md:max-w-6/12  ">
 	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3 ">
 		{#if projects.length}
 		{#each projects as project,index}
-			<a href=/project/{project.slug.current} class="text-white">
-				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border">
+			<a href=/project/{project.slug.current} class="text-white transition hover:text-red">
+				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border  transition hover:border-black">
 					{#if project.images?.[0]}
 						<img 
 							src={project.images[0].image.asset.url} 

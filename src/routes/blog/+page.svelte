@@ -16,12 +16,12 @@
 
 </script>
 
-<section class="items-container max-h-[60vh] overflow-y-scroll max-w-6/12  ">
+<section class="items-container max-h-[60vh] overflow-y-scroll mmax-w-11/12 md:max-w-6/12  ">
 	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3 ">
 		{#if posts.length}
 		{#each posts as lab,index}
-			<a href="/blog/{lab.slug.current}" class="text-white">
-				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border">
+			<a href="/blog/{lab.slug.current}" class="text-white transition hover:text-black">
+				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black">
 					{#if lab.image}
 						<img 
 							src={lab.image.asset.url} 

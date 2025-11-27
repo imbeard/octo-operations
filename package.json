@@ -24,6 +24,8 @@
     "@sanity/visual-editing": "^3.2.4",
     "@tailwindcss/vite": "^4.1.17",
     "groq": "^3.96.0",
+    "resize-observer-polyfill": "^1.5.1",
+    "simplebar": "^6.3.3",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {

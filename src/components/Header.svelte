@@ -3,6 +3,12 @@
 	import { onMount } from 'svelte';
     import { page } from '$app/stores';
 
+    import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+    import 'simplebar/dist/simplebar.css';
+
+    import ResizeObserver from 'resize-observer-polyfill';
+
+
     const { settings } = $props();   
 
 	let open = $state(false);
@@ -12,7 +18,7 @@
             now = new Date();
         }, 1000);
 
-        
+        window.ResizeObserver = ResizeObserver;
         return () => clearInterval(interval);
 	});
 
@@ -40,13 +46,13 @@
 <header
 	class="header"
 >
-	<div class="p-5 flex flex-wrap items-center justify-between  {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
+	<div class="p-5 flex flex-col gap-y-2 md:flex-row flex-wrap md:items-center justify-between  {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
         <a
                 id="logo"
                 class="{$page.url.pathname.startsWith('/blog') ? 'blog-logo' : ''}"
                 href="/"
             >
-            <svg class="max-w-60 h-auto" width="709" height="130" viewBox="0 0 709 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="max-w-40 md:max-w-60 h-auto" width="709" height="130" viewBox="0 0 709 130" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M26.8845 0.364258C18.53 0.364258 11.9512 2.80002 7.17071 7.71708C2.39024 12.6114 0 18.826 0 26.3609V102.712C0 110.725 2.29918 117.053 6.89754 121.72C11.4959 126.387 18.1658 128.709 26.8845 128.709C35.6031 128.709 42.273 126.387 46.8714 121.72C51.4698 117.053 53.7689 110.725 53.7689 102.712V26.3609C53.7689 18.5983 51.4015 12.3154 46.6893 7.53497C41.9771 2.75449 35.3755 0.364258 26.8845 0.364258ZM29.5706 105.216C29.5706 106.172 29.3202 106.901 28.8422 107.356C28.3641 107.834 27.704 108.084 26.8617 108.084C26.0194 108.084 25.3593 107.834 24.8812 107.356C24.4032 106.878 24.1528 106.172 24.1528 105.216V23.8341C24.1528 22.878 24.3804 22.1723 24.8812 21.6943C25.3593 21.2162 26.0194 20.9886 26.8617 20.9886C27.704 20.9886 28.3641 21.2162 28.8422 21.6943C29.3202 22.1723 29.5706 22.9008 29.5706 23.8341V105.216Z" fill="#E30613"/>
 <path d="M86.0251 0C77.6707 0 71.0918 2.36747 66.3113 7.07965C61.5309 11.7918 59.1406 17.9154 59.1406 25.4503V105.034C59.1406 112.796 61.4398 118.738 66.0382 122.858C70.6365 126.978 77.3064 129.05 86.0251 129.05C94.2657 129.05 100.549 126.865 104.851 122.494C109.153 118.123 111.316 112.022 111.316 104.123V82.7932H88.734V105.74C88.734 106.582 88.5292 107.242 88.0966 107.72C87.6869 108.198 86.9812 108.426 86.0251 108.426C85.1828 108.426 84.5227 108.175 84.0446 107.72C83.5666 107.242 83.3162 106.582 83.3162 105.74V23.652C83.3162 21.6259 84.204 20.6016 86.0023 20.6016C87.8007 20.6016 88.6885 21.6259 88.6885 23.652V43.9121H111.271V25.4503C111.271 17.6877 109.062 11.4959 104.646 6.89754C100.23 2.29918 94.0153 0 86.0023 0L86.0251 0Z" fill="#E30613"/>
 <path d="M113.82 25.0861H124.565V127.274H148.763V25.0861H159.531V1.79834H113.82V25.0861Z" fill="#E30613"/>
@@ -63,11 +69,19 @@
 </svg>
         </a>
         {#if !isSinglePage}
-        <p class="max-w-4/12 text-sm leading-none">
-            {settings?.description}
-        </p>
+        <div class="ticker-container max-w-8/12 md:max-w-4/12">
+            <div class="ticker-wrapper">
+                {#each {length: 8} as _, i}
+                    <p class=" text-sm leading-none ticker-item">
+                        {settings?.description}
+                    </p>
+                {/each}    
+            </div>
+        </div>
+
+        
         {/if}
-        <p class="text-right text-sm">
+        <p class="text-right text-sm hidden md:block">
             {date}<br/>
             {parisTime} | {londonTime}<br/>
             Paris | Londre

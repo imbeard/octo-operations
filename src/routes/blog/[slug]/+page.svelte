@@ -43,7 +43,7 @@
 		<p>Loading...</p>
 	</div>
 {:else if post}
-	<article class="post flex  gap-x-10 max-w-8/12">
+	<article class="post flex flex-col md:flex-row gap-y-5 gap-x-10 max-w-8/12">
 		<div class="main-image relative">
 		
 			{#if post.image}
@@ -67,7 +67,7 @@
 
 
 			{#if post.content}
-				<div class="post__content prose ">
+				<div class="post__content prose text-xs">
 					<p>
 						{@html post.content} 
 					</p>
@@ -80,15 +80,15 @@
 		{#if previousPost}
 			<a
 				href="/blog/{previousPost.slug.current}"
-				class="pointer-events-auto"
+				class="pointer-events-auto nav-link  transition hover:text-black"
 			>
-				previous article
+				prev
 			</a>
 		{/if}
 
 		{#if nextPost}
-			<a href="/blog/{nextPost.slug.current}" class="pointer-events-auto ml-auto">
-				next article
+			<a href="/blog/{nextPost.slug.current}" class="nav-link  transition hover:text-black pointer-events-auto ml-auto">
+				next 
 			</a>
 		{/if}
 	</nav>

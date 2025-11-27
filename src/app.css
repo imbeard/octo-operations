@@ -23,3 +23,52 @@ body{
     }
   }
 }
+
+footer{
+  
+
+  > .text-red{
+    .nav-link{
+      &:hover,&.active{
+        color:white;
+      }
+    }
+  }
+
+  > .text-white{
+    .nav-link{
+      &:hover,&.active{
+        color:black;
+      }
+    }
+  }
+}
+
+.simplebar-scrollbar::before {
+  background-color: red;
+}
+
+        .ticker-container {
+            overflow: hidden;
+            position: relative;
+            height:2.5rem;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            flex-direction: column;
+            animation: scroll-up 25s linear infinite;
+        }
+
+        @keyframes scroll-up {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .ticker-wrapper:hover {
+            animation-play-state: paused;
+        }

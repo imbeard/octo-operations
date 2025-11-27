@@ -65,19 +65,19 @@
 		
 	</article>
 
-	<nav class="post__nav absolute w-full text-white px-5 flex flex-col md:flex-row md:justify-between md:items-center pointer-events-none"  aria-label="Navigate between blog posts">
+	<nav class="post__nav absolute w-full text-white px-5 flex flex-row justify-between items-center pointer-events-none"  aria-label="Navigate between blog posts">
 		{#if previousPost}
 			<a
 				href="/project/{previousPost.slug.current}"
-				class="pointer-events-auto"
+				class="pointer-events-auto nav-link  transition hover:text-red"
 			>
-				previous project
+				prev
 			</a>
 		{/if}
 
 		{#if nextPost}
-			<a href="/project/{nextPost.slug.current}" class="pointer-events-auto ml-auto">
-				next project
+			<a href="/project/{nextPost.slug.current}" class="nav-link  transition hover:text-red pointer-events-auto ml-auto">
+				next
 			</a>
 		{/if}
 	</nav>
