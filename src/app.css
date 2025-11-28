@@ -64,7 +64,7 @@ footer{
 }
 
 .simplebar-track{
-  pointer-events: auto;
+  pointer-events: auto !important;
 
   &.simplebar-horizontal{
     bottom:-1.25rem !important;
