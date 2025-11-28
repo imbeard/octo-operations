@@ -3,11 +3,6 @@
 	import { onMount } from 'svelte';
     import { page } from '$app/stores';
 
-    import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
-    import 'simplebar/dist/simplebar.css';
-
-    import ResizeObserver from 'resize-observer-polyfill';
-
 
     const { settings } = $props();   
 
@@ -17,8 +12,7 @@
 		const interval = setInterval(() => {
             now = new Date();
         }, 1000);
-
-        window.ResizeObserver = ResizeObserver;
+        
         return () => clearInterval(interval);
 	});
 

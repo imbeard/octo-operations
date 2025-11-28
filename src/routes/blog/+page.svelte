@@ -4,6 +4,15 @@
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/sanity/image';
 	import type { Lab } from '$lib/sanity/queries';
+	import { onMount } from 'svelte';
+	import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+    import 'simplebar/dist/simplebar.css';
+
+    import ResizeObserver from 'resize-observer-polyfill';		
+
+	onMount(() => {
+		window.ResizeObserver = ResizeObserver;
+	});
 
 	const { data }: { data: PageData } = $props();
 	
