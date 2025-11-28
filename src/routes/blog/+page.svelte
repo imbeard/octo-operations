@@ -16,7 +16,7 @@
 
 </script>
 
-<section class="items-container max-h-[60vh] overflow-y-scroll mmax-w-11/12 md:max-w-6/12  ">
+<section class="items-container max-h-[60vh] w-full mmax-w-11/12 md:max-w-6/12  " data-simplebar>
 	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3 ">
 		{#if posts.length}
 		{#each posts as lab,index}

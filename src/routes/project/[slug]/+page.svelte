@@ -42,16 +42,16 @@
 		<p>Loading...</p>
 	</div>
 {:else if post}
-	<article class="single-project ">
-		<div class="outer-images-container">
+	<article class="single-project w-full">
+		<div class="outer-images-container mx-auto max-h-[60vh] max-w-6/12 h-full w-6/12">
 			{#if post?.images && post.images.length > 0}
-				<div class="images-container mx-auto max-h-[60vh] max-w-6/12 overflow-x-auto overflow-y-hidden whitespace-nowrap">
+				<div class="images-container    w-full whitespace-nowrap" data-simplebar>
 					{#each post.images as image}
-						<div class="image-wrapper image-wrapper inline-block max-h-full">
+						<div class="image-wrapper image-wrapper inline-block max-h-full ">
 							<img 
 								src={image.image.asset.url} 
 								alt={image.description || post.title || 'Project image'}
-								class="project-image project-image max-h-[60vh] h-full w-auto inline-block"
+								class="project-image project-image max-h-[60vh]   w-auto inline-block"
 							/>
 							
 						</div>

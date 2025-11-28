@@ -18,7 +18,7 @@
 	<meta name="description" content="" />
 </svelte:head>
 
-<section class="items-container max-h-[60vh] data-simplebar overflow-y-scroll max-w-11/12 md:max-w-6/12  ">
+<section class="items-container max-h-[60vh] w-full  max-w-11/12 md:max-w-6/12  " data-simplebar>
 	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3 ">
 		{#if projects.length}
 		{#each projects as project,index}

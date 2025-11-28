@@ -45,30 +45,60 @@ footer{
 }
 
 .simplebar-scrollbar::before {
-  background-color: red;
+  opacity: 1 !important;
+  border-radius: 0 !important;
+  background-color: var(--color-red-800) !important;
 }
 
-        .ticker-container {
-            overflow: hidden;
-            position: relative;
-            height:2.5rem;
-        }
+.simplebar-track{
+  &:after{
+    position:absolute;
+    content:'';
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    background-color: var(--color-gray-800) !important;
+    z-index:-1;
+  }
+}
 
-        .ticker-wrapper {
-            display: flex;
-            flex-direction: column;
-            animation: scroll-up 25s linear infinite;
-        }
+.simplebar-track{
+  pointer-events: auto;
 
-        @keyframes scroll-up {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-50%);
-            }
-        }
+  &.simplebar-horizontal{
+    bottom:-1.25rem !important;
+    
+  }
 
-        .ticker-wrapper:hover {
-            animation-play-state: paused;
-        }
+  &.simplebar-vertical{
+    right:-1.25rem !important;
+  }
+}
+
+
+
+.ticker-container {
+    overflow: hidden;
+    position: relative;
+    height:2.5rem;
+}
+
+.ticker-wrapper {
+    display: flex;
+    flex-direction: column;
+    animation: scroll-up 25s linear infinite;
+}
+
+@keyframes scroll-up {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+.ticker-wrapper:hover {
+    animation-play-state: paused;
+}
