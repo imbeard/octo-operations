@@ -38,9 +38,9 @@
 </script>
 
 <header
-	class="header"
+	class="header sticky top-0 z-50 md:relative"
 >
-	<div class="p-5 flex flex-col gap-y-2 md:flex-row flex-wrap md:items-center justify-between  {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
+	<div class="p-3 md:p-5 flex flex-col gap-y-2 md:flex-row flex-wrap md:items-center justify-between  {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
         <a
                 id="logo"
                 class="{$page.url.pathname.startsWith('/blog') ? 'blog-logo' : ''}"

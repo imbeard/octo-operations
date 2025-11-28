@@ -76,7 +76,7 @@
 		</div>
 	</article>
 
-	<nav class="post__nav absolute w-full text-white px-5 flex flex-col md:flex-row md:justify-between md:items-center pointer-events-none"  aria-label="Navigate between blog posts">
+	<nav class="post__nav absolute w-full text-white px-3 md:px-5 flex flex-col md:flex-row md:justify-between md:items-center pointer-events-none text-sm md:text-base"  aria-label="Navigate between blog posts">
 		{#if previousPost}
 			<a
 				href="/blog/{previousPost.slug.current}"

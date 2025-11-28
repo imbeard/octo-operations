@@ -113,7 +113,7 @@
 	</div>
 {:else if post}
 	<article class="single-project w-full max-w-[70vw] ">
-		<div class="outer-images-container  mx-auto max-h-[60vh] max-w-[70vw] h-full w-6/12 ">
+		<div class="outer-images-container  mx-auto max-h-[60vh] max-w-[70vw] h-full w-10/12 md:w-6/12 ">
 			{#if post?.images && post.images.length > 0}
 				<div class="images-container    w-full whitespace-nowrap" bind:this={imagesContainer}>
 					{#each post.images as image}
@@ -136,7 +136,7 @@
 		
 	</article>
 
-	<nav class="post__nav absolute w-full text-white px-5 flex flex-row justify-between items-center pointer-events-none"  aria-label="Navigate between blog posts">
+	<nav class="post__nav absolute w-full text-white px-3 md:px-5 flex flex-row justify-between items-center pointer-events-none text-sm md:text-base"  aria-label="Navigate between blog posts">
 		{#if previousPost}
 			<a
 				href="/project/{previousPost.slug.current}"

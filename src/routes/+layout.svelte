@@ -25,7 +25,7 @@
 <div class="{$page.url.pathname.startsWith('/blog') ? 'bg-red' : 'bg-black'}  min-h-screen flex flex-col">
 	<Header settings={data.settings} />
 	
-	<main class="main-container p-5 grow flex flex-col justify-center items-center">
+	<main class="main-container p-3 md:p-5 grow flex flex-col justify-center items-center">
 		<slot />
 	</main>	
 	

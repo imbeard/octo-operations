@@ -46,7 +46,7 @@
         </div>
     {/if}
 <footer class="footer">
-    <div class="p-5  {$page.url.pathname.startsWith('/project/') ? 'flex flex-col-reverse md:flex-row flex-wrap justify-between gap-y-5' : ''} {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
+    <div class="p-3 md:p-5  {$page.url.pathname.startsWith('/project/') ? 'flex flex-col-reverse md:flex-row flex-wrap justify-between gap-y-5' : ''} {$page.url.pathname.startsWith('/blog') ? 'text-white' : 'text-red'}">
         <nav class="flex flex-wrap items-center justify-between ">
             {#if isSingleProject}
                 <!-- Show only back link when on project page -->

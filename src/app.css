@@ -79,7 +79,11 @@ footer{
 .ticker-container {
     overflow: hidden;
     position: relative;
-    height:2.5rem;
+    height:1.875rem;
+
+    @media (min-width: 768px) {
+        height:2.5rem;
+    }
 }
 
 .ticker-wrapper {
