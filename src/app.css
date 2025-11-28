@@ -105,8 +105,10 @@ footer{
     animation-play-state: paused;
 }
 
-@supports (padding: env(safe-area-inset-bottom)) {
-  footer {
-    padding-bottom: calc((var(--spacing) * 8) + env(safe-area-inset-bottom));
+@media (max-width: 767px) {
+  @supports (padding: env(safe-area-inset-bottom)) {
+    footer > div.p-3 {
+      padding-bottom: calc((var(--spacing) * 8) + env(safe-area-inset-bottom));
+    }
   }
 }
