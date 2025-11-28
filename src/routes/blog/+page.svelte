@@ -2,7 +2,6 @@
 	import { useQuery } from '@sanity/svelte-loader';
 	import type { PageData } from './$types';
 	import { formatDate } from '$lib/utils';
-	import { urlFor } from '$lib/sanity/image';
 	import type { Lab } from '$lib/sanity/queries';
 	import { onMount } from 'svelte';
 	import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.

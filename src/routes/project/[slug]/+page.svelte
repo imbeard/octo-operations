@@ -102,7 +102,7 @@
 		<title>{post.title}</title>
 		<meta name="description" content={`${post.title}`} />
 		{#if post.images?.[0]}
-			<meta property="og:image" content={post.images?.[0].image.asset.url} />
+			<meta property="og:image" content={urlFor(post.images?.[0].image).width(1200).height(630).url()} />
 		{/if}
 	{/if}
 </svelte:head>
@@ -112,8 +112,8 @@
 		<p>Loading...</p>
 	</div>
 {:else if post}
-	<article class="single-project w-full max-w-[70vw]">
-		<div class="outer-images-container  mx-auto max-h-[60vh] max-w-6/12 h-full w-6/12">
+	<article class="single-project w-full max-w-[70vw] ">
+		<div class="outer-images-container  mx-auto max-h-[60vh] max-w-[70vw] h-full w-6/12 ">
 			{#if post?.images && post.images.length > 0}
 				<div class="images-container    w-full whitespace-nowrap" bind:this={imagesContainer}>
 					{#each post.images as image}
