@@ -118,7 +118,7 @@
 				<div class="images-container  max-w-full h-[60vh]  " bind:this={imagesContainer}>
 					<div class="inner-images-container  w-full whitespace-nowrap flex items-center flex-nowrap ">
 					{#each post.images as image}
-						<div class="image-wrapper image-wrapper inline-block  min-w-[calc(70vw*10/12)] md:min-w-[calc(70vw*8/12)] h-[60vh]" >
+						<div class="image-wrapper image-wrapper inline-block  min-w-[calc(70vw*10/12)] md:min-w-[calc(70vw*8/12)] h-[60vh] px-2" >
 							<img 
 								src={image.image.asset.url} 
 								alt={image.description || post.title || 'Project image'}
