@@ -67,7 +67,12 @@
             <div class="ticker-wrapper">
                 {#each {length: 8} as _, i}
                     <p class=" text-sm leading-none ticker-item">
-                        {settings?.description}
+                        {#if $page.url.pathname.startsWith('/blog')}
+                            {settings?.descriptionBlog}
+                        {:else}
+                            {settings?.description}
+                        {/if}
+
                     </p>
                 {/each}    
             </div>

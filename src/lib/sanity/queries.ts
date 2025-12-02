@@ -1,4 +1,3 @@
-import type { PortableTextBlock } from '@portabletext/types';
 import type { ImageAsset, Slug } from '@sanity/types';
 import groq from 'groq';
 
@@ -7,6 +6,7 @@ export const settingsQuery = groq`
     _id,
     title,
     description,
+    descriptionBlog,
     siteUrl,
     services,
     contactEmail,
@@ -191,6 +191,7 @@ export interface AdjacentPost {
 }
 export interface General {
 	description?: string;
+  descriptionBlog?: string;
 	contactEmail?: string;
 	contactAddress?: string;
 }

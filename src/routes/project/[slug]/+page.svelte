@@ -113,20 +113,22 @@
 	</div>
 {:else if post}
 	<article class="single-project w-full max-w-[70vw] ">
-		<div class="outer-images-container  mx-auto max-h-[60vh] max-w-[70vw] h-full w-10/12 md:w-6/12 ">
+		<div class="outer-images-container  mx-auto h-[60vh]  w-10/12 md:w-8/12 ">
 			{#if post?.images && post.images.length > 0}
-				<div class="images-container    w-full whitespace-nowrap" bind:this={imagesContainer}>
+				<div class="images-container  max-w-full h-[60vh]  " bind:this={imagesContainer}>
+					<div class="inner-images-container  w-full whitespace-nowrap flex items-center flex-nowrap ">
 					{#each post.images as image}
-						<div class="image-wrapper image-wrapper inline-block max-h-full " >
+						<div class="image-wrapper image-wrapper inline-block  min-w-[calc(70vw*10/12)] md:min-w-[calc(70vw*8/12)] h-[60vh]" >
 							<img 
 								src={image.image.asset.url} 
 								alt={image.description || post.title || 'Project image'}
-								class="project-image project-image max-h-[60vh]   w-auto inline-block"
+								class="project-image project-image w-full h-full object-contain max-h-[60vh]"
 								onload={handleImageLoad}
 							/>
 							
 						</div>
 					{/each}
+					</div>
 				</div>
 			{:else}
 				<p class="text-white">No images available for this project.</p>
