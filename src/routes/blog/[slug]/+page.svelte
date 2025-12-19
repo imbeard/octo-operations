@@ -1,10 +1,17 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	import { PortableText } from '@portabletext/svelte';
 	import { useQuery } from '@sanity/svelte-loader';
 	import { formatDate } from '$lib/utils';
 	import { urlFor } from '$lib/sanity/image';
 	import type { PageData } from './$types';
 	import type { Lab, AdjacentPost, General } from '$lib/sanity/queries';
+
+	import SimpleBar from 'simplebar';
+	import 'simplebar/dist/simplebar.css';
+
+	import ResizeObserver from 'resize-observer-polyfill';
 
 	interface ExtendedPageData extends PageData {
 		previousPost: AdjacentPost | null;
@@ -14,26 +21,108 @@
 
 	let { data }: { data: ExtendedPageData } = $props();
 
-	// Create reactive query that updates when params change
 	const q = $derived(useQuery(data.query, data.params, data.options));
 
-	// Extract reactive values from the query store
 	const post = $derived($q?.data as Lab | null);
 	const loading = $derived($q?.loading as boolean);
 	const error = $derived($q?.error);
 
-	// Extract other data properties directly from data
 	const previousPost = $derived(data.previousPost);
 	const nextPost = $derived(data.nextPost);
 	const general = $derived(data.general);
+
+	let imagesContainer: HTMLElement;
+	let simpleBarInstance: SimpleBar | null = null;
+	let imagesLoaded = $state(0);
+	let currentPostId = $state<string | null>(null);
+	let isInitialized = $state(false);
+
+	function cleanupSimpleBar() {
+		if (simpleBarInstance) {
+			try {
+				simpleBarInstance.unMount();
+			} catch (e) {
+				console.error('Error unmounting SimpleBar:', e);
+			}
+			simpleBarInstance = null;
+		}
+		
+		// Additional cleanup: remove any leftover SimpleBar elements
+		if (imagesContainer) {
+			const simplebarWrapper = imagesContainer.querySelector('.simplebar-wrapper');
+			const simplebarMask = imagesContainer.querySelector('.simplebar-mask');
+			if (simplebarWrapper || simplebarMask) {
+				// Reset the container to its original state
+				const children = Array.from(imagesContainer.querySelectorAll('.simplebar-content > *'));
+				imagesContainer.innerHTML = '';
+				children.forEach(child => imagesContainer.appendChild(child));
+			}
+		}
+	}
+
+	// Handle post changes - cleanup and reset
+	$effect(() => {
+		if (post && post._id !== currentPostId) {
+			currentPostId = post._id;
+			imagesLoaded = 0;
+			isInitialized = false;
+			
+			cleanupSimpleBar();
+		}
+	});
+
+	// Handle SimpleBar initialization after images load
+	$effect(() => {
+		if (!imagesContainer || !post?.images || isInitialized) {
+			return;
+		}
+		
+		const totalImages = post.images.length;
+		const allLoaded = imagesLoaded === totalImages;
+		const needsScrollbar = totalImages > 1;
+		
+		// Wait for all images to load
+		if (!allLoaded) {
+			return;
+		}
+		
+		// All images loaded - manage SimpleBar
+		if (needsScrollbar) {
+			setTimeout(() => {
+				if (!simpleBarInstance && imagesContainer) {
+					simpleBarInstance = new SimpleBar(imagesContainer, {
+						autoHide: false
+					});
+					isInitialized = true;
+				}
+			}, 10);
+		} else {
+			isInitialized = true;
+		}
+	});
+
+	onMount(() => {
+		if (typeof window !== 'undefined') {
+			window.ResizeObserver = ResizeObserver;
+		}
+
+		return () => {
+			cleanupSimpleBar();
+		};
+	});
+
+	function handleImageLoad() {
+		imagesLoaded++;
+	}
+	
 </script>
 
 <svelte:head>
 	{#if post}
 		<title>{post.title}</title>
 		<meta name="description" content={`Read ${post.title} on our blog`} />
-		{#if post.image}
-			<meta property="og:image" content={urlFor(post.image).width(1200).height(630).url()} />
+		{#if post.images?.[0]}
+			<meta property="og:image" content={urlFor(post.images?.[0].image).width(1200).height(630).url()} />
 		{/if}
 	{/if}
 </svelte:head>
@@ -43,19 +132,36 @@
 		<p>Loading...</p>
 	</div>
 {:else if post}
-	<article class="post flex flex-col md:flex-row gap-y-5 gap-x-10 max-w-8/12">
-		<div class="main-image relative">
-		
-			{#if post.image}
-				<img
-					class="post__cover max-h-[50vh] w-auto "
-					src={urlFor(post.image).url()}
-					alt={`Cover image for ${post.title}`}
-				/>
+	<article class="post flex flex-col md:flex-row gap-y-5 gap-x-10 max-w-8/12 w-full  ">
+
+
+			<div class="outer-images-container  mx-auto h-[50vh]  w-10/12 md:w-8/12 ">
+			{#if post?.images && post.images.length > 0}
+				{#key post._id}
+					<div class="images-container max-w-full h-[50vh]" bind:this={imagesContainer}>
+						<div class="inner-images-container w-full whitespace-nowrap flex items-center flex-nowrap">
+							{#each post.images as image}
+								<div class="image-wrapper image-wrapper inline-block min-w-[calc(70vw*10/12)] md:min-w-[calc(70vw*8/12-2.5rem)] h-[50vh] px-2">
+									<img 
+										src={image.image.asset.url} 
+										alt={image.description || post.title || 'Lab image'}
+										class="lab-image w-full h-full object-contain max-h-[50vh]"
+										onload={handleImageLoad}
+									/>
+								</div>
+							{/each}
+						</div>
+					</div>
+				{/key}
 			{:else}
-				<div class="post__cover--none"></div>
+				<p class="text-white">No images available for this Lab.</p>
 			{/if}
+			
 		</div>
+
+		
+			
+		
 		<div class="post__container flex flex-col gap-5 text-white max-w-75">
 			<div class="info-container flex flex-col">
 				<h1 class="bebas-neue-regular text-3xl">{post.title}</h1>

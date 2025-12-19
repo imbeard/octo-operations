@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+	import 'simplebar'; 
     import 'simplebar/dist/simplebar.css';
 
     import ResizeObserver from 'resize-observer-polyfill';

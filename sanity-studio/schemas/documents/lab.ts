@@ -45,14 +45,51 @@ export default defineType({
       fieldset: 'content',
     }),
     defineField({
-      name: 'image',
-      title: 'Lab Image',
-      type: 'image',
-      description: 'Main image for this lab post',
+      name: 'images',
+      title: 'Lab Images',
+      type: 'array',
+      description: 'Add images for this lab post',
       options: {
-        hotspot: true,
+        layout: 'grid',
+        sortable: true,
       },
-      validation: (Rule) => Rule.required(),
+      of: [
+        {
+          type: 'object',
+          name: 'labImage',
+          title: 'Lab Image',
+          fields: [
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Image Description',
+              type: 'text',
+              rows: 2,
+              description: 'Optional description for this image',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'description',
+              media: 'image',
+            },
+            prepare({ title, media }) {
+              return {
+                title: title || 'No description',
+                media: media,
+              }
+            },
+          },
+        },
+      ],
       fieldset: 'content',
     }),
     defineField({

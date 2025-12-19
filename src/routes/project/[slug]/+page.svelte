@@ -12,9 +12,7 @@
 
     import ResizeObserver from 'resize-observer-polyfill';
 
-	onMount(() => {
-		window.ResizeObserver = ResizeObserver;
-	});
+
 
 	interface ExtendedPageData extends PageData {
 		previousPost: AdjacentPost | null;
@@ -47,7 +45,6 @@
 			
 			currentPostId = post._id;
 			imagesLoaded = 0;
-			
 			
 			if (simpleBarInstance) {
 				const scrollElement = simpleBarInstance.getScrollElement();
@@ -83,6 +80,11 @@
 
 	
 	onMount(() => {
+		if (typeof window !== 'undefined') {
+			window.ResizeObserver = ResizeObserver;
+		}
+
+
 		return () => {
 			if (simpleBarInstance) {
 				simpleBarInstance.unMount();
@@ -122,7 +124,7 @@
 							<img 
 								src={image.image.asset.url} 
 								alt={image.description || post.title || 'Project image'}
-								class="project-image project-image w-full h-full object-contain max-h-[60vh]"
+								class="project-image  w-full h-full object-contain max-h-[60vh]"
 								onload={handleImageLoad}
 							/>
 							

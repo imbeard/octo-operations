@@ -30,10 +30,11 @@
 		{#each posts as lab,index}
 			<a href="/blog/{lab.slug.current}" class="text-white transition hover:text-black">
 				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black">
-					{#if lab.image}
+					
+					{#if lab.images?.[0]}
 						<img 
-							src={lab.image.asset.url} 
-							alt={lab.image.description || lab.title || 'Project image'}
+							src={lab.images[0].image.asset.url} 
+							alt={lab.images[0].description || lab.title || 'Lab image'}
 						/>
 					{:else}
 						<div class="w-full h-full flex items-center justify-center bg-gray-300">
