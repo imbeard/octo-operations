@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { useQuery } from '@sanity/svelte-loader';
+	import { urlFor } from '$lib/sanity/image';
 	import type { PageData } from './$types';
 	import { formatDate } from '$lib/utils';
 	import type { Lab } from '$lib/sanity/queries';
@@ -32,12 +33,18 @@
 				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black">
 					
 					{#if lab.images?.[0]}
-						<img 
-							src={lab.images[0].image.asset.url} 
+						<img class="w-full h-full object-cover"
+							src={urlFor(lab.images[0].image)
+							.width(500)
+							.height(500)
+							.fit('crop')
+							.auto('format')
+							.quality(80)
+							.url()} 
 							alt={lab.images[0].description || lab.title || 'Lab image'}
 						/>
 					{:else}
-						<div class="w-full h-full flex items-center justify-center bg-gray-300">
+						<div class="min-w-full min-h-full flex items-center justify-center bg-gray-300">
 							<span class="text-gray-500">No image</span>
 						</div>
 					{/if}
