@@ -34,7 +34,7 @@
 					<div
 						class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black"
 					>
-						{#if project.images?.[0]}
+						{#if project.images?.[0]?.image}
 							<img
 								class="w-full h-full object-cover"
 								src={urlFor(project.images[0].image)
