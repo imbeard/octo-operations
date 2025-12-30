@@ -55,32 +55,16 @@ export default defineType({
 			name: 'images',
 			title: 'Lab Images',
 			type: 'array',
-			description: 'Drag and drop multiple images here, or click "Add item" to browse',
+			description: 'Add images for this lab post',
 			options: {
 				layout: 'grid',
 				sortable: true
 			},
 			of: [
 				{
-					type: 'image',
-					options: {
-						hotspot: true
-					},
-					fields: [
-						{
-							name: 'description',
-							title: 'Image Description',
-							type: 'text',
-							rows: 2,
-							description: 'Optional description for this image'
-						}
-					]
-				},
-				// Keep old format for backward compatibility
-				{
 					type: 'object',
 					name: 'labImage',
-					title: 'Lab Image (Legacy)',
+					title: 'Lab Image',
 					fields: [
 						{
 							name: 'image',

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+	import { urlFor } from '$lib/sanity/image';
+
+	import 'simplebar';
 	import 'simplebar/dist/simplebar.css';
 
 	import ResizeObserver from 'resize-observer-polyfill';
@@ -32,14 +34,16 @@
 					<div
 						class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black"
 					>
-						{#if project.images?.[0]?.image?.asset?.url}
+						{#if project.images?.[0]}
 							<img
-								src={project.images[0].image.asset.url}
-								alt={project.images[0].description || project.title || 'Project image'}
-							/>
-						{:else if project.images?.[0]?.asset?.url}
-							<img
-								src={project.images[0].asset.url}
+								class="w-full h-full object-cover"
+								src={urlFor(project.images[0].image)
+									.width(500)
+									.height(500)
+									.fit('crop')
+									.auto('format')
+									.quality(80)
+									.url()}
 								alt={project.images[0].description || project.title || 'Project image'}
 							/>
 						{:else}

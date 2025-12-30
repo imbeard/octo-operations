@@ -1,4 +1,3 @@
-import type { ImageAsset, Slug } from '@sanity/types';
 import groq from 'groq';
 
 export const settingsQuery = groq`
@@ -123,11 +122,15 @@ export const allLabsQuery = groq`
     slug,
     content,
     publishedAt,
-    image {
-      asset-> {
-        _id,
+    images[] {
+      _key,
+      image {
+        asset-> {
+          _id,
           url
-      }
+        }
+      },
+      description
     },
     seoTitle,
     seoDescription
@@ -143,11 +146,15 @@ export const labQuery = groq`
     content,
     publishedAt,
     externalLink,
-    image {
-      asset-> {
-        _id,
-        url
-      }
+    images[] {
+      _key,
+      image {
+        asset-> {
+          _id,
+          url
+        }
+      },
+      description
     },
     seoTitle,
     seoDescription
@@ -162,11 +169,23 @@ export const allLabSlugsQuery = groq`
 
 export interface Lab {
 	_type: 'lab';
+	_id: string;
 	publishedAt: string;
 	title?: string;
 	slug: Slug;
-	image?: ImageAsset;
+	images?: LabImage[];
 	content: string;
+}
+
+export interface LabImage {
+	_key: string;
+	image: {
+		asset: {
+			_id: string;
+			url: string;
+		};
+	};
+	description?: string;
 }
 
 export const previousLabQuery = groq`

@@ -80,11 +80,15 @@ export const allLabsQuery = groq`
     slug,
     content,
     publishedAt,
-    image {
-      asset-> {
-        _id,
-        url
-      }
+    images[] {
+      _key,
+      image {
+        asset-> {
+          _id,
+          url
+        }
+      },
+      description
     },
     seoTitle,
     seoDescription
@@ -98,11 +102,15 @@ export const labQuery = groq`
     slug,
     content,
     publishedAt,
-    image {
-      asset-> {
-        _id,
-        url
-      }
+    images[] {
+      _key,
+      image {
+        asset-> {
+          _id,
+          url
+        }
+      },
+      description
     },
     seoTitle,
     seoDescription
