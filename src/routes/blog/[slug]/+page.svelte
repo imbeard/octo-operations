@@ -45,10 +45,9 @@
 {:else if post}
 	<article class="post flex flex-col md:flex-row gap-y-5 gap-x-10 max-w-8/12">
 		<div class="main-image relative">
-		
 			{#if post.image}
 				<img
-					class="post__cover max-h-[50vh] w-auto "
+					class="post__cover max-h-[50vh] w-auto"
 					src={urlFor(post.image).url()}
 					alt={`Cover image for ${post.title}`}
 				/>
@@ -63,32 +62,47 @@
 					<strong>{formatDate(post.publishedAt)}</strong>
 				</time>
 			</div>
-	
-
 
 			{#if post.content}
 				<div class="post__content prose text-xs">
 					<p>
-						{@html post.content} 
+						{@html post.content}
 					</p>
 				</div>
+			{/if}
+
+			{#if post.externalLink}
+				<a
+					href={post.externalLink}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-white hover:text-black transition text-xs"
+				>
+					SEE MORE →
+				</a>
 			{/if}
 		</div>
 	</article>
 
-	<nav class="post__nav absolute w-full text-white px-3 md:px-5 flex flex-col md:flex-row md:justify-between md:items-center pointer-events-none text-sm md:text-base"  aria-label="Navigate between blog posts">
+	<nav
+		class="post__nav absolute w-full text-white px-3 md:px-5 flex flex-col md:flex-row md:justify-between md:items-center pointer-events-none text-sm md:text-base"
+		aria-label="Navigate between blog posts"
+	>
 		{#if previousPost}
 			<a
 				href="/blog/{previousPost.slug.current}"
-				class="pointer-events-auto nav-link  transition hover:text-black"
+				class="pointer-events-auto nav-link transition hover:text-black"
 			>
 				prev
 			</a>
 		{/if}
 
 		{#if nextPost}
-			<a href="/blog/{nextPost.slug.current}" class="nav-link  transition hover:text-black pointer-events-auto ml-auto">
-				next 
+			<a
+				href="/blog/{nextPost.slug.current}"
+				class="nav-link transition hover:text-black pointer-events-auto ml-auto"
+			>
+				next
 			</a>
 		{/if}
 	</nav>

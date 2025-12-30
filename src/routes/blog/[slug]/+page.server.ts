@@ -21,11 +21,11 @@ export const load: PageServerLoad = async (event) => {
 		return { status: 404 };
 	}
 
-	const publishedAt = initial.data.publishedAt;
+	const orderRank = initial.data.orderRank;
 
 	const [previousPost, nextPost] = await Promise.all([
-		client.fetch<AdjacentPost | null>(previousLabQuery, { publishedAt }),
-		client.fetch<AdjacentPost | null>(nextLabQuery, { publishedAt })
+		client.fetch<AdjacentPost | null>(previousLabQuery, { orderRank }),
+		client.fetch<AdjacentPost | null>(nextLabQuery, { orderRank })
 	]);
 
 	const general = await loadQuery<General>(settingsQuery);

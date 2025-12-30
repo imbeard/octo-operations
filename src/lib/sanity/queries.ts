@@ -18,7 +18,7 @@ export const settingsQuery = groq`
 
 // Project queries
 export const allProjectsQuery = groq`
-  *[_type == "project"] | order(projectNumber asc) {
+  *[_type == "project"] | order(orderRank) {
     _id,
     projectNumber,
     title,
@@ -45,6 +45,7 @@ export const allProjectsQuery = groq`
 export const projectQuery = groq`
   *[_type == "project" && slug.current == $slug][0] {
     _id,
+    orderRank,
     projectNumber,
     title,
     subtitle,
@@ -73,7 +74,6 @@ export const allProjectSlugsQuery = groq`
   }
 `;
 
-
 export interface Project {
 	_type: 'project';
 	_createdAt: string;
@@ -96,21 +96,20 @@ export interface ProjectImage {
 		asset: {
 			_id: string;
 			url: string;
-		}
+		};
 	};
 	description?: string;
 }
 
 export const nextProjectQuery = groq`
-  *[_type == "project" && projectNumber > $projectNumber] | order(projectNumber asc)[0]{
+  *[_type == "project" && orderRank > $orderRank] | order(orderRank asc)[0]{
     title,
     slug
   }
 `;
 
-
 export const previousProjectQuery = groq`
-  *[_type == "project" && projectNumber < $projectNumber] | order(projectNumber desc)[0]{
+  *[_type == "project" && orderRank < $orderRank] | order(orderRank desc)[0]{
     title,
     slug
   }
@@ -118,7 +117,7 @@ export const previousProjectQuery = groq`
 
 // Lab queries
 export const allLabsQuery = groq`
-  *[_type == "lab"] | order(publishedAt desc) {
+  *[_type == "lab"] | order(orderRank) {
     _id,
     title,
     slug,
@@ -127,7 +126,7 @@ export const allLabsQuery = groq`
     image {
       asset-> {
         _id,
-        url
+          url
       }
     },
     seoTitle,
@@ -138,10 +137,12 @@ export const allLabsQuery = groq`
 export const labQuery = groq`
   *[_type == "lab" && slug.current == $slug][0] {
     _id,
+    orderRank,
     title,
     slug,
     content,
     publishedAt,
+    externalLink,
     image {
       asset-> {
         _id,
@@ -159,7 +160,6 @@ export const allLabSlugsQuery = groq`
   }
 `;
 
-
 export interface Lab {
 	_type: 'lab';
 	publishedAt: string;
@@ -169,30 +169,29 @@ export interface Lab {
 	content: string;
 }
 
-export  const previousLabQuery = groq`
-  *[_type == "lab" && publishedAt > $publishedAt] | order(publishedAt asc)[0]{
+export const previousLabQuery = groq`
+  *[_type == "lab" && orderRank < $orderRank] | order(orderRank desc)[0]{
     title,
     slug
   }
 `;
 
-export  const nextLabQuery = groq`
-  *[_type == "lab" && publishedAt < $publishedAt] | order(publishedAt desc)[0]{
+export const nextLabQuery = groq`
+  *[_type == "lab" && orderRank > $orderRank] | order(orderRank asc)[0]{
     title,
     slug
   }
 `;
 
 export interface AdjacentPost {
-  title: string;
-  slug: {
-    current: string;
-  };
+	title: string;
+	slug: {
+		current: string;
+	};
 }
 export interface General {
 	description?: string;
-  descriptionBlog?: string;
+	descriptionBlog?: string;
 	contactEmail?: string;
 	contactAddress?: string;
 }
-

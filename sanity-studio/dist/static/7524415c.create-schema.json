@@ -266,6 +266,12 @@
   {
     "fields": [
       {
+        "hidden": true,
+        "name": "orderRank",
+        "type": "string",
+        "title": "Order"
+      },
+      {
         "validation": [
           {
             "rules": [
@@ -425,8 +431,23 @@
           "layout": "grid",
           "sortable": true
         },
-        "description": "Add images for this project",
+        "description": "Drag and drop multiple images here, or click \"Add item\" to browse",
         "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "rows": 2,
+                "description": "Optional description for this image",
+                "name": "description",
+                "type": "text",
+                "title": "Image Description"
+              }
+            ],
+            "type": "image"
+          },
           {
             "fields": [
               {
@@ -456,13 +477,40 @@
               }
             ],
             "type": "object",
-            "name": "projectImage"
+            "name": "projectImage",
+            "title": "Project Image (Legacy)"
           }
         ],
         "name": "images",
         "type": "array",
         "title": "Project Images",
         "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Vimeo file url link",
+        "name": "video",
+        "type": "url"
       },
       {
         "validation": [
@@ -558,6 +606,25 @@
         "name": "description",
         "type": "text",
         "title": "Site Description",
+        "fieldset": "general"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Brief description of your blog",
+        "name": "descriptionBlog",
+        "type": "text",
+        "title": "Site Description (Blog)",
         "fieldset": "general"
       },
       {
@@ -709,6 +776,12 @@
   {
     "fields": [
       {
+        "hidden": true,
+        "name": "orderRank",
+        "type": "string",
+        "title": "Order"
+      },
+      {
         "validation": [
           {
             "rules": [
@@ -759,23 +832,62 @@
       },
       {
         "options": {
-          "hotspot": true
+          "layout": "grid",
+          "sortable": true
         },
-        "validation": [
+        "description": "Drag and drop multiple images here, or click \"Add item\" to browse",
+        "of": [
           {
-            "rules": [
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
               {
-                "flag": "presence",
-                "constraint": "required"
+                "rows": 2,
+                "description": "Optional description for this image",
+                "name": "description",
+                "type": "text",
+                "title": "Image Description"
               }
             ],
-            "level": "error"
+            "type": "image"
+          },
+          {
+            "fields": [
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "image",
+                "type": "image"
+              },
+              {
+                "rows": 2,
+                "description": "Optional description for this image",
+                "name": "description",
+                "type": "text",
+                "title": "Image Description"
+              }
+            ],
+            "type": "object",
+            "name": "labImage",
+            "title": "Lab Image (Legacy)"
           }
         ],
-        "description": "Main image for this lab post",
-        "name": "image",
-        "type": "image",
-        "title": "Lab Image",
+        "name": "images",
+        "type": "array",
+        "title": "Lab Images",
         "fieldset": "content"
       },
       {
@@ -817,6 +929,34 @@
         "name": "content",
         "type": "text",
         "title": "Lab Content",
+        "fieldset": "content"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "external link to this blog entry",
+        "name": "externalLink",
+        "type": "url",
+        "title": "Lab External link",
         "fieldset": "content"
       },
       {

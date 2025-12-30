@@ -22,17 +22,17 @@ export const load: PageServerLoad = async (event) => {
 	}
 
 	const project = initial.data;
-	const projectNumber = project.projectNumber;
+	const orderRank = project.orderRank;
 
 	const projectInfo = {
-        place: project.place ?? null,
-        tags: project.tags ?? [],
-        title: project.title ?? null
-    };
+		place: project.place ?? null,
+		tags: project.tags ?? [],
+		title: project.title ?? null
+	};
 
 	const [previousPost, nextPost] = await Promise.all([
-		client.fetch<AdjacentPost | null>(previousProjectQuery, { projectNumber }),
-		client.fetch<AdjacentPost | null>(nextProjectQuery, { projectNumber })
+		client.fetch<AdjacentPost | null>(previousProjectQuery, { orderRank }),
+		client.fetch<AdjacentPost | null>(nextProjectQuery, { orderRank })
 	]);
 
 	const general = await loadQuery<General>(settingsQuery);
