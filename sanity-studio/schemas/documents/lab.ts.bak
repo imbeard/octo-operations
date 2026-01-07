@@ -124,14 +124,6 @@ export default defineType({
 			fieldset: 'content'
 		}),
 		defineField({
-			name: 'externalLinkText',
-			title: 'External Link Text',
-			type: 'string',
-			description: 'Custom text for the external link button (defaults to "SEE MORE" if empty)',
-			validation: (Rule) => Rule.max(50),
-			fieldset: 'content'
-		}),
-		defineField({
 			name: 'seoTitle',
 			title: 'Page Title',
 			type: 'string',

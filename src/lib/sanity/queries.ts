@@ -28,6 +28,11 @@ export const allProjectsQuery = groq`
     tags,
     images[] {
       _key,
+      _type,
+      asset-> {
+        _id,
+        url
+      },
       image {
         asset-> {
           _id,
@@ -54,6 +59,11 @@ export const projectQuery = groq`
     tags,
     images[] {
       _key,
+      _type,
+      asset-> {
+        _id,
+        url
+      },
       image {
         asset-> {
           _id,
@@ -91,13 +101,33 @@ export interface Project {
 
 export interface ProjectImage {
 	_key: string;
-	image: {
+	_type?: string;
+	// Direct image format (new)
+	asset?: {
+		_id: string;
+		url: string;
+	};
+	// Legacy format (object with nested image)
+	image?: {
 		asset: {
 			_id: string;
 			url: string;
 		};
 	};
 	description?: string;
+}
+
+// Helper function to normalize image data from both formats
+export function getImageAsset(image: ProjectImage | LabImage) {
+	// New direct format
+	if (image.asset) {
+		return image.asset;
+	}
+	// Legacy format
+	if (image.image?.asset) {
+		return image.image.asset;
+	}
+	return null;
 }
 
 export const nextProjectQuery = groq`
@@ -146,6 +176,7 @@ export const labQuery = groq`
     content,
     publishedAt,
     externalLink,
+    externalLinkText,
     images[] {
       _key,
       image {
@@ -175,11 +206,20 @@ export interface Lab {
 	slug: Slug;
 	images?: LabImage[];
 	content: string;
+	externalLink?: string;
+	externalLinkText?: string;
 }
 
 export interface LabImage {
 	_key: string;
-	image: {
+	_type?: string;
+	// Direct image format (new)
+	asset?: {
+		_id: string;
+		url: string;
+	};
+	// Legacy format (object with nested image)
+	image?: {
 		asset: {
 			_id: string;
 			url: string;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { urlFor } from '$lib/sanity/image';
+	import { getImageAsset } from '$lib/sanity/queries';
 
 	import 'simplebar';
 	import 'simplebar/dist/simplebar.css';
@@ -34,10 +35,10 @@
 					<div
 						class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black"
 					>
-						{#if project.images?.[0]?.image}
+						{#if project.images?.[0] && getImageAsset(project.images[0])}
 							<img
 								class="w-full h-full object-cover"
-								src={urlFor(project.images[0].image)
+								src={urlFor(getImageAsset(project.images[0]))
 									.width(500)
 									.height(500)
 									.fit('crop')

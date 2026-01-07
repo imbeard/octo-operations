@@ -185,7 +185,7 @@
 					rel="noopener noreferrer"
 					class="text-white hover:text-black transition underline text-xs"
 				>
-					SEE MORE →
+					{post.externalLinkText || 'SEE MORE'} →
 				</a>
 			{/if}
 		</div>
