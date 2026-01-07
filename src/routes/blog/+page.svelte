@@ -6,60 +6,62 @@
 	import type { Lab } from '$lib/sanity/queries';
 	import { onMount } from 'svelte';
 	import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
-    import 'simplebar/dist/simplebar.css';
+	import 'simplebar/dist/simplebar.css';
 
-    import ResizeObserver from 'resize-observer-polyfill';		
+	import ResizeObserver from 'resize-observer-polyfill';
 
 	onMount(() => {
 		window.ResizeObserver = ResizeObserver;
 	});
 
 	const { data }: { data: PageData } = $props();
-	
+
 	const { options, general, total } = data;
 	const { initial, params } = options;
-	
-	const q = useQuery(data);
-	
-	const posts = $derived($q?.data as Lab[] ?? []);
 
+	const q = useQuery(data);
+
+	const posts = $derived(($q?.data as Lab[]) ?? []);
 </script>
 
-<section class="items-container max-h-[60vh] w-full max-w-11/12 md:max-w-6/12  " data-simplebar>
-	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3 ">
+<section
+	class="items-container max-h-[60vh] w-full max-w-11/12 md:max-w-6/12 mx-auto"
+	data-simplebar
+>
+	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3">
 		{#if posts.length}
-		{#each posts as lab,index}
-			<a href="/blog/{lab.slug.current}" class="text-white transition hover:text-black">
-				<div class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black">
-					
-					{#if lab.images?.[0]}
-						<img class="w-full h-full object-cover"
-							src={urlFor(lab.images[0].image)
-							.width(500)
-							.height(500)
-							.fit('crop')
-							.auto('format')
-							.quality(80)
-							.url()} 
-							alt={lab.images[0].description || lab.title || 'Lab image'}
-						/>
-					{:else}
-						<div class="min-w-full min-h-full flex items-center justify-center bg-gray-300">
-							<span class="text-gray-500">No image</span>
-						</div>
-					{/if}
-				</div>
-				<div class="mt-2">
-					<h2 class="text-xs">
-						{lab.title || 'Untitled'}
-					</h2>
-				</div>
-			</a>
-		{/each}
-		
-	{:else}
-		No articles yet.
-	{/if}
+			{#each posts as lab, index}
+				<a href="/blog/{lab.slug.current}" class="text-white transition hover:text-black">
+					<div
+						class="relative aspect-square overflow-hidden bg-gray-200 border-white border transition hover:border-black"
+					>
+						{#if lab.images?.[0]}
+							<img
+								class="w-full h-full object-cover"
+								src={urlFor(lab.images[0].image)
+									.width(500)
+									.height(500)
+									.fit('crop')
+									.auto('format')
+									.quality(80)
+									.url()}
+								alt={lab.images[0].description || lab.title || 'Lab image'}
+							/>
+						{:else}
+							<div class="min-w-full min-h-full flex items-center justify-center bg-gray-300">
+								<span class="text-gray-500">No image</span>
+							</div>
+						{/if}
+					</div>
+					<div class="mt-2">
+						<h2 class="text-xs">
+							{lab.title || 'Untitled'}
+						</h2>
+					</div>
+				</a>
+			{/each}
+		{:else}
+			No articles yet.
+		{/if}
 	</div>
-
 </section>

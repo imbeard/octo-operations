@@ -27,7 +27,10 @@
 	<meta name="description" content="" />
 </svelte:head>
 
-<section class="items-container max-h-[60vh] w-full max-w-11/12 md:max-w-6/12" data-simplebar>
+<section
+	class="items-container max-h-[60vh] w-full max-w-11/12 md:max-w-6/12 mx-auto"
+	data-simplebar
+>
 	<div class="items-list grid grid-cols-2 md:grid-cols-3 gap-3">
 		{#if projects.length}
 			{#each projects as project, index}

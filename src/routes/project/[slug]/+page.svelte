@@ -119,7 +119,13 @@
 									class="image-wrapper image-wrapper inline-block min-w-[calc(70vw*10/12)] md:min-w-[calc(70vw*8/12)] h-[60vh] px-2"
 								>
 									<img
-										src={imageAsset.url}
+										src={urlFor(imageAsset)
+											.width(1920)
+											.height(1920)
+											.fit('max')
+											.auto('format')
+											.quality(85)
+											.url()}
 										alt={image.description || post.title || 'Project image'}
 										class="project-image w-full h-full object-contain max-h-[60vh]"
 										onload={handleImageLoad}

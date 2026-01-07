@@ -134,20 +134,23 @@
 		<p>Loading...</p>
 	</div>
 {:else if post}
-	<article class="post flex flex-col md:flex-row gap-y-5 gap-x-10 max-w-8/12 w-full">
-		<div class="outer-images-container mx-auto h-[50vh] w-10/12 md:w-8/12">
+	<article class="post flex flex-col md:flex-row gap-y-5 gap-x-10 w-full max-w-[1000px]">
+		<div class="outer-images-container h-[50vh] w-full md:w-[650px] md:flex-shrink-0">
 			{#if post?.images && post.images.length > 0}
 				{#key post._id}
-					<div class="images-container max-w-full h-[50vh]" bind:this={imagesContainer}>
+					<div class="images-container w-full h-[50vh]" bind:this={imagesContainer}>
 						<div
 							class="inner-images-container w-full whitespace-nowrap flex items-center flex-nowrap"
 						>
 							{#each post.images as image}
-								<div
-									class="image-wrapper image-wrapper inline-block min-w-[calc(70vw*10/12)] md:min-w-[calc(70vw*8/12-2.5rem)] h-[50vh] px-2"
-								>
+								<div class="image-wrapper inline-block w-full h-[50vh] px-2 flex-shrink-0">
 									<img
-										src={image.image.asset.url}
+										src={urlFor(image.image.asset)
+											.width(1920)
+											.height(1920)
+											.auto('format')
+											.quality(85)
+											.url()}
 										alt={image.description || post.title || 'Lab image'}
 										class="lab-image w-full h-full object-contain max-h-[50vh]"
 										onload={handleImageLoad}
@@ -162,7 +165,9 @@
 			{/if}
 		</div>
 
-		<div class="post__container flex flex-col gap-5 text-white max-w-75">
+		<div
+			class="post__container flex flex-col gap-5 text-white w-full md:w-[310px] md:flex-shrink-0"
+		>
 			<div class="info-container flex flex-col">
 				<h1 class="bebas-neue-regular text-3xl">{post.title}</h1>
 				<time class="text-xs" datetime={post.publishedAt}>
